@@ -1,0 +1,6 @@
+streamlit
+rdflib
+pandas
+networkx
+pyvis
+pdf2image
