@@ -1,0 +1,70 @@
+@prefix jawa: <http://example.org/jawa#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+jawa:Cerita a rdfs:Class .
+jawa:Kalimat a rdfs:Class .
+
+jawa:judul a rdf:Property ;
+    rdfs:domain jawa:Cerita ;
+    rdfs:range xsd:string .
+
+jawa:aksara a rdf:Property ;
+    rdfs:domain jawa:Kalimat ;
+    rdfs:range xsd:string .
+
+jawa:latin a rdf:Property ;
+    rdfs:domain jawa:Kalimat ;
+    rdfs:range xsd:string .
+
+jawa:terjemahan a rdf:Property ;
+    rdfs:domain jawa:Kalimat ;
+    rdfs:range xsd:string .
+
+jawa:bagianDari a rdf:Property ;
+    rdfs:domain jawa:Kalimat ;
+    rdfs:range jawa:Cerita .
+
+jawa:cerita_1 a jawa:Cerita ;
+    jawa:judul "Kakawin Ramayana - Prathamas Sargah" .
+
+jawa:kalimat_1 a jawa:Kalimat ;
+    jawa:latin "Ikanang dhanurdhara kabéh," ;
+    jawa:terjemahan "Semua pemanah bersatu dalam baktinya." ;
+    jawa:bagianDari jawa:cerita_1 .
+
+jawa:kalimat_2 a jawa:Kalimat ;
+    jawa:latin "Kapwa ya bhakti ri sira pranata matwang," ;
+    jawa:terjemahan "Mereka semua setia kepada pemimpin mereka." ;
+    jawa:bagianDari jawa:cerita_1 .
+
+jawa:kalimat_3 a jawa:Kalimat ;
+    jawa:latin "Kadi mawwata yasa lana," ;
+    jawa:terjemahan "Seperti cahaya kemuliaan." ;
+    jawa:bagianDari jawa:cerita_1 .
+
+jawa:kalimat_4 a jawa:Kalimat ;
+    jawa:latin "Rupanyanagong ta kirtti nira." ;
+    jawa:terjemahan "Wajahnya mengagungkan kehormatannya." ;
+    jawa:bagianDari jawa:cerita_1 .
+
+jawa:kalimat_5 a jawa:Kalimat ;
+    jawa:latin "Prajurit-prajurité sané masanjata panah sami," ;
+    jawa:terjemahan "Para prajurit semuanya bersenjata panah." ;
+    jawa:bagianDari jawa:cerita_1 .
+
+jawa:kalimat_6 a jawa:Kalimat ;
+    jawa:latin "Maka sami bhakti ring Ida nungkul ngalap kasor," ;
+    jawa:terjemahan "Mereka berbakti kepada pemimpin mereka, tunduk dalam ketulusan." ;
+    jawa:bagianDari jawa:cerita_1 .
+
+jawa:kalimat_7 a jawa:Kalimat ;
+    jawa:latin "Sekadi pacang ngawewehin kawibuhan Ida satata," ;
+    jawa:terjemahan "Seolah senantiasa menambah kebesarannya." ;
+    jawa:bagianDari jawa:cerita_1 .
+
+jawa:kalimat_8 a jawa:Kalimat ;
+    jawa:latin "Pakantenannya agung wantah kertin Idane." ;
+    jawa:terjemahan "Kebesarannya sungguh agung dalam kehormatan." ;
+    jawa:bagianDari jawa:cerita_1 .
