@@ -320,7 +320,9 @@ def render_dual_pane_layout(page_num, rdf_data):
         st.markdown(f"### 📜 Naskah Asli - Halaman {page_num}")
         
         # Image dengan enhancement
-        image_path = f"images/page_{page_num}.png"
+        # Membuat path yang robust dan tidak bergantung pada direktori kerja
+        script_dir = os.path.dirname(__file__)
+        image_path = os.path.join(script_dir, "images", f"page_{page_num}.png")
         if os.path.exists(image_path):
             # Thumbnail untuk navigation
             st.markdown("**Navigasi Halaman:**")
@@ -337,19 +339,18 @@ def render_dual_pane_layout(page_num, rdf_data):
             image_b64 = get_image_as_base64(image_path)
             if image_b64:
                 st.markdown(f"""
-                    <div class="manuscript-panel">
-                        <img id="manuscriptImage" 
-                             src="data:image/png;base64,{image_b64}" 
-                             class="manuscript-image" 
-                             alt="Naskah halaman {page_num}"
-                             onclick="openLightbox(this.src)">
-                        <div class="image-controls">
-                            <button onclick="zoomIn()">🔍+</button>
-                            <button onclick="zoomOut()">🔍-</button>
-                            <button onclick="downloadImage()">💾</button>
-                        </div>
-                    </div>
-                """, unsafe_allow_html=True)
+            <div class="manuscript-panel">
+                <img id="manuscriptImage" 
+                    src="data:image/png;base64,{image_b64}" 
+                    class="manuscript-image" 
+                    alt="Naskah halaman {page_num}">
+                <div class="image-controls">
+                    <button id="zoomInBtn" title="Perbesar">🔍+</button>
+                    <button id="zoomOutBtn" title="Perkecil">🔍-</button>
+                    <button id="downloadBtn" title="Unduh Gambar">💾</button>
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
         else:
             st.warning(f"Gambar tidak ditemukan untuk halaman {page_num}")
     
@@ -460,252 +461,79 @@ def render_bookmarks_sidebar():
 
 # --- FUNGSI UTAMA ---
 def main():
-    init_session_state()
-    
-    # Load enhanced CSS
-    enhanced_css = """
-    <style>
-    /* Enhanced CSS berdasarkan requirements */
-    
-    /* Dark mode variables */
-    :root {
-        --bg-primary: #FEFDF8;
-        --bg-secondary: #F7F3E9;
-        --text-primary: #2C1810;
-        --text-secondary: #5D4E37;
-    }
-    
-    [data-theme="dark"] {
-        --bg-primary: #1a1a1a;
-        --bg-secondary: #2d2d2d;
-        --text-primary: #e0e0e0;
-        --text-secondary: #b0b0b0;
-    }
-    
-    /* Hero section dengan batik pattern */
-    .hero-section {
-        background: linear-gradient(135deg, #D4AF37 0%, #6D4C41 100%);
-        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm10 0c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        padding: 4rem 2rem;
-        text-align: center;
-        color: white;
-        animation: fadeInUp 1s ease-out;
-    }
-    
-    .hero-stats {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        margin-top: 2rem;
-    }
-    
-    .stat-item {
-        text-align: center;
-    }
-    
-    .stat-number {
-        display: block;
-        font-size: 2rem;
-        font-weight: bold;
-        color: #FFD700;
-    }
-    
-    .stat-label {
-        font-size: 0.9rem;
-        opacity: 0.8;
-    }
-    
-    /* Tooltip untuk glossary */
-    .tooltip {
-        position: relative;
-        display: inline-block;
-        border-bottom: 1px dotted #D4AF37;
-        cursor: help;
-    }
-    
-    .tooltip .tooltiptext {
-        visibility: hidden;
-        width: 200px;
-        background-color: #333;
-        color: #fff;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px 10px;
-        position: absolute;
-        z-index: 1;
-        bottom: 125%;
-        left: 50%;
-        margin-left: -100px;
-        opacity: 0;
-        transition: opacity 0.3s;
-    }
-    
-    .tooltip:hover .tooltiptext {
-        visibility: visible;
-        opacity: 1;
-    }
-    
-    /* Search results highlighting */
-    mark {
-        background: linear-gradient(120deg, #FFF3CD 0%, #FFEAA7 100%);
-        padding: 2px 4px;
-        border-radius: 3px;
-        font-weight: 600;
-    }
-    
-    /* Enhanced manuscript panel */
-    .manuscript-panel {
-        position: relative;
-        background: #000;
-        border-radius: 12px;
-        padding: 1rem;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    }
-    
-    .image-controls {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        display: flex;
-        gap: 5px;
-    }
-    
-    .image-controls button {
-        background: rgba(0,0,0,0.7);
-        color: white;
-        border: none;
-        padding: 8px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 14px;
-    }
-    
-    .image-controls button:hover {
-        background: rgba(0,0,0,0.9);
-    }
-    
-    /* Reading mode adjustments */
-    .reading-mode .transliterasi-item {
-        font-size: 1.1em;
-        line-height: 1.8;
-        margin-bottom: 2rem;
-    }
-    
-    /* Responsive design */
-    @media (max-width: 768px) {
-        .hero-stats {
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .dual-pane-container {
-            flex-direction: column;
-        }
-    }
-    
-    /* Animations */
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    /* Font size variations */
-    .font-small { font-size: 0.9em; }
-    .font-medium { font-size: 1em; }
-    .font-large { font-size: 1.2em; }
-    
-    </style>
     """
-    
-    # Apply theme
-    theme_class = "dark" if st.session_state.dark_mode else "light"
+    Fungsi utama untuk menjalankan aplikasi Streamlit.
+    Menginisialisasi state, memuat aset, dan merender semua komponen UI.
+    """
+    init_session_state()
+
+    # --- MEMUAT ASET EKSTERNAL ---
+    # Memuat file CSS eksternal untuk menjaga kode Python tetap bersih.
+    st.markdown(f'<style>{load_asset("assets/style.css")}</style>', unsafe_allow_html=True)
+
+    # Menentukan tema (terang/gelap) dan ukuran font berdasarkan session state.
+    # Menggunakan atribut data-theme yang sesuai dengan standar di style.css.
+    theme_attribute = "dark" if st.session_state.dark_mode else "light"
     font_class = f"font-{st.session_state.font_size}"
-    
-    st.markdown(f'<div class="app-container {theme_class} {font_class}">', unsafe_allow_html=True)
-    st.markdown(enhanced_css, unsafe_allow_html=True)
-    
-    # Render components
+
+    # --- CONTAINER UTAMA APLIKASI ---
+    st.markdown(f'<div data-theme="{theme_attribute}" class="app-container {font_class}">', unsafe_allow_html=True)
+
+    # --- RENDER KOMPONEN UI ---
     render_hero_section()
     render_personalization_panel()
     render_bookmarks_sidebar()
-    
-    # Main content tabs
+
+    # Membuat tab untuk konten utama.
     tab1, tab2, tab3 = st.tabs(["📖 Transliterasi", "🔍 Pencarian", "📊 Statistik"])
-    
-    # Load RDF data
+
+    # Memuat data RDF (di-cache untuk performa).
     rdf_data = load_rdf_data()
-    
+
+    # Konten untuk Tab 1: Transliterasi
     with tab1:
         render_advanced_navigation()
         render_dual_pane_layout(st.session_state.page_num, rdf_data)
         render_export_panel()
-    
+
+    # Konten untuk Tab 2: Pencarian
     with tab2:
         render_enhanced_search(rdf_data)
-    
+
+    # Konten untuk Tab 3: Statistik
     with tab3:
         st.markdown("### 📊 Statistik Digitalisasi")
         col1, col2, col3 = st.columns(3)
-        
+
         with col1:
             st.metric("Total Halaman", "20", "100%")
         with col2:
             st.metric("Halaman Terdigitalisasi", "1", "5%")
         with col3:
             st.metric("Total Pengunjung", "1,234", "+12%")
-        
-        # Progress chart
+
+        # Contoh grafik progres.
         st.markdown("**Progress Digitalisasi per Bulan:**")
         st.bar_chart({"Jan": 0, "Feb": 0, "Mar": 1, "Apr": 0})
-    
-    # Lightbox dan JavaScript
+
+    # --- ELEMEN HTML UNTUK LIGHTBOX ---
+    # Struktur HTML untuk lightbox. Fungsionalitasnya dikontrol oleh assets/script.js.
+    # Inline style dan onclick telah dihapus.
     st.markdown("""
-        <div id="imageLightbox" class="lightbox" style="display:none;">
-            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <div id="imageLightbox" class="lightbox">
+            <span class="lightbox-close">&times;</span>
             <img class="lightbox-content" id="lightboxImage">
         </div>
-        
-        <script>
-        function openLightbox(src) {
-            document.getElementById('imageLightbox').style.display = 'block';
-            document.getElementById('lightboxImage').src = src;
-        }
-        
-        function closeLightbox() {
-            document.getElementById('imageLightbox').style.display = 'none';
-        }
-        
-        function zoomIn() {
-            const img = document.getElementById('manuscriptImage');
-            const currentScale = img.style.transform.match(/scale\\((\\d*\\.?\\d+)\\)/);
-            const scale = currentScale ? parseFloat(currentScale[1]) * 1.2 : 1.2;
-            img.style.transform = `scale(${scale})`;
-        }
-        
-        function zoomOut() {
-            const img = document.getElementById('manuscriptImage');
-            const currentScale = img.style.transform.match(/scale\\((\\d*\\.?\\d+)\\)/);
-            const scale = currentScale ? parseFloat(currentScale[1]) / 1.2 : 0.8;
-            img.style.transform = `scale(${Math.max(0.5, scale)})`;
-        }
-        
-        function downloadImage() {
-            const img = document.getElementById('manuscriptImage');
-            const link = document.createElement('a');
-            link.href = img.src;
-            link.download = `kakawin_page_${new Date().getTime()}.png`;
-            link.click();
-        }
-        </script>
     """, unsafe_allow_html=True)
-    
+
+    # Menutup container utama aplikasi.
     st.markdown('</div>', unsafe_allow_html=True)
+
+    # --- MEMUAT JAVASCRIPT EKSTERNAL ---
+    # Memuat file JavaScript di akhir halaman.
+    # Ini memastikan semua elemen HTML sudah ada sebelum skrip mencoba mengaksesnya.
+    st.components.v1.html(f'<script>{load_asset("assets/script.js")}</script>', height=0)
+
 
 if __name__ == "__main__":
     main()
