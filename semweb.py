@@ -12,7 +12,7 @@ st.set_page_config(
 # CSS Kustom untuk semua permintaan UI baru
 st.markdown("""
 <style>
-    /* [UMUM] Menghilangkan padding atas agar judul lebih nempel */
+    /* [UMUM] */
     .block-container {
         padding-top: 2rem;
     }
@@ -21,54 +21,58 @@ st.markdown("""
     }
 
     /* [C. Navbar] */
-    /* [C1] Menargetkan container dari radio buttons di sidebar */
     [data-testid="stSidebar"] [data-testid="stRadio"] > div {
         display: flex;
         flex-direction: column;
-        width: 100%; /* Membuat kotak fit dengan lebar sidebar */
+        width: 100%;
     }
-    /* [C1] Gaya untuk setiap tombol navbar */
     [data-testid="stSidebar"] [data-testid="stRadio"] label {
         display: block;
         width: 100%;
         background-color: #f8f9fa;
         border: 1px solid #e9ecef;
-        border-radius: 0.75rem; /* rounded-square */
+        border-radius: 0.75rem;
         padding: 12px 20px;
         margin-bottom: 10px;
         cursor: pointer;
         transition: all 0.2s ease-in-out;
-        font-weight: 500; /* [C3] Berat font normal (tidak aktif) */
-        color: #495057;   /* [C3] Warna font normal (tidak aktif) */
+        font-weight: 500;
+        color: #495057;
     }
-    /* Hover effect */
     [data-testid="stSidebar"] [data-testid="stRadio"] label:hover {
         background-color: #e9ecef;
         border-color: #dee2e6;
     }
-    /* [C3] Gaya untuk tombol navbar yang SEDANG AKTIF (selected) */
+    /* [IMPROV 3] Gaya untuk tombol navbar yang SEDANG AKTIF (selected) */
     [data-testid="stSidebar"] [data-testid="stRadio"] > div > div:has(input:checked) label {
-        background-color: #1e3c72; /* Warna biru tua */
-        border-color: #1e3c72;
-        color: white !important; /* Warna font putih */
+        background-color: rgba(30, 60, 114, 0.15); /* Background biru transparan */
+        border-color: #1e3c72; /* Border biru tua */
+        color: #1e3c72 !important; /* Warna font biru tua */
         font-weight: 700; /* Font lebih tebal */
     }
     [data-testid="stSidebar"] [data-testid="stRadio"] > div > div:has(input:checked) label p {
-        color: white !important;
+        color: #1e3c72 !important;
     }
-    /* Menyembunyikan radio button asli */
     [data-testid="stSidebar"] [data-testid="stRadio"] input {
         display: none;
     }
 
     /* [B. Halaman Transliterasi] */
-    /* [B1 & B3] Gaya untuk tombol halaman dan navigasi next/prev */
+    /* [IMPROV 1] Membuat kolom gambar fixed saat sidebar buka-tutup */
+    div[data-testid="stHorizontalBlock"] > div:nth-child(1) {
+        flex: 0 0 40%; /* Menetapkan lebar kolom pertama (gambar) sebesar 40% dan tidak bisa menyusut */
+        min-width: 400px; /* Lebar minimum agar tidak terlalu kecil di layar besar */
+    }
+    div[data-testid="stHorizontalBlock"] > div:nth-child(2) {
+        flex-grow: 1; /* Membiarkan kolom kedua (teks) mengisi sisa ruang */
+    }
+
     .pagination-container {
         text-align: center;
         margin-top: 1.5rem;
     }
     .pagination-container .stButton > button {
-        border-radius: 0.5rem !important; /* rounded-square */
+        border-radius: 0.5rem !important;
         width: 45px;
         height: 45px;
     }
@@ -88,19 +92,18 @@ st.markdown("""
         color: #1e3c72;
     }
 
-    /* [B2 & B4] Panel dengan scroll internal untuk hasil transliterasi */
     .transliterasi-wrapper {
         background-color: white;
         padding: 1.5rem;
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        height: 70vh; /* Tinggi panel utama */
+        height: 70vh;
         display: flex;
         flex-direction: column;
     }
     .transliterasi-content {
-        overflow-y: auto; /* Scroll hanya pada bagian ini */
-        flex-grow: 1; /* Mengisi sisa ruang */
+        overflow-y: auto;
+        flex-grow: 1;
     }
     .transliterasi-item {
         margin-bottom: 1.5rem;
@@ -109,17 +112,14 @@ st.markdown("""
     }
 
     /* [A. Halaman Pencarian] */
-    /* [A2] Gaya untuk textbox pencarian */
     div[data-testid="stTextInput"] > div {
-        background-color: rgba(222, 226, 230, 0.5); /* Background abu-abu transparan */
-        border: 2px solid #ced4da; /* Stroke menengah */
+        background-color: rgba(222, 226, 230, 0.5);
+        border: 2px solid #ced4da;
     }
     div[data-testid="stTextInput"] > div:focus-within {
-        border-color: #1e3c72; /* Stroke menebal saat di-highlight */
+        border-color: #1e3c72;
         box-shadow: none;
     }
-
-    /* [A1] Hasil pencarian yang sudah disederhanakan */
     .search-result-container {
         background-color: white;
         padding: 1.5rem;
@@ -159,123 +159,114 @@ if 'page_num' not in st.session_state:
     st.session_state.page_num = 1
 
 # --- UI UTAMA ---
-# [C2] Menggunakan kolom utama untuk mencegah elemen lain mengecil saat sidebar dibuka/tutup
-main_col, _ = st.columns([1, 0.0001]) # Kolom kedua sangat kecil (hack)
 
-with main_col:
-    st.title("Naskah Kakawin Ramayana")
+st.title("Naskah Kakawin Ramayana")
 
-    # --- NAVIGASI ---
-    with st.sidebar:
-        st.markdown("##")
-        page = st.radio(
-            "Navigasi", 
-            ["📖 Transliterasi", "🔍 Pencarian", "ℹ️ Tentang Naskah"], # [D2] Halaman baru ditambahkan
-            key="nav"
-        )
-        st.markdown("---")
-        st.info("Aplikasi web semantik untuk eksplorasi naskah kakawin ramayana.") # [D1] Teks diubah
+# Navigasi di Sidebar
+with st.sidebar:
+    st.markdown("##")
+    page = st.radio(
+        "Navigasi", 
+        ["📖 Transliterasi", "🔍 Pencarian", "ℹ️ Tentang Naskah"],
+        key="nav"
+    )
+    st.markdown("---")
+    st.info("Aplikasi web semantik untuk eksplorasi naskah kakawin ramayana.")
 
-    # --- KONTEN HALAMAN ---
-    if page == "📖 Transliterasi":
-        col1, col2 = st.columns([2, 3], gap="large")
+# --- KONTEN HALAMAN ---
+if page == "📖 Transliterasi":
+    col1, col2 = st.columns([2, 3], gap="large")
 
-        # Kolom Kiri: Gambar Naskah dan Navigasi
-        with col1:
-            st.header(f"Halaman Naskah {st.session_state.page_num}")
-            image_path = os.path.join("images", f"page_{st.session_state.page_num}.png")
-            if os.path.exists(image_path):
-                st.image(image_path, use_container_width=True)
-            else:
-                st.warning(f"Gambar 'page_{st.session_state.page_num}.png' tidak ditemukan.")
+    with col1:
+        st.header(f"Halaman Naskah {st.session_state.page_num}")
+        image_path = os.path.join("images", f"page_{st.session_state.page_num}.png")
+        if os.path.exists(image_path):
+            st.image(image_path, use_container_width=True)
+        else:
+            st.warning(f"Gambar 'page_{st.session_state.page_num}.png' tidak ditemukan.")
 
-            # [B3] Navigasi Next/Prev yang dipercantik
-            st.markdown('<div class="nav-buttons">', unsafe_allow_html=True)
-            if st.button("⬅️", key="prev_button"):
-                if st.session_state.page_num > 1:
-                    st.session_state.page_num -= 1
-                    st.rerun()
-            st.markdown(f'<span class="page-indicator">Halaman {st.session_state.page_num} dari {TOTAL_PAGES}</span>', unsafe_allow_html=True)
-            if st.button("➡️", key="next_button"):
-                if st.session_state.page_num < TOTAL_PAGES:
-                    st.session_state.page_num += 1
-                    st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('<div class="nav-buttons">', unsafe_allow_html=True)
+        if st.button("⬅️", key="prev_button"):
+            if st.session_state.page_num > 1:
+                st.session_state.page_num -= 1
+                st.rerun()
+        # [IMPROV 2] Mengubah format indikator halaman
+        st.markdown(f'<span class="page-indicator">{st.session_state.page_num}/{TOTAL_PAGES}</span>', unsafe_allow_html=True)
+        if st.button("➡️", key="next_button"):
+            if st.session_state.page_num < TOTAL_PAGES:
+                st.session_state.page_num += 1
+                st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
 
-            # [B1] Tombol Halaman di Bawah Navigasi
-            st.markdown('<div class="pagination-container">', unsafe_allow_html=True)
-            st.write("Lompat ke Halaman:")
-            page_cols = st.columns(10)
-            for i in range(20):
-                col_index = i % 10
-                if page_cols[col_index].button(f"{i+1}", key=f"page_{i+1}"):
-                    st.session_state.page_num = i + 1
-                    st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('<div class="pagination-container">', unsafe_allow_html=True)
+        st.write("Lompat ke Halaman:")
+        page_cols = st.columns(10)
+        for i in range(20):
+            col_index = i % 10
+            if page_cols[col_index].button(f"{i+1}", key=f"page_{i+1}"):
+                st.session_state.page_num = i + 1
+                st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
 
-        # [B2 & B4] Kolom Kanan: Panel Transliterasi dengan Scroll Internal
-        with col2:
-            st.header("Transliterasi & Terjemahan")
-            st.markdown('<div class="transliterasi-wrapper">', unsafe_allow_html=True)
-            st.markdown('<div class="transliterasi-content">', unsafe_allow_html=True)
-            
-            if st.session_state.page_num == 3:
-                for item in rdf_data:
-                    st.markdown(f"""
-                    <div class="transliterasi-item">
-                        <strong>Latin:</strong>
-                        <p><em>{item['latin']}</em></p>
-                        <strong>Terjemahan:</strong>
-                        <p>{item['terjemahan']}</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-            else:
-                st.info("Data transliterasi untuk halaman ini belum tersedia.")
-            
-            st.markdown('</div></div>', unsafe_allow_html=True)
-
-    elif page == "🔍 Pencarian":
-        st.header("Pencarian Teks")
-        search_query = st.text_input("Cari kata kunci", placeholder="Contoh: rama, bhakti, prajurit...", label_visibility="collapsed")
+    with col2:
+        st.header("Transliterasi & Terjemahan")
+        st.markdown('<div class="transliterasi-wrapper">', unsafe_allow_html=True)
+        st.markdown('<div class="transliterasi-content">', unsafe_allow_html=True)
         
-        st.markdown("---")
-
-        if search_query:
-            query_lower = search_query.lower()
-            results = [item for item in rdf_data if query_lower in item['latin'].lower() or query_lower in item['terjemahan'].lower()]
-            st.subheader(f"Ditemukan {len(results)} hasil untuk '{search_query}'")
-            
-            for item in results:
-                # [A1] Hasil pencarian sederhana
+        if st.session_state.page_num == 3:
+            for item in rdf_data:
                 st.markdown(f"""
-                <div class="search-result-container">
-                    <strong>Transliterasi Latin</strong>
-                    <p style="font-style: italic;">{item['latin']}</p>
-                    <hr>
-                    <strong>Terjemahan Indonesia</strong>
+                <div class="transliterasi-item">
+                    <strong>Latin:</strong>
+                    <p><em>{item['latin']}</em></p>
+                    <strong>Terjemahan:</strong>
                     <p>{item['terjemahan']}</p>
                 </div>
                 """, unsafe_allow_html=True)
         else:
-            st.info("Masukkan kata kunci untuk mencari di semua data transliterasi yang tersedia.")
+            st.info("Data transliterasi untuk halaman ini belum tersedia.")
+        
+        st.markdown('</div></div>', unsafe_allow_html=True)
 
-    elif page == "ℹ️ Tentang Naskah":
-        # [D2] Halaman baru tentang naskah
-        st.header("Tentang Naskah Kakawin Ramayana")
-        st.image("https://images.unsplash.com/photo-1618335914367-523a1d355050?q=80&w=1932&auto=format&fit=crop", use_container_width=True)
-        st.markdown("""
-        **Kakawin Ramayana** adalah sebuah karya sastra Jawa Kuno yang adiluhung, diperkirakan digubah pada masa Kerajaan Medang (Mataram Kuno) sekitar abad ke-9 Masehi. Karya ini merupakan adaptasi dari epos Ramayana karya Walmiki dari India, namun tidak sekadar terjemahan. Sang pujangga Jawa Kuno berhasil menyuntikkan nilai-nilai lokal, pandangan hidup, dan keindahan bahasa yang khas, menjadikannya sebuah mahakarya yang berdiri sendiri.
+elif page == "🔍 Pencarian":
+    st.header("Pencarian Teks")
+    search_query = st.text_input("Cari kata kunci", placeholder="Contoh: rama, bhakti, prajurit...", label_visibility="collapsed")
+    
+    st.markdown("---")
 
-        Secara garis besar, naskah kakawin ramayana ini menceritakan kisah **Sang Rama**, seorang pangeran dari Ayodhya, yang harus menjalani pengasingan di hutan selama 14 tahun bersama istrinya, **Sita**, dan adiknya, **Laksmana**. Puncak konflik terjadi ketika Sita diculik oleh Rahwana, raja raksasa dari Alengka. Peperangan besar pun tak terelakkan, di mana Rama dibantu oleh pasukan kera yang dipimpin oleh Hanuman dan Sugriwa.
+    if search_query:
+        query_lower = search_query.lower()
+        results = [item for item in rdf_data if query_lower in item['latin'].lower() or query_lower in item['terjemahan'].lower()]
+        st.subheader(f"Ditemukan {len(results)} hasil untuk '{search_query}'")
+        
+        for item in results:
+            st.markdown(f"""
+            <div class="search-result-container">
+                <strong>Transliterasi Latin</strong>
+                <p style="font-style: italic;">{item['latin']}</p>
+                <hr>
+                <strong>Terjemahan Indonesia</strong>
+                <p>{item['terjemahan']}</p>
+            </div>
+            """, unsafe_allow_html=True)
+    else:
+        st.info("Masukkan kata kunci untuk mencari di semua data transliterasi yang tersedia.")
 
-        Aplikasi ini bertujuan untuk melestarikan dan memudahkan akses terhadap naskah kakawin ramayana, menyajikan transliterasi dan terjemahan agar dapat dipelajari oleh generasi masa kini.
-        """)
+elif page == "ℹ️ Tentang Naskah":
+    st.header("Tentang Naskah Kakawin Ramayana")
+    st.image("https://images.unsplash.com/photo-1618335914367-523a1d355050?q=80&w=1932&auto=format&fit=crop", use_container_width=True)
+    st.markdown("""
+    **Kakawin Ramayana** adalah sebuah karya sastra Jawa Kuno yang adiluhung, diperkirakan digubah pada masa Kerajaan Medang (Mataram Kuno) sekitar abad ke-9 Masehi. Karya ini merupakan adaptasi dari epos Ramayana karya Walmiki dari India, namun tidak sekadar terjemahan. Sang pujangga Jawa Kuno berhasil menyuntikkan nilai-nilai lokal, pandangan hidup, dan keindahan bahasa yang khas, menjadikannya sebuah mahakarya yang berdiri sendiri.
+
+    Secara garis besar, naskah kakawin ramayana ini menceritakan kisah **Sang Rama**, seorang pangeran dari Ayodhya, yang harus menjalani pengasingan di hutan selama 14 tahun bersama istrinya, **Sita**, dan adiknya, **Laksmana**. Puncak konflik terjadi ketika Sita diculik oleh Rahwana, raja raksasa dari Alengka. Peperangan besar pun tak terelakkan, di mana Rama dibantu oleh pasukan kera yang dipimpin oleh Hanuman dan Sugriwa.
+
+    Aplikasi ini bertujuan untuk melestarikan dan memudahkan akses terhadap naskah kakawin ramayana, menyajikan transliterasi dan terjemahan agar dapat dipelajari oleh generasi masa kini.
+    """)
 
 # --- FOOTER ---
-with main_col:
-    st.markdown("---")
-    st.markdown("""
-    <div class="footer">
-        <p>Naskah Kakawin Ramayana | Proyek Web Semantik © 2025</p>
-    </div>
-    """, unsafe_allow_html=True)
+st.markdown("---")
+st.markdown("""
+<div class="footer">
+    <p>Naskah Kakawin Ramayana | Proyek Web Semantik © 2025</p>
+</div>
+""", unsafe_allow_html=True)
