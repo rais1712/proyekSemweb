@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naskah Kakawin Ramayana - Digital Archive</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>Kakawin Ramayana</h2>
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            
+            <div class="nav-menu">
+                <button class="nav-item active" data-page="transliterasi">
+                    <span class="nav-icon">📖</span>
+                    <span class="nav-text">Transliterasi</span>
+                </button>
+                <button class="nav-item" data-page="pencarian">
+                    <span class="nav-icon">🔍</span>
+                    <span class="nav-text">Pencarian</span>
+                </button>
+                <button class="nav-item" data-page="tentang">
+                    <span class="nav-icon">ℹ️</span>
+                    <span class="nav-text">Tentang Naskah</span>
+                </button>
+                <button class="nav-item" data-page="visualisasi">
+                    <span class="nav-icon">🕸️</span>
+                    <span class="nav-text">Visualisasi RDF</span>
+                </button>
+            </div>
+            
+            <div class="sidebar-footer">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Garin_Workshop_of_Character_Animation_-_Wayang_Kulit_Rama.jpg/400px-Garin_Workshop_of_Character_Animation_-_Wayang_Kulit_Rama.jpg" 
+                     alt="Sang Rama" class="sidebar-image">
+                <p class="sidebar-caption">Sang Rama</p>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Transliterasi Page -->
+            <div class="page active" id="transliterasi-page">
+                <div class="page-header">
+                    <h1>Transliterasi & Terjemahan</h1>
+                    <p class="page-description">Eksplorasi naskah Kakawin Ramayana dengan transliterasi Latin dan terjemahan Indonesia</p>
+                </div>
+                
+                <div class="content-grid">
+                    <div class="manuscript-viewer">
+                        <div class="viewer-header">
+                            <h3 id="page-title">Tampilan Naskah Halaman 1</h3>
+                        </div>
+                        <div class="image-container">
+                            <img id="manuscript-image" src="images/page_1.png" alt="Halaman naskah 1" class="manuscript-image">
+                            <div class="image-placeholder" id="image-placeholder" style="display: none;">
+                                <p>Gambar halaman tidak tersedia</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Pagination Controls -->
+                        <div class="pagination-controls">
+                            <button id="prev-page" class="pagination-btn" disabled>
+                                <span>⬅️</span> Sebelumnya
+                            </button>
+                            <div class="page-indicator">
+                                <span>Halaman</span>
+                                <input type="number" id="page-input" value="1" min="1" max="20" class="page-input">
+                                <span>/ 20</span>
+                            </div>
+                            <button id="next-page" class="pagination-btn">
+                                Selanjutnya <span>➡️</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="transliteration-panel">
+                        <div class="panel-header">
+                            <h3>Transliterasi & Terjemahan</h3>
+                        </div>
+                        <div class="transliteration-content" id="transliteration-content">
+                            <div class="content-message">
+                                <p>Pilih halaman 3 untuk melihat data transliterasi yang tersedia.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pencarian Page -->
+            <div class="page" id="pencarian-page">
+                <div class="page-header">
+                    <h1>Pencarian Teks</h1>
+                    <p class="page-description">Cari kata kunci dalam transliterasi dan terjemahan naskah</p>
+                </div>
+                
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="search-input" placeholder="Cari dalam transliterasi atau terjemahan..." class="search-input">
+                        <button id="search-btn" class="search-btn">Cari</button>
+                    </div>
+                    
+                    <div class="search-results" id="search-results">
+                        <div class="search-placeholder">
+                            <p>Masukkan kata kunci untuk memulai pencarian</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tentang Page -->
+            <div class="page" id="tentang-page">
+                <div class="page-header">
+                    <h1>Tentang Naskah Kakawin Ramayana</h1>
+                </div>
+                
+                <div class="about-content">
+                    <section class="about-section">
+                        <h2>Sejarah dan Latar Belakang</h2>
+                        <p>Kakawin Ramayana adalah salah satu karya sastra Jawa Kuno yang paling penting, ditulis pada abad ke-9 atau ke-10 Masehi. Karya ini merupakan adaptasi dari epos Ramayana India ke dalam tradisi sastra Jawa.</p>
+                    </section>
+                    
+                    <section class="about-section">
+                        <h2>Struktur Naskah</h2>
+                        <p>Naskah ini terdiri dari beberapa sarga (bab) yang menceritakan kisah Rama, Sita, dan Hanuman. Setiap sarga mengandung nilai-nilai filosofis dan moral yang mendalam.</p>
+                    </section>
+                    
+                    <section class="about-section">
+                        <h2>Digitalisasi</h2>
+                        <p>Proyek digitalisasi ini bertujuan untuk melestarikan dan membuat naskah kuno ini lebih mudah diakses oleh peneliti dan masyarakat umum. Data disimpan dalam format RDF untuk memungkinkan analisis semantik.</p>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Visualisasi Page -->
+            <div class="page" id="visualisasi-page">
+                <div class="page-header">
+                    <h1>Visualisasi RDF</h1>
+                    <p class="page-description">Eksplorasi hubungan semantik dalam naskah melalui graf RDF interaktif</p>
+                </div>
+                
+                <div class="visualization-container">
+                    <iframe src="visualization.html" class="rdf-visualization" title="RDF Graph Visualization"></iframe>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
