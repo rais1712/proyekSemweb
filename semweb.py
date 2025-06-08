@@ -57,63 +57,87 @@ st.markdown("""
         max-width: 1400px;
     }
 
-    /* Custom Main Container */
-    .main-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1rem;
-    }
-
     /* Enhanced Sidebar Styling */
     .css-1d391kg {
         background: linear-gradient(180deg, #2C1810 0%, #1A0F08 100%);
-        border-right: 2px solid var(--primary-gold);
+        border-right: 3px solid var(--primary-gold);
+        box-shadow: 4px 0 20px rgba(139, 69, 19, 0.15);
     }
 
     .css-1d391kg .css-17eq0hr {
         color: var(--secondary-cream);
     }
 
-    /* Sidebar Title */
+    /* Enhanced Sidebar Title */
     .css-1d391kg h2 {
         color: var(--primary-gold) !important;
         font-family: 'Playfair Display', serif;
         font-weight: 700;
         text-align: center;
-        margin-bottom: 1.5rem;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        margin-bottom: 2rem;
+        text-shadow: 0 3px 6px rgba(0,0,0,0.4);
+        font-size: 1.8rem;
+        background: var(--gradient-gold);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        padding: 1rem 0;
+        border-bottom: 2px solid rgba(212, 175, 55, 0.3);
     }
 
-    /* Sidebar Navigation */
+    /* Enhanced Sidebar Navigation */
     .css-1d391kg .stRadio > div {
-        background: rgba(212, 175, 55, 0.1);
-        border-radius: 12px;
-        padding: 1rem;
-        margin-bottom: 1rem;
+        background: rgba(212, 175, 55, 0.08);
+        border-radius: 16px;
+        padding: 1.2rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .css-1d391kg .stRadio label {
         color: var(--secondary-cream) !important;
         font-weight: 500;
-        padding: 0.75rem 1rem;
-        border-radius: 8px;
-        transition: all 0.3s ease;
+        font-size: 1.1rem;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         cursor: pointer;
         display: block;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.8rem;
+        position: relative;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .css-1d391kg .stRadio label::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+        transition: left 0.6s ease;
     }
 
     .css-1d391kg .stRadio label:hover {
-        background: rgba(212, 175, 55, 0.2);
-        transform: translateX(4px);
+        background: rgba(212, 175, 55, 0.25);
+        transform: translateX(8px) scale(1.02);
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
     }
 
-    /* Sidebar Image Container */
-    .css-1d391kg .stImage {
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: var(--shadow-medium);
-        margin-top: 2rem;
+    .css-1d391kg .stRadio label:hover::before {
+        left: 100%;
+    }
+
+    /* Selected radio button styling */
+    .css-1d391kg .stRadio input[type="radio"]:checked + label {
+        background: var(--gradient-gold);
+        color: var(--text-dark) !important;
+        font-weight: 600;
+        transform: translateX(8px) scale(1.02);
+        box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
     }
 
     /* Typography Hierarchy */
@@ -147,94 +171,82 @@ st.markdown("""
         color: var(--text-dark);
     }
 
-    /* Enhanced Transliterasi Container */
+    /* Image container styling */
+    .manuscript-image {
+        background: transparent;
+        border: none;
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+        transition: none;
+    }
+
+    .manuscript-image:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    /* PERBAIKAN: Transliterasi Container dengan scrollbar yang benar */
     .transliterasi-container {
         background: var(--bg-paper);
         border: 2px solid var(--border-light);
         border-radius: 16px;
-        padding: 2rem;
-        height: 70vh;
+        padding: 1.5rem;
+        height: 600px;
         overflow-y: auto;
         box-shadow: var(--shadow-medium);
         position: relative;
     }
 
-    .transliterasi-container::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-image: 
-            radial-gradient(circle at 25% 25%, rgba(139, 69, 19, 0.03) 0%, transparent 50%),
-            radial-gradient(circle at 75% 75%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
-        pointer-events: none;
-        border-radius: 16px;
-    }
-
-    /* Custom Scrollbar */
     .transliterasi-container::-webkit-scrollbar {
         width: 8px;
     }
 
     .transliterasi-container::-webkit-scrollbar-track {
         background: var(--bg-parchment);
-        border-radius: 10px;
+        border-radius: 4px;
     }
 
     .transliterasi-container::-webkit-scrollbar-thumb {
         background: var(--primary-gold);
-        border-radius: 10px;
-        transition: background 0.3s ease;
+        border-radius: 4px;
     }
 
     .transliterasi-container::-webkit-scrollbar-thumb:hover {
-        background: var(--accent-orange);
+        background: var(--primary-brown);
     }
 
-    /* Transliterasi Items */
+    /* PERBAIKAN: Transliterasi Items - memastikan berada di dalam container */
     .transliterasi-item {
         background: rgba(255, 255, 255, 0.7);
         border: 1px solid var(--border-light);
         border-radius: 12px;
         padding: 1.5rem;
         margin-bottom: 1.5rem;
-        position: relative;
+        border-left: 4px solid var(--primary-gold);
+        box-shadow: var(--shadow-soft);
         transition: all 0.3s ease;
-        backdrop-filter: blur(5px);
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .transliterasi-item:hover {
         transform: translateY(-2px);
         box-shadow: var(--shadow-medium);
         border-color: var(--primary-gold);
+        background: rgba(255, 255, 255, 0.9);
     }
 
-    .transliterasi-item:last-child {
-        margin-bottom: 0;
-    }
-
-    .transliterasi-item::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 4px;
-        height: 100%;
-        background: var(--gradient-gold);
-        border-radius: 2px 0 0 2px;
-    }
-
-    /* Text Styling */
+    /* PERBAIKAN: Text Styling - Menghilangkan italic dan memastikan layout yang benar */
     .latin-text {
         font-family: 'Playfair Display', serif;
-        font-style: italic;
+        font-style: normal;
         font-size: 1.25rem;
         color: var(--text-dark);
         margin-bottom: 1rem;
         line-height: 1.6;
         font-weight: 500;
+        word-wrap: break-word;
     }
 
     .translation-text {
@@ -243,6 +255,7 @@ st.markdown("""
         font-size: 1rem;
         line-height: 1.7;
         font-weight: 400;
+        word-wrap: break-word;
     }
 
     .translation-text strong {
@@ -250,49 +263,13 @@ st.markdown("""
         font-weight: 600;
     }
 
-    /* Manuscript Image Container */
-    .manuscript-image-container {
-        background: var(--bg-paper);
-        border: 2px solid var(--border-light);
-        border-radius: 16px;
-        padding: 1.5rem;
-        box-shadow: var(--shadow-medium);
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .manuscript-image-container::before {
-        content: '';
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: var(--gradient-gold);
-        border-radius: 18px;
-        z-index: -1;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .manuscript-image-container:hover::before {
-        opacity: 1;
-    }
-
-    .manuscript-image-container:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-strong);
-    }
-
-    .manuscript-image-container img {
-        width: 100%;
-        border-radius: 8px;
-        transition: transform 0.3s ease;
-    }
-
-    .manuscript-image-container:hover img {
-        transform: scale(1.02);
+    /* Search Results Highlighting */
+    .search-highlight {
+        background: linear-gradient(120deg, #FFF3CD 0%, #FFEAA7 100%);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-weight: 600;
+        color: var(--primary-brown);
     }
 
     /* Enhanced Button Styling */
@@ -364,15 +341,6 @@ st.markdown("""
         font-style: italic;
     }
 
-    /* Search Results Highlighting */
-    .search-highlight {
-        background: linear-gradient(120deg, #FFF3CD 0%, #FFEAA7 100%);
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-weight: 600;
-        color: var(--primary-brown);
-    }
-
     /* Success/Info/Warning Messages */
     .stSuccess, .stInfo, .stWarning {
         border-radius: 12px;
@@ -411,11 +379,6 @@ st.markdown("""
         display: inline-block;
     }
 
-    /* Columns Gap Enhancement */
-    .element-container .stColumn {
-        background: transparent;
-    }
-
     /* About Page Content */
     .about-content {
         background: var(--bg-paper);
@@ -423,6 +386,9 @@ st.markdown("""
         padding: 2rem;
         box-shadow: var(--shadow-medium);
         border: 1px solid var(--border-light);
+        font-family: 'Inter', sans-serif;
+        color: var(--text-dark);
+        line-height: 1.7;
     }
 
     .about-content h3 {
@@ -430,21 +396,33 @@ st.markdown("""
         border-left: 4px solid var(--primary-gold);
         padding-left: 1rem;
         margin: 2rem 0 1rem 0;
+        font-family: 'Playfair Display', serif;
     }
 
-    .about-content ul {
+    .about-content p {
+        margin-bottom: 1.5rem;
+        color: var(--text-medium);
+    }
+
+    .about-content strong {
+        color: var(--primary-brown);
+        font-weight: 600;
+    }
+
+    .about-list {
         list-style: none;
         padding-left: 0;
+        margin: 1rem 0;
     }
 
-    .about-content li {
+    .about-list li {
         position: relative;
         padding-left: 2rem;
         margin-bottom: 0.75rem;
         color: var(--text-medium);
     }
 
-    .about-content li::before {
+    .about-list li::before {
         content: '◆';
         position: absolute;
         left: 0;
@@ -455,10 +433,6 @@ st.markdown("""
 
     /* Responsive Design */
     @media (max-width: 768px) {
-        .main-container {
-            padding: 0 0.5rem;
-        }
-        
         h1 {
             font-size: 2rem;
         }
@@ -467,69 +441,25 @@ st.markdown("""
             font-size: 1.5rem;
         }
         
-        .transliterasi-container {
-            height: 60vh;
-            padding: 1rem;
-        }
-        
         .transliterasi-item {
-            padding: 1rem;
-        }
-        
-        .manuscript-image-container {
             padding: 1rem;
         }
         
         .latin-text {
             font-size: 1.1rem;
         }
-    }
 
-    /* Animation Keyframes */
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
+        .css-1d391kg h2 {
+            font-size: 1.5rem;
         }
-        to {
-            opacity: 1;
-            transform: translateY(0);
+
+        .css-1d391kg .stRadio label {
+            font-size: 1rem;
+            padding: 0.8rem 1.2rem;
         }
-    }
 
-    @keyframes slideInLeft {
-        from {
-            opacity: 0;
-            transform: translateX(-20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
-    /* Apply Animations */
-    .transliterasi-item {
-        animation: fadeInUp 0.6s ease forwards;
-    }
-
-    .manuscript-image-container {
-        animation: slideInLeft 0.8s ease forwards;
-    }
-
-    /* Loading States */
-    .loading-shimmer {
-        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-        background-size: 200% 100%;
-        animation: shimmer 2s infinite;
-    }
-
-    @keyframes shimmer {
-        0% {
-            background-position: -200% 0;
-        }
-        100% {
-            background-position: 200% 0;
+        .transliterasi-container {
+            height: 400px;
         }
     }
 </style>
@@ -580,22 +510,26 @@ def load_rdf_data(ttl_file="naskah_bhakti_final.ttl"):
 
 # --- FUNGSI BANTUAN TAMPILAN (UI HELPER FUNCTIONS) ---
 def render_transliterasi_content(data):
-    """Menampilkan konten transliterasi di dalam kontainer yang bisa di-scroll."""
+    """PERBAIKAN: Menampilkan konten transliterasi dengan HTML container yang benar."""
     if not data:
         st.info("Data transliterasi untuk halaman ini belum tersedia.")
         return
     
-    st.markdown('<div class="transliterasi-container">', unsafe_allow_html=True)
+    # Membangun seluruh konten HTML sekaligus
+    html_content = '<div class="transliterasi-container">'
     
-    for item in data:
-        st.markdown(f"""
+    for i, item in enumerate(data):
+        html_content += f'''
         <div class="transliterasi-item">
-            <div class="latin-text">{item['latin']}</div>
-            <div class="translation-text"><strong>Terjemahan:</strong> {item['terjemahan']}</div>
+            <div class="latin-text">{item["latin"]}</div>
+            <div class="translation-text"><strong>Terjemahan:</strong> {item["terjemahan"]}</div>
         </div>
-        """, unsafe_allow_html=True)
-        
-    st.markdown('</div>', unsafe_allow_html=True)
+        '''
+    
+    html_content += '</div>'
+    
+    # Menampilkan seluruh konten sekaligus
+    st.markdown(html_content, unsafe_allow_html=True)
 
 def render_search_results(results, query):
     """Menampilkan hasil pencarian dengan format yang lebih baik."""
@@ -605,54 +539,55 @@ def render_search_results(results, query):
     
     st.success(f"Ditemukan {len(results)} hasil untuk '{query}'")
     
-    st.markdown('<div class="transliterasi-container">', unsafe_allow_html=True)
+    # Membangun konten HTML untuk hasil pencarian
+    html_content = '<div class="transliterasi-container">'
     
     for item in results:
+        # Highlight search terms
         latin_highlighted = item['latin'].replace(query, f"<span class='search-highlight'>{query}</span>")
         translation_highlighted = item['terjemahan'].replace(query, f"<span class='search-highlight'>{query}</span>")
         
-        st.markdown(f"""
+        html_content += f'''
         <div class="transliterasi-item">
             <div class="latin-text">{latin_highlighted}</div>
             <div class="translation-text"><strong>Terjemahan:</strong> {translation_highlighted}</div>
         </div>
-        """, unsafe_allow_html=True)
-        
-    st.markdown('</div>', unsafe_allow_html=True)
+        '''
+    
+    html_content += '</div>'
+    st.markdown(html_content, unsafe_allow_html=True)
 
 def render_about_page():
+    """Menampilkan halaman tentang."""
+    st.markdown("## 🏛️ Sejarah Naskah")
     st.markdown("""
-    <div class="about-content">
-        <h2>🏛️ Sejarah Naskah</h2>
-        <p><strong>Kakawin Ramayana</strong> adalah salah satu karya sastra Jawa Kuno yang paling penting, diperkirakan ditulis pada abad ke-9 atau ke-10 Masehi. Naskah ini merupakan adaptasi dari epos Ramayana Sanskrit karya Valmiki, namun diresapi dengan nilai-nilai, budaya, dan bahasa lokal Jawa Kuno.</p>
-        
-        <h3>📚 Karakteristik Utama</h3>
-        <ul>
-            <li><strong>Bahasa:</strong> Jawa Kuno (Kawi)</li>
-            <li><strong>Bentuk:</strong> Puisi Kakawin (memiliki aturan metrum yang ketat)</li>
-            <li><strong>Periode:</strong> Kerajaan Medang (Mataram Kuno)</li>
-            <li><strong>Isi:</strong> Mengisahkan perjalanan hidup Sang Rama dalam mencari dan menyelamatkan istrinya, Sita, dengan nuansa filosofis Hindu-Jawa yang kental</li>
-        </ul>
+    **Kakawin Ramayana** adalah salah satu karya sastra Jawa Kuno yang paling penting, diperkirakan 
+    ditulis pada abad ke-9 atau ke-10 Masehi. Naskah ini merupakan adaptasi dari epos Ramayana Sanskrit 
+    karya Valmiki, namun diresapi dengan nilai-nilai, budaya, dan bahasa lokal Jawa Kuno.
+    """)
+    
+    st.markdown("### 📚 Karakteristik Utama")
+    st.markdown("**Bahasa:** Jawa Kuno (Kawi)")
+    st.markdown("**Bentuk:** Puisi Kakawin (memiliki aturan metrum yang ketat)")
+    st.markdown("**Periode:** Kerajaan Medang (Mataram Kuno)")
+    st.markdown("**Isi:** Mengisahkan perjalanan hidup Sang Rama dalam mencari dan menyelamatkan istrinya, Sita, dengan nuansa filosofis Hindu-Jawa yang kental")
 
-        <h2>💻 Tentang Proyek Digitalisasi Ini</h2>
-        <p>Proyek ini bertujuan untuk melestarikan warisan budaya takbenda ini dan membuatnya lebih mudah diakses oleh para peneliti, mahasiswa, serta masyarakat umum melalui teknologi digital.</p>
-        
-        <h3>🛠️ Teknologi yang Digunakan</h3>
-        <ul>
-            <li><strong>RDF (Resource Description Framework):</strong> Data naskah distrukturkan secara semantik menggunakan format Turtle (.ttl) untuk mendefinisikan hubungan antar entitas seperti cerita, kalimat, dan terjemahan</li>
-            <li><strong>Streamlit:</strong> Kerangka kerja Python yang digunakan untuk membangun antarmuka web interaktif ini dengan cepat</li>
-            <li><strong>Python:</strong> Bahasa pemrograman utama yang digunakan untuk memproses data RDF dan menjalankan aplikasi</li>
-        </ul>
-        
-        <h3>🎯 Fitur Utama</h3>
-        <ul>
-            <li><strong>Navigasi Interaktif:</strong> Jelajahi halaman-halaman naskah dengan mudah</li>
-            <li><strong>Pencarian Semantik:</strong> Cari teks dalam bahasa Latin dan terjemahan Indonesia</li>
-            <li><strong>Tampilan Responsif:</strong> Optimal di berbagai perangkat dan ukuran layar</li>
-            <li><strong>Desain Otentik:</strong> Tema visual yang menghormati karakteristik naskah kuno</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("## 💻 Tentang Proyek Digitalisasi Ini")
+    st.markdown("""
+    Proyek ini bertujuan untuk melestarikan warisan budaya takbenda ini dan membuatnya lebih mudah 
+    diakses oleh para peneliti, mahasiswa, serta masyarakat umum melalui teknologi digital.
+    """)
+    
+    st.markdown("### 🛠️ Teknologi yang Digunakan")
+    st.markdown("**RDF (Resource Description Framework):** Data naskah distrukturkan secara semantik menggunakan format Turtle (.ttl) untuk mendefinisikan hubungan antar entitas seperti cerita, kalimat, dan terjemahan")
+    st.markdown("**Streamlit:** Kerangka kerja Python yang digunakan untuk membangun antarmuka web interaktif ini dengan cepat")
+    st.markdown("**Python:** Bahasa pemrograman utama yang digunakan untuk memproses data RDF dan menjalankan aplikasi")
+    
+    st.markdown("### 🎯 Fitur Utama")
+    st.markdown("**Navigasi Interaktif:** Jelajahi halaman-halaman naskah dengan mudah")
+    st.markdown("**Pencarian Semantik:** Cari teks dalam bahasa Latin dan terjemahan Indonesia")
+    st.markdown("**Tampilan Responsif:** Optimal di berbagai perangkat dan ukuran layar")
+    st.markdown("**Desain Otentik:** Tema visual yang menghormati karakteristik naskah kuno")
 
 # --- INISIALISASI SESSION STATE ---
 if 'page_num' not in st.session_state:
@@ -670,17 +605,8 @@ def main():
             ["📖 Transliterasi", "🔍 Pencarian", "ℹ️ Tentang Naskah"],
             key="main_nav"
         )
-        
-        st.markdown("---")
-        st.image(
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Garin_Workshop_of_Character_Animation_-_Wayang_Kulit_Rama.jpg/400px-Garin_Workshop_of_Character_Animation_-_Wayang_Kulit_Rama.jpg",
-            caption="Ilustrasi Sang Rama",
-            use_container_width=True
-        )
 
-    # --- Konten Halaman ---
-    st.markdown('<div class="main-container">', unsafe_allow_html=True)
-    
+    # --- Load Data ---
     rdf_data = load_rdf_data()
     if rdf_data is None:
         st.stop()
@@ -696,14 +622,14 @@ def main():
             
             image_path = f"images/page_{st.session_state.page_num}.png"
             if os.path.exists(image_path):
-                st.markdown('<div class="manuscript-image-container">', unsafe_allow_html=True)
                 st.image(image_path, use_container_width=True)
-                st.markdown('</div>', unsafe_allow_html=True)
             else:
                 st.warning(f"Gambar untuk halaman {st.session_state.page_num} tidak tersedia.")
 
+            # Navigation
             TOTAL_PAGES = 20
             nav_cols = st.columns([2, 1, 2])
+            
             if nav_cols[0].button("← Sebelumnya", use_container_width=True, disabled=(st.session_state.page_num == 1)):
                 st.session_state.page_num -= 1
                 st.rerun()
@@ -716,6 +642,7 @@ def main():
 
         with col2:
             st.subheader("Teks & Terjemahan")
+            
             if st.session_state.page_num == 3:
                 render_transliterasi_content(rdf_data)
             else:
@@ -745,8 +672,6 @@ def main():
     elif page == "ℹ️ Tentang Naskah":
         st.markdown("<h1>ℹ️ Tentang Naskah Kakawin Ramayana</h1>", unsafe_allow_html=True)
         render_about_page()
-    
-    st.markdown('</div>', unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
