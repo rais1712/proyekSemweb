@@ -1,262 +1,297 @@
 import streamlit as st
 import os
 from rdflib import Graph
+import streamlit.components.v1 as components
 
 # --- KONFIGURASI HALAMAN ---
 st.set_page_config(
     page_title="Naskah Kakawin Ramayana",
     page_icon="📜",
     layout="wide",
+    initial_sidebar_state="expanded"
 )
 
-# --- CSS ARCHITECTURE & STYLING ---
-# Mengikuti prinsip: Max 200 baris, CSS variables, mobile-first, WCAG compliance
+# --- GAYA CSS & TAMPILAN ---
+# Menambahkan gaya untuk kontainer yang bisa di-scroll dan perbaikan lainnya
 st.markdown("""
 <style>
-    /* CSS Custom Properties untuk Theming yang Konsisten */
-    :root {
-        --primary-color: #8B4513;  /* SaddleBrown */
-        --secondary-color: #2C3E50;/* Dark Blue-Gray */
-        --accent-color: #E67E22;   /* Carrot Orange */
-        --bg-color: #FDFEFE;       /* Latar belakang sangat terang */
-        --font-color: #34495E;     /* Warna font utama */
-        --light-gray: #ECF0F1;     /* Abu-abu terang untuk border/bg */
-        --font-family: 'Georgia', 'serif';
-        --line-height: 1.6;
+    /* Gaya untuk membungkus konten utama agar tidak terlalu lebar di layar besar */
+    .main-container {
+        max-width: 1200px;
+        margin: auto;
     }
 
-    /* General Body & Typography */
-    .stApp { 
-        background-color: var(--bg-color); 
-    }
-    h1, h2, h3 {
-        color: var(--secondary-color);
-        font-family: var(--font-family);
-    }
-    p, li, label {
-        color: var(--font-color);
-        font-family: var(--font-family);
-        line-height: var(--line-height);
-    }
-    .block-container {
-        padding: 1rem 2rem;
-    }
-
-    /* Sidebar Navigation */
-    [data-testid="stSidebar"] {
-        background-color: white;
-        border-right: 1px solid var(--light-gray);
-    }
-    [data-testid="stSidebar"] [data-testid="stRadio"] label {
-        display: block;
-        padding: 12px 20px;
+    /* Gaya untuk kontainer transliterasi yang dapat di-scroll */
+    .transliterasi-container {
+        background-color: #f8f9fa; /* Warna latar sedikit berbeda */
+        border: 1px solid #e9ecef; /* Border tipis */
         border-radius: 8px;
-        margin: 0.5rem 0;
-        transition: background-color 0.2s ease;
-        border-left: 4px solid transparent;
+        padding: 1rem;
+        height: 70vh; /* Tinggi tetap untuk kontainer */
+        overflow-y: auto; /* Scroll vertikal otomatis jika konten melebihi tinggi */
     }
-    [data-testid="stSidebar"] [data-testid="stRadio"] label:hover {
-        background-color: var(--light-gray);
-    }
-    [data-testid="stSidebar"] [data-testid="stRadio"] > div > div:has(input:checked) label {
-        background-color: #EAE3DC; /* Warna coklat muda untuk background aktif */
-        border-left: 4px solid var(--primary-color);
-        font-weight: 700;
-        color: var(--primary-color) !important;
-    }
-    [data-testid="stSidebar"] [data-testid="stRadio"] > div > div:has(input:checked) label p {
-        color: var(--primary-color) !important;
-    }
-    [data-testid="stSidebar"] [data-testid="stRadio"] input {
-        display: none;
-    }
-
-    /* Halaman Transliterasi */
-    .image-container {
-        position: sticky; /* Membuat gambar "menempel" saat scroll */
-        top: 2rem;
-    }
-    .transliterasi-wrapper {
-        height: 80vh; /* Tinggi panel utama */
-        display: flex;
-        flex-direction: column;
-    }
-    .transliterasi-content {
-        overflow-y: auto;
-        padding-right: 1rem;
-    }
+    
     .transliterasi-item {
-        margin-bottom: 2rem;
         padding-bottom: 1rem;
-        border-bottom: 1px solid var(--light-gray);
-    }
-
-    /* Pagination */
-    .pagination-desktop { display: flex; }
-    .pagination-mobile { display: none; }
-
-    /* Halaman Pencarian */
-    .search-result {
-        border: 1px solid var(--light-gray);
-        border-radius: 8px;
-        padding: 1.5rem;
         margin-bottom: 1rem;
+        border-bottom: 1px solid #ddd;
     }
-    .search-result:hover {
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-    .highlight {
-        background-color: #FDEBD0; /* Highlight oranye muda */
-        padding: 0 4px;
-        border-radius: 3px;
+    
+    .transliterasi-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
     }
 
-    /* Responsive Design - Mobile First */
-    @media (max-width: 768px) {
-        .block-container { padding: 1rem; }
-        .pagination-desktop { display: none; }
-        .pagination-mobile { display: block; }
-        h1 { font-size: 2rem; }
+    .latin-text {
+        font-family: 'Georgia', serif;
+        font-style: italic;
+        font-size: 1.1rem;
+        color: #2C3E50;
+        margin-bottom: 0.5rem;
     }
+
+    .translation-text {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        color: #2C3E50;
+    }
+
+    /* Gaya untuk gambar agar ukurannya lebih konsisten */
+    .manuscript-image-container {
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        padding: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .manuscript-image-container img {
+        width: 100%;
+        border-radius: 4px;
+    }
+
 </style>
 """, unsafe_allow_html=True)
 
 
-# --- DATA LOADING & STATE MANAGEMENT ---
+# --- PEMUATAN DATA (DATA LOADING & CACHING) ---
 @st.cache_data
 def load_rdf_data(ttl_file="naskah_bhakti_final.ttl"):
-    """Memuat dan mem-parsing file TTL.
-    Returns: List of dictionaries atau None jika gagal."""
-    g = Graph()
+    """Memuat dan mem-parsing file TTL dengan penanganan error yang lebih baik."""
     if not os.path.exists(ttl_file):
-        st.error(f"File data '{ttl_file}' tidak ditemukan. Pastikan file berada di direktori yang benar.")
+        st.error(f"Berkas data '{ttl_file}' tidak ditemukan di direktori proyek.")
         return None
+    
     try:
+        g = Graph()
         g.parse(ttl_file, format="turtle")
-        query = "..." # Query seperti sebelumnya
+        
+        # Query SPARQL untuk mengambil semua data kalimat
+        query = """
+        PREFIX jawa: <http://example.org/jawa#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        
+        SELECT ?kalimat_uri ?latin ?terjemahan WHERE {
+            ?kalimat_uri a jawa:Kalimat ;
+                         jawa:latin ?latin ;
+                         jawa:terjemahan ?terjemahan .
+        }
+        ORDER BY ?kalimat_uri
+        """
+        
         results = g.query(query)
-        return [{"uri": str(r.kalimat_uri), "latin": str(r.latin), "terjemahan": str(r.terjemahan)} for r in results]
+        data = []
+        for r in results:
+            data.append({
+                "uri": str(r.kalimat_uri),
+                "latin": str(r.latin),
+                "terjemahan": str(r.terjemahan)
+            })
+            
+        if not data:
+            st.warning("Tidak ada data transliterasi yang berhasil dimuat dari file TTL.")
+            return []
+            
+        return data
+        
     except Exception as e:
-        st.error(f"Gagal mem-parsing file TTL: {e}")
+        st.error(f"Gagal memuat atau mem-parsing data RDF: {str(e)}")
         return None
 
-# Initialize session state
+# --- FUNGSI BANTUAN TAMPILAN (UI HELPER FUNCTIONS) ---
+def render_transliterasi_content(data):
+    """Menampilkan konten transliterasi di dalam kontainer yang bisa di-scroll."""
+    if not data:
+        st.info("Data transliterasi untuk halaman ini belum tersedia.")
+        return
+    
+    # Memulai kontainer yang bisa di-scroll
+    st.markdown('<div class="transliterasi-container">', unsafe_allow_html=True)
+    
+    for item in data:
+        st.markdown(f"""
+        <div class="transliterasi-item">
+            <div class="latin-text">{item['latin']}</div>
+            <div class="translation-text"><strong>Terjemahan:</strong> {item['terjemahan']}</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    # Menutup kontainer
+    st.markdown('</div>', unsafe_allow_html=True)
+
+def render_search_results(results, query):
+    """Menampilkan hasil pencarian dengan format yang lebih baik."""
+    if not results:
+        st.info("Tidak ada hasil yang cocok ditemukan.")
+        return
+    
+    st.success(f"Ditemukan {len(results)} hasil untuk '{query}'")
+    
+    # Menggunakan kontainer yang sama dengan halaman transliterasi
+    st.markdown('<div class="transliterasi-container">', unsafe_allow_html=True)
+    
+    highlight_class = "background-color: #FDEBD0; padding: 0 4px; border-radius: 3px;"
+    for item in results:
+        latin_highlighted = item['latin'].replace(query, f"<span style='{highlight_class}'>{query}</span>")
+        translation_highlighted = item['terjemahan'].replace(query, f"<span style='{highlight_class}'>{query}</span>")
+        
+        st.markdown(f"""
+        <div class="transliterasi-item">
+            <div class="latin-text">{latin_highlighted}</div>
+            <div class="translation-text"><strong>Terjemahan:</strong> {translation_highlighted}</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    st.markdown('</div>', unsafe_allow_html=True)
+
+def render_about_page():
+    st.markdown("""
+    ## Sejarah Naskah
+    **Kakawin Ramayana** adalah salah satu karya sastra Jawa Kuno yang paling penting, diperkirakan ditulis pada abad ke-9 atau ke-10 Masehi. Naskah ini merupakan adaptasi dari epos Ramayana Sanskrit karya Valmiki, namun diresapi dengan nilai-nilai, budaya, dan bahasa lokal Jawa Kuno.
+    
+    ### Karakteristik Utama:
+    - **Bahasa**: Jawa Kuno (Kawi)
+    - **Bentuk**: Puisi Kakawin (memiliki aturan metrum yang ketat)
+    - **Periode**: Kerajaan Medang (Mataram Kuno)
+    - **Isi**: Mengisahkan perjalanan hidup Sang Rama dalam mencari dan menyelamatkan istrinya, Sita, dengan nuansa filosofis Hindu-Jawa yang kental.
+
+    ## Tentang Proyek Digitalisasi Ini
+    Proyek ini bertujuan untuk melestarikan warisan budaya takbenda ini dan membuatnya lebih mudah diakses oleh para peneliti, mahasiswa, serta masyarakat umum melalui teknologi digital.
+    
+    ### Teknologi yang Digunakan:
+    - **RDF (Resource Description Framework)**: Data naskah distrukturkan secara semantik menggunakan format Turtle (`.ttl`) untuk mendefinisikan hubungan antar entitas seperti cerita, kalimat, dan terjemahan.
+    - **Streamlit**: Kerangka kerja Python yang digunakan untuk membangun antarmuka web interaktif ini dengan cepat.
+    - **Python**: Bahasa pemrograman utama yang digunakan untuk memproses data RDF dan menjalankan aplikasi.
+    """)
+
+def render_visualization_page():
+    """Menampilkan halaman visualisasi RDF dari file HTML."""
+    try:
+        with open("visualization.html", "r", encoding="utf-8") as f:
+            html_content = f.read()
+            components.html(html_content, height=620, scrolling=False)
+    except FileNotFoundError:
+        st.error("File 'visualization.html' tidak ditemukan. Pastikan file tersebut berada di direktori yang sama dengan `semweb.py`.")
+    except Exception as e:
+        st.error(f"Gagal memuat halaman visualisasi: {e}")
+
+# --- INISIALISASI SESSION STATE ---
 if 'page_num' not in st.session_state:
     st.session_state.page_num = 1
 
-# --- UI HELPER FUNCTIONS (SEPARATION OF CONCERNS) ---
-def render_pagination(total_pages):
-    """Menampilkan komponen navigasi halaman yang responsif."""
-    
-    # Navigasi Mobile (Dropdown)
-    with st.expander("Navigasi Halaman"):
-        st.selectbox(
-            "Pilih Halaman",
-            options=range(1, total_pages + 1),
-            key="mobile_nav",
-            on_change=lambda: st.session_state.update(page_num=st.session_state.mobile_nav)
+# --- APLIKASI UTAMA (MAIN APPLICATION) ---
+def main():
+    # --- Sidebar ---
+    with st.sidebar:
+        st.markdown("## 📜 Kakawin Ramayana")
+        st.markdown("---")
+        
+        page = st.radio(
+            "Navigasi",
+            ["📖 Transliterasi", "🔍 Pencarian", "🕸️ Visualisasi RDF", "ℹ️ Tentang Naskah"],
+            key="main_nav"
+        )
+        
+        st.markdown("---")
+        st.image(
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Garin_Workshop_of_Character_Animation_-_Wayang_Kulit_Rama.jpg/400px-Garin_Workshop_of_Character_Animation_-_Wayang_Kulit_Rama.jpg",
+            caption="Ilustrasi Sang Rama",
+            use_container_width=True
         )
 
-    # Navigasi Desktop (Next/Prev + Input)
-    st.write("") # Memberi sedikit spasi
-    prev_col, indicator_col, next_col, jump_col = st.columns([2, 3, 2, 3])
+    # --- Konten Halaman ---
+    st.markdown('<div class="main-container">', unsafe_allow_html=True)
     
-    if prev_col.button("⬅️ Sebelumnya", use_container_width=True, disabled=(st.session_state.page_num == 1)):
-        st.session_state.page_num -= 1
-        
-    indicator_col.markdown(f"**Halaman {st.session_state.page_num} / {total_pages}**")
+    # Memuat data sekali saja
+    rdf_data = load_rdf_data()
+    if rdf_data is None:
+        st.stop() # Menghentikan eksekusi jika data gagal dimuat
 
-    if next_col.button("Selanjutnya ➡️", use_container_width=True, disabled=(st.session_state.page_num == total_pages)):
-        st.session_state.page_num += 1
-
-    jump_col.number_input(
-        "Lompat ke", min_value=1, max_value=total_pages, 
-        key="jump_nav",
-        on_change=lambda: st.session_state.update(page_num=st.session_state.jump_nav)
-    )
-
-# --- MAIN APP LOGIC ---
-# Data loaded once
-rdf_data = load_rdf_data()
-TOTAL_PAGES = 20
-
-# Sidebar Navigation
-with st.sidebar:
-    st.header("Kakawin Ramayana")
-    page = st.radio(
-        "Navigasi", 
-        ["📖 Transliterasi", "🔍 Pencarian", "ℹ️ Tentang Naskah"],
-        key="nav_main"
-    )
-    st.markdown("---")
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Garin_Workshop_of_Character_Animation_-_Wayang_Kulit_Rama.jpg/800px-Garin_Workshop_of_Character_Animation_-_Wayang_Kulit_Rama.jpg",
-             caption="Sang Rama")
-
-if rdf_data is None:
-    st.warning("Aplikasi tidak dapat berjalan karena data naskah tidak berhasil dimuat.")
-else:
-    # Page Routing
+    # --- Routing Halaman ---
     if page == "📖 Transliterasi":
-        col1, col2 = st.columns([5, 6], gap="large") # Kolom gambar sedikit lebih kecil
-
+        st.header("Transliterasi & Terjemahan Naskah")
+        
+        # Layout dua kolom: Kiri untuk gambar, Kanan untuk teks
+        col1, col2 = st.columns([1, 1], gap="large")
+        
         with col1:
-            with st.container(border=False):
-                st.markdown('<div class="image-container">', unsafe_allow_html=True)
-                st.subheader(f"Tampilan Naskah Halaman {st.session_state.page_num}")
-                image_path = os.path.join("images", f"page_{st.session_state.page_num}.png")
-                if os.path.exists(image_path):
-                    st.image(image_path, use_container_width=True)
-                else:
-                    st.warning(f"Gambar 'page_{st.session_state.page_num}.png' tidak ditemukan.")
-                
-                render_pagination(TOTAL_PAGES)
+            st.subheader(f"Halaman Naskah {st.session_state.page_num}")
+            
+            image_path = f"images/page_{st.session_state.page_num}.png"
+            if os.path.exists(image_path):
+                st.markdown('<div class="manuscript-image-container">', unsafe_allow_html=True)
+                st.image(image_path, use_container_width=True)
                 st.markdown('</div>', unsafe_allow_html=True)
+            else:
+                st.warning(f"Gambar untuk halaman {st.session_state.page_num} tidak tersedia.")
+
+            # Kontrol navigasi di bawah gambar
+            TOTAL_PAGES = 20
+            nav_cols = st.columns([2, 1, 2])
+            if nav_cols[0].button("← Sebelumnya", use_container_width=True, disabled=(st.session_state.page_num == 1)):
+                st.session_state.page_num -= 1
+                st.rerun()
+            
+            nav_cols[1].markdown(f"<div style='text-align: center; margin-top: 0.5rem;'>{st.session_state.page_num}/{TOTAL_PAGES}</div>", unsafe_allow_html=True)
+            
+            if nav_cols[2].button("Selanjutnya →", use_container_width=True, disabled=(st.session_state.page_num == TOTAL_PAGES)):
+                st.session_state.page_num += 1
+                st.rerun()
 
         with col2:
-            st.subheader("Transliterasi & Terjemahan")
-            st.markdown('<div class="transliterasi-wrapper">', unsafe_allow_html=True)
-            st.markdown('<div class="transliterasi-content">', unsafe_allow_html=True)
-            
+            st.subheader("Teks & Terjemahan")
             if st.session_state.page_num == 3:
-                for item in rdf_data:
-                    st.markdown(f"""
-                    <div class="transliterasi-item">
-                        <p><strong>Latin:</strong> <em>{item['latin']}</em></p>
-                        <p><strong>Terjemahan:</strong> {item['terjemahan']}</p>
-                    </div>
-                    """, unsafe_allow_html=True)
+                # Menampilkan data yang tersedia untuk halaman 3
+                render_transliterasi_content(rdf_data)
             else:
-                st.info("Data transliterasi untuk halaman ini belum tersedia.")
-            
-            st.markdown('</div></div>', unsafe_allow_html=True)
+                st.info(f"Data transliterasi untuk halaman {st.session_state.page_num} sedang dalam proses digitalisasi.")
 
     elif page == "🔍 Pencarian":
-        st.subheader("Pencarian Teks dalam Naskah")
-        search_query = st.text_input("Cari kata kunci", placeholder="Cari dalam transliterasi atau terjemahan...")
-
-        st.markdown("---")
-        if not search_query:
-            st.info("Masukkan kata kunci untuk memulai pencarian.")
-        else:
+        st.header("Pencarian Teks")
+        
+        search_query = st.text_input(
+            "Cari dalam naskah:",
+            placeholder="Masukkan kata kunci dalam teks Latin atau terjemahan..."
+        )
+        
+        if search_query:
             query_lower = search_query.lower()
-            results = [item for item in rdf_data if query_lower in item['latin'].lower() or query_lower in item['terjemahan'].lower()]
-            
-            st.write(f"Menampilkan **{len(results)}** hasil untuk '{search_query}':")
-            st.markdown("---")
-            
-            for item in results:
-                # Highlight aringan
-                display_latin = item['latin'].replace(search_query, f"<span class='highlight'>{search_query}</span>")
-                display_terjemahan = item['terjemahan'].replace(search_query, f"<span class='highlight'>{search_query}</span>")
+            results = [
+                item for item in rdf_data 
+                if query_lower in item['latin'].lower() or query_lower in item['terjemahan'].lower()
+            ]
+            render_search_results(results, search_query)
+        else:
+            st.info("Masukkan kata kunci di atas untuk memulai pencarian di dalam data yang tersedia.")
 
-                with st.container():
-                    st.markdown(f"""
-                    <div class="search-result">
-                        <p><strong>Latin:</strong> <em>{display_latin}</em></p>
-                        <p><strong>Terjemahan:</strong> {display_terjemahan}</p>
-                    </div>
-                    """, unsafe_allow_html=True)
+    elif page == "🕸️ Visualisasi RDF":
+        st.header("Visualisasi Hubungan Data RDF")
+        st.markdown("Graf berikut memvisualisasikan hubungan antara entitas cerita utama dengan setiap kalimat yang menjadi bagiannya, sesuai dengan data pada file `naskah_bhakti_final.ttl`.")
+        render_visualization_page()
 
     elif page == "ℹ️ Tentang Naskah":
-        st.subheader("Tentang Naskah Kakawin Ramayana")
-        # Konten halaman "Tentang Naskah" seperti sebelumnya
+        st.header("Tentang Naskah Kakawin Ramayana")
+        render_about_page()
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+
+
+if __name__ == "__main__":
+    main()
