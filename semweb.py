@@ -1,7 +1,6 @@
 import streamlit as st
 import os
 from rdflib import Graph
-import streamlit.components.v1 as components
 
 # --- KONFIGURASI HALAMAN ---
 st.set_page_config(
@@ -12,7 +11,6 @@ st.set_page_config(
 )
 
 # --- GAYA CSS & TAMPILAN ---
-# Menambahkan gaya untuk kontainer yang bisa di-scroll dan perbaikan lainnya
 st.markdown("""
 <style>
     /* Gaya untuk membungkus konten utama agar tidak terlalu lebar di layar besar */
@@ -23,8 +21,8 @@ st.markdown("""
 
     /* Gaya untuk kontainer transliterasi yang dapat di-scroll */
     .transliterasi-container {
-        background-color: #f8f9fa; /* Warna latar sedikit berbeda */
-        border: 1px solid #e9ecef; /* Border tipis */
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
         border-radius: 8px;
         padding: 1rem;
         height: 70vh; /* Tinggi tetap untuk kontainer */
@@ -83,7 +81,6 @@ def load_rdf_data(ttl_file="naskah_bhakti_final.ttl"):
         g = Graph()
         g.parse(ttl_file, format="turtle")
         
-        # Query SPARQL untuk mengambil semua data kalimat
         query = """
         PREFIX jawa: <http://example.org/jawa#>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -122,7 +119,6 @@ def render_transliterasi_content(data):
         st.info("Data transliterasi untuk halaman ini belum tersedia.")
         return
     
-    # Memulai kontainer yang bisa di-scroll
     st.markdown('<div class="transliterasi-container">', unsafe_allow_html=True)
     
     for item in data:
@@ -133,7 +129,6 @@ def render_transliterasi_content(data):
         </div>
         """, unsafe_allow_html=True)
         
-    # Menutup kontainer
     st.markdown('</div>', unsafe_allow_html=True)
 
 def render_search_results(results, query):
@@ -144,7 +139,6 @@ def render_search_results(results, query):
     
     st.success(f"Ditemukan {len(results)} hasil untuk '{query}'")
     
-    # Menggunakan kontainer yang sama dengan halaman transliterasi
     st.markdown('<div class="transliterasi-container">', unsafe_allow_html=True)
     
     highlight_class = "background-color: #FDEBD0; padding: 0 4px; border-radius: 3px;"
@@ -181,17 +175,6 @@ def render_about_page():
     - **Python**: Bahasa pemrograman utama yang digunakan untuk memproses data RDF dan menjalankan aplikasi.
     """)
 
-def render_visualization_page():
-    """Menampilkan halaman visualisasi RDF dari file HTML."""
-    try:
-        with open("visualization.html", "r", encoding="utf-8") as f:
-            html_content = f.read()
-            components.html(html_content, height=620, scrolling=False)
-    except FileNotFoundError:
-        st.error("File 'visualization.html' tidak ditemukan. Pastikan file tersebut berada di direktori yang sama dengan `semweb.py`.")
-    except Exception as e:
-        st.error(f"Gagal memuat halaman visualisasi: {e}")
-
 # --- INISIALISASI SESSION STATE ---
 if 'page_num' not in st.session_state:
     st.session_state.page_num = 1
@@ -205,7 +188,7 @@ def main():
         
         page = st.radio(
             "Navigasi",
-            ["📖 Transliterasi", "🔍 Pencarian", "🕸️ Visualisasi RDF", "ℹ️ Tentang Naskah"],
+            ["📖 Transliterasi", "🔍 Pencarian", "ℹ️ Tentang Naskah"],
             key="main_nav"
         )
         
@@ -219,16 +202,14 @@ def main():
     # --- Konten Halaman ---
     st.markdown('<div class="main-container">', unsafe_allow_html=True)
     
-    # Memuat data sekali saja
     rdf_data = load_rdf_data()
     if rdf_data is None:
-        st.stop() # Menghentikan eksekusi jika data gagal dimuat
+        st.stop()
 
     # --- Routing Halaman ---
     if page == "📖 Transliterasi":
         st.header("Transliterasi & Terjemahan Naskah")
         
-        # Layout dua kolom: Kiri untuk gambar, Kanan untuk teks
         col1, col2 = st.columns([1, 1], gap="large")
         
         with col1:
@@ -242,7 +223,6 @@ def main():
             else:
                 st.warning(f"Gambar untuk halaman {st.session_state.page_num} tidak tersedia.")
 
-            # Kontrol navigasi di bawah gambar
             TOTAL_PAGES = 20
             nav_cols = st.columns([2, 1, 2])
             if nav_cols[0].button("← Sebelumnya", use_container_width=True, disabled=(st.session_state.page_num == 1)):
@@ -258,10 +238,12 @@ def main():
         with col2:
             st.subheader("Teks & Terjemahan")
             if st.session_state.page_num == 3:
-                # Menampilkan data yang tersedia untuk halaman 3
                 render_transliterasi_content(rdf_data)
             else:
-                st.info(f"Data transliterasi untuk halaman {st.session_state.page_num} sedang dalam proses digitalisasi.")
+                st.info(f"Data transliterasi untuk halaman {st.session_state.page_num} belum tersedia.")
+                st.markdown("""
+                **Catatan:** Proyek digitalisasi naskah ini sedang berlangsung. Saat ini, data RDF yang tersedia hanya untuk **halaman 3**.
+                """)
 
     elif page == "🔍 Pencarian":
         st.header("Pencarian Teks")
@@ -281,17 +263,11 @@ def main():
         else:
             st.info("Masukkan kata kunci di atas untuk memulai pencarian di dalam data yang tersedia.")
 
-    elif page == "🕸️ Visualisasi RDF":
-        st.header("Visualisasi Hubungan Data RDF")
-        st.markdown("Graf berikut memvisualisasikan hubungan antara entitas cerita utama dengan setiap kalimat yang menjadi bagiannya, sesuai dengan data pada file `naskah_bhakti_final.ttl`.")
-        render_visualization_page()
-
     elif page == "ℹ️ Tentang Naskah":
         st.header("Tentang Naskah Kakawin Ramayana")
         render_about_page()
     
     st.markdown('</div>', unsafe_allow_html=True)
-
 
 if __name__ == "__main__":
     main()
