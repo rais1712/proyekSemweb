@@ -1,6 +1,8 @@
 import streamlit as st
 import os
 from rdflib import Graph
+import html
+import re
 
 # --- KONFIGURASI HALAMAN ---
 st.set_page_config(
@@ -13,10 +15,8 @@ st.set_page_config(
 # --- ENHANCED CSS STYLING ---
 st.markdown("""
 <style>
-    /* Import Google Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
-    
-    /* CSS Variables - Color System */
+
     :root {
         --primary-gold: #D4AF37;
         --primary-brown: #8B4513;
@@ -36,40 +36,39 @@ st.markdown("""
         --gradient-gold: linear-gradient(135deg, #FFD700 0%, var(--primary-gold) 100%);
     }
 
-    /* Global Reset & Base Styles */
     .stApp {
         background: var(--gradient-primary);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+            Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
-    /* Hide Streamlit Default Elements */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-    
-    .stDeployButton {display: none;}
-    .stDecoration {display: none;}
+    /* Hide default Streamlit elements safely */
+    #MainMenu, footer, header {
+        display: none !important;
+    }
+    .stDeployButton, .stDecoration {
+        display: none !important;
+    }
 
-    /* Main Container */
     .main .block-container {
         padding-top: 2rem;
         padding-bottom: 3rem;
         max-width: 1400px;
     }
 
-    /* Enhanced Sidebar Styling */
-    .css-1d391kg {
+    /* Sidebar styling with stable selector */
+    div[data-testid="stSidebar"] > div:first-child {
         background: linear-gradient(180deg, #2C1810 0%, #1A0F08 100%);
         border-right: 3px solid var(--primary-gold);
         box-shadow: 4px 0 20px rgba(139, 69, 19, 0.15);
+        padding: 1rem 1.5rem 2rem 1.5rem;
+        height: 100vh;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
     }
 
-    .css-1d391kg .css-17eq0hr {
-        color: var(--secondary-cream);
-    }
-
-    /* Enhanced Sidebar Title */
-    .css-1d391kg h2 {
+    div[data-testid="stSidebar"] h2 {
         color: var(--primary-gold) !important;
         font-family: 'Playfair Display', serif;
         font-weight: 700;
@@ -78,15 +77,19 @@ st.markdown("""
         text-shadow: 0 3px 6px rgba(0,0,0,0.4);
         font-size: 1.8rem;
         background: var(--gradient-gold);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
         background-clip: text;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+        -moz-text-fill-color: transparent;
+        -webkit-mask-image: linear-gradient(#000 0 0);
+        mask-image: linear-gradient(#000 0 0);
         padding: 1rem 0;
         border-bottom: 2px solid rgba(212, 175, 55, 0.3);
     }
 
-    /* Enhanced Sidebar Navigation */
-    .css-1d391kg .stRadio > div {
+    div[data-testid="stSidebar"] .stRadio > div {
         background: rgba(212, 175, 55, 0.08);
         border-radius: 16px;
         padding: 1.2rem;
@@ -95,7 +98,7 @@ st.markdown("""
         box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    .css-1d391kg .stRadio label {
+    div[data-testid="stSidebar"] .stRadio label {
         color: var(--secondary-cream) !important;
         font-weight: 500;
         font-size: 1.1rem;
@@ -110,7 +113,7 @@ st.markdown("""
         background: rgba(255, 255, 255, 0.05);
     }
 
-    .css-1d391kg .stRadio label::before {
+    div[data-testid="stSidebar"] .stRadio label::before {
         content: '';
         position: absolute;
         top: 0;
@@ -121,18 +124,17 @@ st.markdown("""
         transition: left 0.6s ease;
     }
 
-    .css-1d391kg .stRadio label:hover {
+    div[data-testid="stSidebar"] .stRadio label:hover {
         background: rgba(212, 175, 55, 0.25);
         transform: translateX(8px) scale(1.02);
         box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
     }
 
-    .css-1d391kg .stRadio label:hover::before {
+    div[data-testid="stSidebar"] .stRadio label:hover::before {
         left: 100%;
     }
 
-    /* Selected radio button styling */
-    .css-1d391kg .stRadio input[type="radio"]:checked + label {
+    div[data-testid="stSidebar"] .stRadio input[type="radio"]:checked + label {
         background: var(--gradient-gold);
         color: var(--text-dark) !important;
         font-weight: 600;
@@ -140,7 +142,6 @@ st.markdown("""
         box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
     }
 
-    /* Typography Hierarchy */
     h1, h2, h3, h4, h5, h6 {
         font-family: 'Playfair Display', serif;
         color: var(--text-dark);
@@ -151,9 +152,14 @@ st.markdown("""
         font-size: 2.5rem;
         margin-bottom: 1.5rem;
         background: var(--gradient-gold);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
         background-clip: text;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+        -moz-text-fill-color: transparent;
+        -webkit-mask-image: linear-gradient(#000 0 0);
+        mask-image: linear-gradient(#000 0 0);
         text-align: center;
     }
 
@@ -171,7 +177,6 @@ st.markdown("""
         color: var(--text-dark);
     }
 
-    /* Image container styling */
     .manuscript-image {
         background: transparent;
         border: none;
@@ -186,7 +191,6 @@ st.markdown("""
         box-shadow: none;
     }
 
-    /* PERBAIKAN: Transliterasi Container dengan scrollbar yang benar */
     .transliterasi-container {
         background: var(--bg-paper);
         border: 2px solid var(--border-light);
@@ -216,7 +220,6 @@ st.markdown("""
         background: var(--primary-brown);
     }
 
-    /* PERBAIKAN: Transliterasi Items - memastikan berada di dalam container */
     .transliterasi-item {
         background: rgba(255, 255, 255, 0.7);
         border: 1px solid var(--border-light);
@@ -237,7 +240,6 @@ st.markdown("""
         background: rgba(255, 255, 255, 0.9);
     }
 
-    /* PERBAIKAN: Text Styling - Menghilangkan italic dan memastikan layout yang benar */
     .latin-text {
         font-family: 'Playfair Display', serif;
         font-style: normal;
@@ -263,7 +265,6 @@ st.markdown("""
         font-weight: 600;
     }
 
-    /* Search Results Highlighting */
     .search-highlight {
         background: linear-gradient(120deg, #FFF3CD 0%, #FFEAA7 100%);
         padding: 2px 6px;
@@ -272,7 +273,6 @@ st.markdown("""
         color: var(--primary-brown);
     }
 
-    /* Enhanced Button Styling */
     .stButton > button {
         background: var(--gradient-gold);
         color: var(--text-dark);
@@ -318,7 +318,6 @@ st.markdown("""
         transform: none;
     }
 
-    /* Enhanced Input Styling */
     .stTextInput input {
         background: var(--bg-paper);
         border: 2px solid var(--border-light);
@@ -341,7 +340,6 @@ st.markdown("""
         font-style: italic;
     }
 
-    /* Success/Info/Warning Messages */
     .stSuccess, .stInfo, .stWarning {
         border-radius: 12px;
         border: none;
@@ -365,7 +363,6 @@ st.markdown("""
         color: #E65100;
     }
 
-    /* Navigation Indicators */
     .page-indicator {
         text-align: center;
         margin-top: 0.5rem;
@@ -379,7 +376,6 @@ st.markdown("""
         display: inline-block;
     }
 
-    /* About Page Content */
     .about-content {
         background: var(--bg-paper);
         border-radius: 16px;
@@ -431,7 +427,6 @@ st.markdown("""
         top: 0.2rem;
     }
 
-    /* Responsive Design */
     @media (max-width: 768px) {
         h1 {
             font-size: 2rem;
@@ -449,11 +444,11 @@ st.markdown("""
             font-size: 1.1rem;
         }
 
-        .css-1d391kg h2 {
+        div[data-testid="stSidebar"] h2 {
             font-size: 1.5rem;
         }
 
-        .css-1d391kg .stRadio label {
+        div[data-testid="stSidebar"] .stRadio label {
             font-size: 1rem;
             padding: 0.8rem 1.2rem;
         }
@@ -465,10 +460,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- PEMUATAN DATA (DATA LOADING & CACHING) ---
+# --- PEMUATAN DATA ---
 @st.cache_data
 def load_rdf_data(ttl_file="naskah_bhakti_final.ttl"):
-    """Memuat dan mem-parsing file TTL dengan penanganan error yang lebih baik."""
     if not os.path.exists(ttl_file):
         st.error(f"Berkas data '{ttl_file}' tidak ditemukan di direktori proyek.")
         return None
@@ -508,57 +502,118 @@ def load_rdf_data(ttl_file="naskah_bhakti_final.ttl"):
         st.error(f"Gagal memuat atau mem-parsing data RDF: {str(e)}")
         return None
 
-# --- FUNGSI BANTUAN TAMPILAN (UI HELPER FUNCTIONS) ---
+# --- FUNGSI BANTUAN ---
 def render_transliterasi_content(data):
-    """PERBAIKAN: Menampilkan konten transliterasi dengan HTML container yang benar."""
     if not data:
         st.info("Data transliterasi untuk halaman ini belum tersedia.")
         return
     
-    # Membangun seluruh konten HTML sekaligus
-    html_content = '<div class="transliterasi-container">'
-    
-    for i, item in enumerate(data):
-        html_content += f'''
-        <div class="transliterasi-item">
-            <div class="latin-text">{item["latin"]}</div>
-            <div class="translation-text"><strong>Terjemahan:</strong> {item["terjemahan"]}</div>
-        </div>
-        '''
-    
-    html_content += '</div>'
-    
-    # Menampilkan seluruh konten sekaligus
-    st.markdown(html_content, unsafe_allow_html=True)
+    # Gunakan st.container() untuk memastikan rendering yang konsisten
+    with st.container():
+        # Render setiap item secara terpisah menggunakan st.markdown
+        for i, item in enumerate(data):
+            # Buat HTML untuk setiap item secara terpisah
+            item_html = f'''
+            <div class="transliterasi-item" style="
+                background: rgba(255, 255, 255, 0.7);
+                border: 1px solid rgba(139, 69, 19, 0.1);
+                border-radius: 12px;
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+                border-left: 4px solid #D4AF37;
+                box-shadow: 0 4px 12px rgba(139, 69, 19, 0.08);
+                transition: all 0.3s ease;
+                width: 100%;
+                box-sizing: border-box;
+            ">
+                <div class="latin-text" style="
+                    font-family: 'Playfair Display', serif;
+                    font-style: normal;
+                    font-size: 1.25rem;
+                    color: #2C1810;
+                    margin-bottom: 1rem;
+                    line-height: 1.6;
+                    font-weight: 500;
+                    word-wrap: break-word;
+                ">{html.escape(item["latin"])}</div>
+                <div class="translation-text" style="
+                    font-family: 'Inter', sans-serif;
+                    color: #5D4E37;
+                    font-size: 1rem;
+                    line-height: 1.7;
+                    font-weight: 400;
+                    word-wrap: break-word;
+                "><strong style="color: #8B4513; font-weight: 600;">Terjemahan:</strong> {html.escape(item["terjemahan"])}</div>
+            </div>
+            '''
+            
+            # Render setiap item secara individual
+            st.markdown(item_html, unsafe_allow_html=True)
 
 def render_search_results(results, query):
-    """Menampilkan hasil pencarian dengan format yang lebih baik."""
     if not results:
         st.info("Tidak ada hasil yang cocok ditemukan.")
         return
     
-    st.success(f"Ditemukan {len(results)} hasil untuk '{query}'")
+    st.success(f"Ditemukan {len(results)} hasil untuk '{html.escape(query)}'")
     
-    # Membangun konten HTML untuk hasil pencarian
-    html_content = '<div class="transliterasi-container">'
-    
-    for item in results:
-        # Highlight search terms
-        latin_highlighted = item['latin'].replace(query, f"<span class='search-highlight'>{query}</span>")
-        translation_highlighted = item['terjemahan'].replace(query, f"<span class='search-highlight'>{query}</span>")
+    # Gunakan st.container() untuk konsistensi
+    with st.container():
+        pattern = re.compile(re.escape(query), re.IGNORECASE)
         
-        html_content += f'''
-        <div class="transliterasi-item">
-            <div class="latin-text">{latin_highlighted}</div>
-            <div class="translation-text"><strong>Terjemahan:</strong> {translation_highlighted}</div>
-        </div>
-        '''
-    
-    html_content += '</div>'
-    st.markdown(html_content, unsafe_allow_html=True)
+        for i, item in enumerate(results):
+            # Escape HTML terlebih dahulu
+            latin_escaped = html.escape(item['latin'])
+            translation_escaped = html.escape(item['terjemahan'])
+            
+            # Tambahkan highlight
+            latin_highlighted = pattern.sub(
+                lambda m: f"<span style='background: linear-gradient(120deg, #FFF3CD 0%, #FFEAA7 100%); padding: 2px 6px; border-radius: 4px; font-weight: 600; color: #8B4513;'>{m.group(0)}</span>", 
+                latin_escaped
+            )
+            translation_highlighted = pattern.sub(
+                lambda m: f"<span style='background: linear-gradient(120deg, #FFF3CD 0%, #FFEAA7 100%); padding: 2px 6px; border-radius: 4px; font-weight: 600; color: #8B4513;'>{m.group(0)}</span>", 
+                translation_escaped
+            )
+            
+            # Render setiap hasil pencarian secara individual
+            result_html = f'''
+            <div style="
+                background: rgba(255, 255, 255, 0.7);
+                border: 1px solid rgba(139, 69, 19, 0.1);
+                border-radius: 12px;
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+                border-left: 4px solid #D4AF37;
+                box-shadow: 0 4px 12px rgba(139, 69, 19, 0.08);
+                transition: all 0.3s ease;
+                width: 100%;
+                box-sizing: border-box;
+            ">
+                <div style="
+                    font-family: 'Playfair Display', serif;
+                    font-style: normal;
+                    font-size: 1.25rem;
+                    color: #2C1810;
+                    margin-bottom: 1rem;
+                    line-height: 1.6;
+                    font-weight: 500;
+                    word-wrap: break-word;
+                ">{latin_highlighted}</div>
+                <div style="
+                    font-family: 'Inter', sans-serif;
+                    color: #5D4E37;
+                    font-size: 1rem;
+                    line-height: 1.7;
+                    font-weight: 400;
+                    word-wrap: break-word;
+                "><strong style="color: #8B4513; font-weight: 600;">Terjemahan:</strong> {translation_highlighted}</div>
+            </div>
+            '''
+            
+            st.markdown(result_html, unsafe_allow_html=True)
 
 def render_about_page():
-    """Menampilkan halaman tentang."""
     st.markdown("## 🏛️ Sejarah Naskah")
     st.markdown("""
     **Kakawin Ramayana** adalah salah satu karya sastra Jawa Kuno yang paling penting, diperkirakan 
@@ -593,10 +648,10 @@ def render_about_page():
 if 'page_num' not in st.session_state:
     st.session_state.page_num = 1
 
-# --- APLIKASI UTAMA (MAIN APPLICATION) ---
+# --- APLIKASI UTAMA ---
 def main():
-    # --- Sidebar ---
     with st.sidebar:
+        st.markdown('<div class="custom-sidebar">', unsafe_allow_html=True)
         st.markdown("## 📜 Kakawin Ramayana")
         st.markdown("---")
         
@@ -605,13 +660,12 @@ def main():
             ["📖 Transliterasi", "🔍 Pencarian", "ℹ️ Tentang Naskah"],
             key="main_nav"
         )
+        st.markdown('</div>', unsafe_allow_html=True)
 
-    # --- Load Data ---
     rdf_data = load_rdf_data()
     if rdf_data is None:
         st.stop()
 
-    # --- Routing Halaman ---
     if page == "📖 Transliterasi":
         st.markdown("<h1>📜 Transliterasi & Terjemahan Naskah</h1>", unsafe_allow_html=True)
         
@@ -626,19 +680,23 @@ def main():
             else:
                 st.warning(f"Gambar untuk halaman {st.session_state.page_num} tidak tersedia.")
 
-            # Navigation
             TOTAL_PAGES = 20
             nav_cols = st.columns([2, 1, 2])
             
-            if nav_cols[0].button("← Sebelumnya", use_container_width=True, disabled=(st.session_state.page_num == 1)):
-                st.session_state.page_num -= 1
-                st.rerun()
+            # Tombol Sebelumnya dengan key unik dan disabled sesuai kondisi
+            if nav_cols[0].button("← Sebelumnya", use_container_width=True, disabled=(st.session_state.page_num == 1), key="prev_button"):
+                if st.session_state.page_num > 1:
+                    st.session_state.page_num -= 1
+                    st.rerun()
             
+            # Indikator halaman
             nav_cols[1].markdown(f"<div class='page-indicator'>{st.session_state.page_num}/{TOTAL_PAGES}</div>", unsafe_allow_html=True)
             
-            if nav_cols[2].button("Selanjutnya →", use_container_width=True, disabled=(st.session_state.page_num == TOTAL_PAGES)):
-                st.session_state.page_num += 1
-                st.rerun()
+            # Tombol Selanjutnya dengan key unik dan disabled sesuai kondisi
+            if nav_cols[2].button("Selanjutnya →", use_container_width=True, disabled=(st.session_state.page_num == TOTAL_PAGES), key="next_button"):
+                if st.session_state.page_num < TOTAL_PAGES:
+                    st.session_state.page_num += 1
+                    st.rerun()
 
         with col2:
             st.subheader("Teks & Terjemahan")
@@ -672,6 +730,7 @@ def main():
     elif page == "ℹ️ Tentang Naskah":
         st.markdown("<h1>ℹ️ Tentang Naskah Kakawin Ramayana</h1>", unsafe_allow_html=True)
         render_about_page()
+
 
 if __name__ == "__main__":
     main()
