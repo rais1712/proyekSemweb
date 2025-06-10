@@ -40,11 +40,12 @@ def init_session_state():
 def load_asset(file_path):
     """Fungsi untuk memuat file CSS atau JS eksternal"""
     try:
-        with open(file_path) as f:
+        # Menambahkan argumen encoding='utf-8' untuk memastikan file dibaca dengan benar
+         with open(file_path, mode="r", encoding="utf-8") as f:
             return f.read()
     except FileNotFoundError:
-        st.error(f"Peringatan: File aset tidak ditemukan di '{file_path}'.")
-        return ""
+         st.error(f"Peringatan: File aset tidak ditemukan di '{file_path}'.")
+         return ""
 
 def get_image_as_base64(file_path):
     """Fungsi untuk mengonversi gambar menjadi base64"""
