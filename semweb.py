@@ -4,51 +4,27 @@ from rdflib import Graph
 import base64
 import html
 import re
-import json
-from datetime import datetime
-import time
 
 # --- KONFIGURASI HALAMAN ---
 st.set_page_config(
     page_title="Digitalisasi Kakawin Ramayana",
     page_icon="📜",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
-
-# --- INISIALISASI SESSION STATE ---
-def init_session_state():
-    """Inisialisasi state untuk personalisasi dan tracking"""
-    if 'page_num' not in st.session_state:
-        st.session_state.page_num = 1
-    if 'dark_mode' not in st.session_state:
-        st.session_state.dark_mode = False
-    if 'font_size' not in st.session_state:
-        st.session_state.font_size = 'medium'
-    if 'reading_mode' not in st.session_state:
-        st.session_state.reading_mode = False
-    if 'bookmarks' not in st.session_state:
-        st.session_state.bookmarks = []
-    if 'recent_pages' not in st.session_state:
-        st.session_state.recent_pages = []
-    if 'user_annotations' not in st.session_state:
-        st.session_state.user_annotations = {}
-    if 'search_history' not in st.session_state:
-        st.session_state.search_history = []
 
 # --- FUNGSI PEMUATAN ASET ---
 def load_asset(file_path):
-    """Fungsi untuk memuat file CSS atau JS eksternal"""
+    """Fungsi untuk memuat file CSS atau JS eksternal dengan encoding UTF-8."""
     try:
-        # Menambahkan argumen encoding='utf-8' untuk memastikan file dibaca dengan benar
-         with open(file_path, mode="r", encoding="utf-8") as f:
+        with open(file_path, mode="r", encoding="utf-8") as f:
             return f.read()
     except FileNotFoundError:
-         st.error(f"Peringatan: File aset tidak ditemukan di '{file_path}'.")
-         return ""
+        st.error(f"Peringatan: File aset tidak ditemukan di '{file_path}'.")
+        return ""
 
 def get_image_as_base64(file_path):
-    """Fungsi untuk mengonversi gambar menjadi base64"""
+    """Fungsi untuk mengonversi gambar menjadi base64."""
     try:
         with open(file_path, "rb") as f:
             return base64.b64encode(f.read()).decode()
@@ -58,6 +34,7 @@ def get_image_as_base64(file_path):
 # --- PEMUATAN DATA RDF ---
 @st.cache_data
 def load_rdf_data(ttl_file="naskah_bhakti_final.ttl"):
+    """Memuat dan mem-parsing data transliterasi dari file Turtle RDF."""
     if not os.path.exists(ttl_file):
         st.error(f"Berkas data '{ttl_file}' tidak ditemukan.")
         return None
@@ -79,462 +56,294 @@ def load_rdf_data(ttl_file="naskah_bhakti_final.ttl"):
         st.error(f"Gagal memuat data RDF: {e}")
         return None
 
-# --- FUNGSI UTILITY ---
-def add_to_recent_pages(page_num):
-    """Menambahkan halaman ke recent activity"""
-    if page_num not in st.session_state.recent_pages:
-        st.session_state.recent_pages.insert(0, page_num)
-        if len(st.session_state.recent_pages) > 5:
-            st.session_state.recent_pages.pop()
+# --- INISIALISASI SESSION STATE ---
+def init_session_state():
+    """Inisialisasi state yang dibutuhkan."""
+    if 'page_num' not in st.session_state:
+        query_params = st.query_params.to_dict()
+        st.session_state.page_num = int(query_params.get("page", [1])[0])
+    if 'search_history' not in st.session_state:
+        st.session_state.search_history = []
 
 def add_to_search_history(query):
-    """Menambahkan query ke search history"""
+    """Menambahkan query ke search history."""
     if query and query not in st.session_state.search_history:
         st.session_state.search_history.insert(0, query)
-        if len(st.session_state.search_history) > 10:
+        if len(st.session_state.search_history) > 5:
             st.session_state.search_history.pop()
-
-def toggle_bookmark(page_num):
-    """Toggle bookmark untuk halaman"""
-    if page_num in st.session_state.bookmarks:
-        st.session_state.bookmarks.remove(page_num)
-    else:
-        st.session_state.bookmarks.append(page_num)
-
-def get_jawa_kuno_glossary():
-    """Mendefinisikan glossary untuk istilah Jawa Kuno"""
-    return {
-        "bhakti": "Pengabdian atau pemujaan kepada Tuhan",
-        "prajurit": "Prajurit atau tentara",
-        "ratu": "Raja atau pemimpin",
-        "mantra": "Doa atau jampi-jampi suci",
-        "dharma": "Kewajiban moral dan spiritual"
-    }
 
 # --- KOMPONEN UI UTAMA ---
 def render_hero_section():
-    """Hero Section dengan animasi dan background batik"""
+    """Merender Hero Section dengan animasi dan efek visual yang menarik."""
     st.markdown("""
         <section class="hero-section">
+            <div class="hero-background-pattern"></div>
             <div class="hero-content">
+                <div class="hero-icon">📜</div>
                 <h1 class="hero-title">Kakawin Ramayana</h1>
-                <p class="hero-subtitle">Menjelajahi Kekayaan Sastra Jawa Kuno Melalui Digitalisasi Interaktif</p>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">20</span>
-                        <span class="stat-label">Halaman</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">500+</span>
-                        <span class="stat-label">Baris Teks</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">1000+</span>
-                        <span class="stat-label">Kata Unik</span>
-                    </div>
-                </div>
+                <p class="hero-subtitle">Menjelajahi Kekayaan Sastra Jawa Kuno</p>
+                <div class="hero-decorative-line"></div>
             </div>
         </section>
     """, unsafe_allow_html=True)
 
-def render_personalization_panel():
-    """Panel personalisasi untuk user preferences"""
-    with st.expander("⚙️ Pengaturan Tampilan", expanded=False):
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
-            if st.button("🌓 Toggle Dark Mode"):
-                st.session_state.dark_mode = not st.session_state.dark_mode
-                st.rerun()
-        
-        with col2:
-            font_size = st.selectbox(
-                "Ukuran Font:",
-                ["small", "medium", "large"],
-                index=["small", "medium", "large"].index(st.session_state.font_size)
-            )
-            st.session_state.font_size = font_size
-        
-        with col3:
-            if st.button("📖 Mode Baca"):
-                st.session_state.reading_mode = not st.session_state.reading_mode
-                st.rerun()
+def render_transliteration_page(rdf_data, total_pages=20):
+    """Merender halaman transliterasi dengan navigasi st.button yang telah di-styling."""
+    st.markdown('<h2 class="page-title">📖 Transliterasi Naskah</h2>', unsafe_allow_html=True)
+    
+    st.markdown('<div class="transliteration-container">', unsafe_allow_html=True)
+    col1, col2 = st.columns([1, 1], gap="large")
 
-def render_advanced_navigation(total_pages=20):
-    """Advanced Navigation System dengan timeline dan progress"""
-    st.markdown('<div class="navigation-container">', unsafe_allow_html=True)
-    
-    # Timeline Navigation dengan thumbnail preview
-    st.markdown("### 🗺️ Navigasi Timeline")
-    
-    col1, col2, col3 = st.columns([2, 1, 1])
-    
     with col1:
-        # Slider dengan custom styling
-        page_num = st.slider(
-            "Pilih Halaman", 
-            min_value=1, 
-            max_value=total_pages, 
-            value=st.session_state.page_num,
-            key="main_slider"
-        )
-        
-        if page_num != st.session_state.page_num:
-            st.session_state.page_num = page_num
-            add_to_recent_pages(page_num)
-    
-    with col2:
-        # Quick jump buttons
-        st.markdown("**Quick Jump:**")
-        if st.button("⏮️ Awal"):
-            st.session_state.page_num = 1
-            st.rerun()
-        if st.button("⏭️ Akhir"):
-            st.session_state.page_num = total_pages
-            st.rerun()
-    
-    with col3:
-        # Bookmark toggle
-        is_bookmarked = st.session_state.page_num in st.session_state.bookmarks
-        bookmark_label = "⭐ Hapus Bookmark" if is_bookmarked else "☆ Tambah Bookmark"
-        if st.button(bookmark_label):
-            toggle_bookmark(st.session_state.page_num)
-            st.rerun()
-    
-    # Progress dan breadcrumb
-    progress_val = st.session_state.page_num / total_pages
-    st.progress(progress_val, text=f"Progres: {int(progress_val*100)}% • Halaman {st.session_state.page_num}/{total_pages}")
-    
-    # Breadcrumb
-    st.markdown(f"""
-        <div class="breadcrumb">
-            <span>Beranda</span> › <span>Transliterasi</span> › <span class="current">Halaman {st.session_state.page_num}</span>
-        </div>
-    """, unsafe_allow_html=True)
-    
-    # Recent pages
-    if st.session_state.recent_pages:
-        st.markdown("**Halaman Terakhir:** " + " | ".join([
-            f"[{p}]" for p in st.session_state.recent_pages[:3]
-        ]))
-    
-    st.markdown('</div>', unsafe_allow_html=True)
-
-def render_enhanced_search(rdf_data):
-    """Enhanced Search dengan suggestions dan filters"""
-    st.markdown("### 🔍 Pencarian Lanjutan")
-    
-    col1, col2 = st.columns([3, 1])
-    
-    with col1:
-        search_query = st.text_input(
-            "Cari dalam naskah:",
-            placeholder="Ketik kata kunci...",
-            help="Gunakan 'AND', 'OR' untuk pencarian boolean"
-        )
-    
-    with col2:
-        search_type = st.selectbox(
-            "Jenis Pencarian:",
-            ["Semua", "Latin", "Terjemahan"]
-        )
-    
-    # Search suggestions dari history
-    if st.session_state.search_history:
-        st.markdown("**Pencarian Terkini:** " + " | ".join([
-            f"`{q}`" for q in st.session_state.search_history[:5]
-        ]))
-    
-    if search_query:
-        add_to_search_history(search_query)
-        
-        if rdf_data:
-            # Boolean search logic
-            if " AND " in search_query.upper():
-                terms = [t.strip().lower() for t in search_query.upper().split(" AND ")]
-                results = [
-                    item for item in rdf_data 
-                    if all(term in item['latin'].lower() or term in item['terjemahan'].lower() for term in terms)
-                ]
-            elif " OR " in search_query.upper():
-                terms = [t.strip().lower() for t in search_query.upper().split(" OR ")]
-                results = [
-                    item for item in rdf_data 
-                    if any(term in item['latin'].lower() or term in item['terjemahan'].lower() for term in terms)
-                ]
-            else:
-                query_lower = search_query.lower()
-                if search_type == "Latin":
-                    results = [item for item in rdf_data if query_lower in item['latin'].lower()]
-                elif search_type == "Terjemahan":
-                    results = [item for item in rdf_data if query_lower in item['terjemahan'].lower()]
-                else:
-                    results = [
-                        item for item in rdf_data 
-                        if query_lower in item['latin'].lower() or query_lower in item['terjemahan'].lower()
-                    ]
-            
-            render_search_results(results, search_query)
-        else:
-            st.error("Data tidak tersedia untuk pencarian.")
-
-def render_search_results(results, query):
-    """Render hasil pencarian dengan highlighting"""
-    if not results:
-        st.info("Tidak ada hasil yang cocok.")
-        return
-    
-    st.success(f"Ditemukan {len(results)} hasil untuk '{query}'")
-    
-    # Multiple term highlighting
-    terms = re.findall(r'\b\w+\b', query.lower())
-    
-    for i, item in enumerate(results):
-        with st.expander(f"Hasil {i+1}: {item['latin'][:50]}...", expanded=i<3):
-            latin_text = item['latin']
-            translation_text = item['terjemahan']
-            
-            # Highlight multiple terms
-            for term in terms:
-                pattern = re.compile(re.escape(term), re.IGNORECASE)
-                latin_text = pattern.sub(f"<mark>{term}</mark>", latin_text)
-                translation_text = pattern.sub(f"<mark>{term}</mark>", translation_text)
-            
-            st.markdown(f"""
-                <div class="search-result">
-                    <div class="latin-text">{latin_text}</div>
-                    <div class="translation-text"><strong>Terjemahan:</strong> {translation_text}</div>
-                </div>
-            """, unsafe_allow_html=True)
-
-def render_dual_pane_layout(page_num, rdf_data):
-    """Dual-pane layout dengan synchronization"""
-    st.markdown('<div class="dual-pane-container">', unsafe_allow_html=True)
-    
-    if not st.session_state.reading_mode:
-        col1, col2 = st.columns([1, 1], gap="large")
-    else:
-        # Reading mode - fokus pada teks
-        col1, col2 = st.columns([1, 2], gap="large")
-    
-    with col1:
-        st.markdown(f"### 📜 Naskah Asli - Halaman {page_num}")
-        
-        # Image dengan enhancement
-        # Membuat path yang robust dan tidak bergantung pada direktori kerja
-        script_dir = os.path.dirname(__file__)
-        image_path = os.path.join(script_dir, "images", f"page_{page_num}.png")
-        if os.path.exists(image_path):
-            # Thumbnail untuk navigation
-            st.markdown("**Navigasi Halaman:**")
-            thumb_cols = st.columns(5)
-            for i, col in enumerate(thumb_cols):
-                with col:
-                    thumb_page = max(1, page_num - 2 + i)
-                    if thumb_page <= 20:
-                        if st.button(f"{thumb_page}", key=f"thumb_{thumb_page}"):
-                            st.session_state.page_num = thumb_page
-                            st.rerun()
-            
-            # Main image dengan zoom functionality
-            image_b64 = get_image_as_base64(image_path)
-            if image_b64:
-                st.markdown(f"""
-            <div class="manuscript-panel">
-                <img id="manuscriptImage" 
-                    src="data:image/png;base64,{image_b64}" 
-                    class="manuscript-image" 
-                    alt="Naskah halaman {page_num}">
-                <div class="image-controls">
-                    <button id="zoomInBtn" title="Perbesar">🔍+</button>
-                    <button id="zoomOutBtn" title="Perkecil">🔍-</button>
-                    <button id="downloadBtn" title="Unduh Gambar">💾</button>
+        st.markdown(f"""
+            <div class="panel-header manuscript-header">
+                <div class="panel-header-icon">📜</div>
+                <div class="panel-header-text">
+                    <h3>Naskah Asli</h3>
+                    <span class="panel-header-subtitle">Halaman {st.session_state.page_num}</span>
                 </div>
             </div>
         """, unsafe_allow_html=True)
-        else:
-            st.warning(f"Gambar tidak ditemukan untuk halaman {page_num}")
-    
-    with col2:
-        st.markdown(f"### 📖 Transliterasi - Halaman {page_num}")
         
-        # Floating information panel
-        with st.expander("ℹ️ Konteks Sejarah", expanded=False):
-            st.markdown(f"""
-                **Halaman {page_num} - Konteks:**
-                - Bagian dari episode penting dalam Ramayana
-                - Menggunakan meter Sloka tradisional
-                - Mengandung ajaran moral dan spiritual
-                - Ditulis dalam bahasa Jawa Kuno (Kawi)
-            """)
+        script_dir = os.path.dirname(os.path.abspath(__file__)) if "__file__" in locals() else "."
+        image_path = os.path.join(script_dir, "images", f"page_{st.session_state.page_num}.png")
         
-        # Main transliteration content
-        st.markdown('<div class="transliterasi-panel">', unsafe_allow_html=True)
-        
-        if page_num == 3 and rdf_data:
-            glossary = get_jawa_kuno_glossary()
-            
-            for i, item in enumerate(rdf_data):
-                # Annotation system
-                annotation_key = f"annotation_{page_num}_{i}"
-                user_note = st.session_state.user_annotations.get(annotation_key, "")
-                
-                # Tooltip untuk istilah Jawa Kuno
-                latin_text = item['latin']
-                for term, definition in glossary.items():
-                    if term in latin_text.lower():
-                        latin_text = latin_text.replace(
-                            term, 
-                            f'<span class="tooltip">{term}<span class="tooltiptext">{definition}</span></span>'
-                        )
-                
+        if os.path.exists(image_path):
+            image_b64 = get_image_as_base64(image_path)
+            if image_b64:
                 st.markdown(f"""
-                    <div class="transliterasi-item" id="item_{i}">
-                        <div class="latin-text">{latin_text}</div>
-                        <div class="translation-text">
-                            <strong>Terjemahan:</strong> {html.escape(item['terjemahan'])}
+                    <div class="manuscript-panel">
+                        <div class="manuscript-frame">
+                            <img id="manuscriptImage" src="data:image/png;base64,{image_b64}" class="manuscript-image">
+                            <div class="manuscript-overlay">
+                                <div class="zoom-hint">🔍 Klik untuk memperbesar</div>
+                            </div>
                         </div>
                     </div>
                 """, unsafe_allow_html=True)
-                
-                # Annotation input
-                with st.expander(f"📝 Catatan untuk baris {i+1}", expanded=False):
-                    new_note = st.text_area(
-                        "Tambahkan catatan:",
-                        value=user_note,
-                        key=f"note_input_{i}",
-                        height=100
-                    )
-                    if st.button(f"Simpan Catatan", key=f"save_note_{i}"):
-                        st.session_state.user_annotations[annotation_key] = new_note
-                        st.success("Catatan disimpan!")
         else:
-            st.info(f"Data transliterasi untuk halaman {page_num} belum tersedia.")
-            
-            # Simulasi data untuk demo
-            if page_num != 3:
-                st.markdown("""
-                    <div class="transliterasi-item">
-                        <div class="latin-text">Data transliterasi akan segera tersedia</div>
-                        <div class="translation-text">
-                            <strong>Status:</strong> Sedang dalam proses digitalisasi
+            st.markdown(f"""
+                <div class="manuscript-panel">
+                    <div class="manuscript-placeholder">
+                        <div class="placeholder-icon">📜</div>
+                        <p>Gambar naskah untuk halaman {st.session_state.page_num} tidak ditemukan.</p>
+                    </div>
+                </div>
+            """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="page-nav-container">', unsafe_allow_html=True)
+        st.markdown('<div class="page-nav-bar-st">', unsafe_allow_html=True)
+        nav_cols = st.columns([1, 3, 1])
+
+        with nav_cols[0]:
+            if st.button("◀", key="prev_page_btn", use_container_width=True, disabled=(st.session_state.page_num <= 1)):
+                st.session_state.page_num -= 1
+                st.rerun()
+
+        with nav_cols[1]:
+            st.markdown(f"""
+                <div class="page-indicator-nav">
+                    <div class="page-info">
+                        <span class="current-page">{st.session_state.page_num}</span>
+                        <span class="page-separator">dari</span>
+                        <span class="total-pages">{total_pages}</span>
+                    </div>
+                    <div class="page-progress">
+                        <div class="progress-bar" style="width: {(st.session_state.page_num/total_pages)*100}%"></div>
+                    </div>
+                </div>
+            """, unsafe_allow_html=True)
+
+        with nav_cols[2]:
+            if st.button("▶", key="next_page_btn", use_container_width=True, disabled=(st.session_state.page_num >= total_pages)):
+                st.session_state.page_num += 1
+                st.rerun()
+        
+        st.markdown('</div></div>', unsafe_allow_html=True)
+
+    with col2:
+        st.markdown(f"""
+            <div class="panel-header transliteration-header">
+                <div class="panel-header-icon">📖</div>
+                <div class="panel-header-text">
+                    <h3>Transliterasi</h3>
+                    <span class="panel-header-subtitle">Halaman {st.session_state.page_num}</span>
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="transliteration-content">', unsafe_allow_html=True)
+        with st.container(height=650):
+            if st.session_state.page_num == 3 and rdf_data:
+                st.markdown('<div class="transliteration-items">', unsafe_allow_html=True)
+                for i, item in enumerate(rdf_data):
+                    st.markdown(f"""
+                        <div class="transliterasi-item" data-item="{i+1}">
+                            <div class="item-number">{i+1}</div>
+                            <div class="item-content">
+                                <div class="latin-text">{item['latin']}</div>
+                                <div class="translation-divider"></div>
+                                <div class="translation-text">
+                                    <span class="translation-label">Terjemahan:</span>
+                                    <span class="translation-content">{html.escape(item['terjemahan'])}</span>
+                                </div>
+                            </div>
                         </div>
+                    """, unsafe_allow_html=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+            else:
+                st.markdown(f"""
+                    <div class="no-data-placeholder">
+                        <div class="placeholder-icon">📖</div>
+                        <h4>Data Belum Tersedia</h4>
+                        <p>Data transliterasi untuk halaman {st.session_state.page_num} sedang dalam proses digitalisasi.</p>
+                        <div class="placeholder-hint">Coba kunjungi halaman 3 untuk melihat contoh transliterasi.</div>
                     </div>
                 """, unsafe_allow_html=True)
-        
         st.markdown('</div>', unsafe_allow_html=True)
     
     st.markdown('</div>', unsafe_allow_html=True)
 
-def render_export_panel():
-    """Panel untuk export dan sharing"""
-    st.markdown("### 📤 Export & Sharing")
+def render_search_page(rdf_data):
+    """Merender halaman pencarian yang dipercantik."""
+    st.markdown('<h2 class="page-title">🔍 Pencarian Teks</h2>', unsafe_allow_html=True)
+    st.markdown('<div class="search-page-container">', unsafe_allow_html=True)
     
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        if st.button("📄 Export PDF"):
-            st.info("Fitur export PDF akan segera tersedia")
-    
-    with col2:
-        if st.button("📝 Export Text"):
-            st.info("Fitur export text akan segera tersedia")
-    
-    with col3:
-        if st.button("🔗 Share Link"):
-            st.info(f"Link: https://app.com/page/{st.session_state.page_num}")
+    st.markdown("""
+        <div class="search-panel">
+            <div class="search-header">
+                <div class="search-icon">🔍</div>
+                <h3>Cari dalam Naskah</h3>
+                <p>Temukan teks dalam transliterasi Latin atau terjemahan Bahasa Indonesia</p>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
 
-def render_bookmarks_sidebar():
-    """Sidebar untuk bookmarks dan recent activity"""
-    if st.session_state.bookmarks:
-        st.sidebar.markdown("### ⭐ Halaman Favorit")
-        for bookmark in st.session_state.bookmarks:
-            if st.sidebar.button(f"Halaman {bookmark}", key=f"bookmark_{bookmark}"):
-                st.session_state.page_num = bookmark
-                st.rerun()
+    search_query = st.text_input("Cari...", placeholder="Ketik kata kunci yang ingin dicari...", label_visibility="collapsed")
+
+    if st.session_state.search_history:
+        st.markdown("""
+            <div class="search-history">
+                <div class="history-header">
+                    <span class="history-icon">🕒</span>
+                    <span class="history-title">Pencarian Terkini</span>
+                </div>
+                <div class="history-tags">
+        """, unsafe_allow_html=True)
+        for query in st.session_state.search_history:
+            st.markdown(f'<span class="history-tag">{query}</span>', unsafe_allow_html=True)
+        st.markdown('</div></div>', unsafe_allow_html=True)
+
+    if search_query:
+        add_to_search_history(search_query)
+        st.markdown('<div class="search-results-section">', unsafe_allow_html=True)
+        
+        if rdf_data:
+            query_lower = search_query.lower()
+            results = [item for item in rdf_data if query_lower in item['latin'].lower() or query_lower in item['terjemahan'].lower()]
+            
+            if not results:
+                st.markdown(f"""<div class="no-results">...</div>""", unsafe_allow_html=True)
+            else:
+                st.markdown(f"""
+                    <div class="results-header">
+                        <div class="results-count">
+                            <span class="results-icon">✨</span>
+                            <span class="results-text">Ditemukan <strong>{len(results)} hasil</strong> untuk "<strong>{search_query}</strong>"</span>
+                        </div>
+                    </div>""", unsafe_allow_html=True)
+                
+                st.markdown('<div class="search-results-container">', unsafe_allow_html=True)
+                for i, item in enumerate(results):
+                    highlighted_latin = re.sub(f'({re.escape(search_query)})', r'<mark>\1</mark>', item['latin'], flags=re.IGNORECASE)
+                    highlighted_translation = re.sub(f'({re.escape(search_query)})', r'<mark>\1</mark>', item['terjemahan'], flags=re.IGNORECASE)
+                    
+                    with st.expander(f"📝 Hasil {i+1}: {item['latin'][:70]}{'...' if len(item['latin']) > 70 else ''}", expanded=(i < 3)):
+                        st.markdown(f"""...""", unsafe_allow_html=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+        else:
+            st.markdown("""<div class="error-state">...</div>""", unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+def render_about_page():
+    """Merender halaman 'Tentang Naskah' dengan format FAQ."""
+    st.markdown('<h2 class="page-title">📜 Tentang Naskah Kakawin Ramayana</h2>', unsafe_allow_html=True)
+    st.markdown("""<div class="about-hero">...</div>""", unsafe_allow_html=True)
+    st.markdown('<div class="faq-container">', unsafe_allow_html=True)
     
-    if st.session_state.recent_pages:
-        st.sidebar.markdown("### 🕐 Terakhir Dibaca")
-        for recent in st.session_state.recent_pages:
-            if st.sidebar.button(f"Halaman {recent}", key=f"recent_{recent}"):
-                st.session_state.page_num = recent
-                st.rerun()
+    with st.expander("🚪 Pendahuluan: Membuka Gerbang Kakawin Ramayana", expanded=True):
+        st.markdown("""<div class="faq-content">...</div>""", unsafe_allow_html=True)
+    with st.expander("🏛️ Jejak Sejarah: Asal-Usul dan Konteks Penciptaan"):
+        st.markdown("""<div class="faq-content">...</div>""", unsafe_allow_html=True)
+    with st.expander("⚔️ Kisah Abadi Sang Rama: Alur Cerita Kakawin Ramayana"):
+        st.markdown("""<div class="faq-content">...</div>""", unsafe_allow_html=True)
+    with st.expander("👥 Galeri Karakter: Tokoh-Tokoh Sentral dan Perwatakannya"):
+        st.markdown("""<div class="faq-content">...</div>""", unsafe_allow_html=True)
+    with st.expander("🎨 Gubahan Jawa: Kakawin Ramayana dalam Dialog dengan Epos India"):
+        st.markdown("""<div class="faq-content">...</div>""", unsafe_allow_html=True)
+    with st.expander("🎼 Keindahan Puitika Kawi: Struktur Sastra"):
+        st.markdown("""<div class="faq-content">...</div>""", unsafe_allow_html=True)
+    with st.expander("🌟 Warisan Budaya Tak Ternilai: Pengaruh Kakawin Ramayana"):
+        st.markdown("""<div class="faq-content">...</div>""", unsafe_allow_html=True)
+    with st.expander("💫 Kesimpulan: Relevansi Abadi Kakawin Ramayana"):
+        st.markdown("""<div class="faq-content">...</div>""", unsafe_allow_html=True)
+        
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # --- FUNGSI UTAMA ---
 def main():
-    """
-    Fungsi utama untuk menjalankan aplikasi Streamlit.
-    Menginisialisasi state, memuat aset, dan merender semua komponen UI.
-    """
+    """Fungsi utama untuk menjalankan aplikasi Streamlit."""
     init_session_state()
-
-    # --- MEMUAT ASET EKSTERNAL ---
-    # Memuat file CSS eksternal untuk menjaga kode Python tetap bersih.
     st.markdown(f'<style>{load_asset("assets/style.css")}</style>', unsafe_allow_html=True)
+    st.markdown('<div class="app-container">', unsafe_allow_html=True)
 
-    # Menentukan tema (terang/gelap) dan ukuran font berdasarkan session state.
-    # Menggunakan atribut data-theme yang sesuai dengan standar di style.css.
-    theme_attribute = "dark" if st.session_state.dark_mode else "light"
-    font_class = f"font-{st.session_state.font_size}"
+    with st.sidebar:
+        st.markdown("""
+            <div class="sidebar-header">
+                <div class="sidebar-logo">📜</div>
+                <h2 class="sidebar-title">Navigasi</h2>
+                <div class="sidebar-subtitle">Kakawin Ramayana</div>
+            </div>""", unsafe_allow_html=True)
+        app_page = st.radio("Pilih Halaman:", ["Transliterasi & Naskah", "Pencarian", "Tentang Naskah"], label_visibility="collapsed")
+        st.markdown("---")
+        st.markdown("""
+            <div class="sidebar-footer">
+                <div class="footer-content">
+                    <div class="footer-icon">🌟</div>
+                    <div class="footer-text">
+                        <strong>Digitalisasi Kakawin Ramayana</strong>
+                        <br><small>Preservasi Warisan Budaya, 2025</small>
+                    </div>
+                </div>
+                <div class="footer-stats">
+                    <div class="stat-item"><span class="stat-number">20</span><span class="stat-label">Halaman</span></div>
+                    <div class="stat-item"><span class="stat-number">∞</span><span class="stat-label">Makna</span></div>
+                </div>
+            </div>""", unsafe_allow_html=True)
 
-    # --- CONTAINER UTAMA APLIKASI ---
-    st.markdown(f'<div data-theme="{theme_attribute}" class="app-container {font_class}">', unsafe_allow_html=True)
-
-    # --- RENDER KOMPONEN UI ---
-    render_hero_section()
-    render_personalization_panel()
-    render_bookmarks_sidebar()
-
-    # Membuat tab untuk konten utama.
-    tab1, tab2, tab3 = st.tabs(["📖 Transliterasi", "🔍 Pencarian", "📊 Statistik"])
-
-    # Memuat data RDF (di-cache untuk performa).
+    st.markdown('<div class="main-content">', unsafe_allow_html=True)
     rdf_data = load_rdf_data()
 
-    # Konten untuk Tab 1: Transliterasi
-    with tab1:
-        render_advanced_navigation()
-        render_dual_pane_layout(st.session_state.page_num, rdf_data)
-        render_export_panel()
-
-    # Konten untuk Tab 2: Pencarian
-    with tab2:
-        render_enhanced_search(rdf_data)
-
-    # Konten untuk Tab 3: Statistik
-    with tab3:
-        st.markdown("### 📊 Statistik Digitalisasi")
-        col1, col2, col3 = st.columns(3)
-
-        with col1:
-            st.metric("Total Halaman", "20", "100%")
-        with col2:
-            st.metric("Halaman Terdigitalisasi", "1", "5%")
-        with col3:
-            st.metric("Total Pengunjung", "1,234", "+12%")
-
-        # Contoh grafik progres.
-        st.markdown("**Progress Digitalisasi per Bulan:**")
-        st.bar_chart({"Jan": 0, "Feb": 0, "Mar": 1, "Apr": 0})
-
-    # --- ELEMEN HTML UNTUK LIGHTBOX ---
-    # Struktur HTML untuk lightbox. Fungsionalitasnya dikontrol oleh assets/script.js.
-    # Inline style dan onclick telah dihapus.
+    if app_page == "Transliterasi & Naskah":
+        render_hero_section()
+        render_transliteration_page(rdf_data)
+    elif app_page == "Pencarian":
+        render_hero_section()
+        render_search_page(rdf_data)
+    elif app_page == "Tentang Naskah":
+        render_about_page()
+    
+    st.markdown("</div>", unsafe_allow_html=True)
     st.markdown("""
         <div id="imageLightbox" class="lightbox">
             <span class="lightbox-close">&times;</span>
             <img class="lightbox-content" id="lightboxImage">
-        </div>
-    """, unsafe_allow_html=True)
-
-    # Menutup container utama aplikasi.
+            <div class="lightbox-caption" id="lightboxCaption">Klik di luar gambar untuk menutup</div>
+        </div>""", unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
-
-    # --- MEMUAT JAVASCRIPT EKSTERNAL ---
-    # Memuat file JavaScript di akhir halaman.
-    # Ini memastikan semua elemen HTML sudah ada sebelum skrip mencoba mengaksesnya.
     st.components.v1.html(f'<script>{load_asset("assets/script.js")}</script>', height=0)
-
 
 if __name__ == "__main__":
     main()
