@@ -4,6 +4,7 @@ from rdflib import Graph
 import base64
 import html
 import re
+from SPARQLWrapper import SPARQLWrapper, JSON
 
 # --- KONFIGURASI HALAMAN ---
 st.set_page_config(
@@ -31,9 +32,43 @@ def get_image_as_base64(file_path):
     except FileNotFoundError:
         return None
 
-# --- PEMUATAN DATA RDF ---
+# --- PEMUATAN DATA RDF (VERSI BARU DARI FUSEKI) ---
 @st.cache_data
-def load_rdf_data(ttl_file="naskah_bhakti_final.ttl"):
+def load_rdf_data(fuseki_endpoint="http://localhost:3030/kakawin/query"):
+    """Mengambil data transliterasi dari SPARQL endpoint Fuseki."""
+    # Query SPARQL yang sama dengan yang Anda miliki sebelumnya
+    query = """
+    PREFIX jawa: <http://example.org/jawa#>
+    SELECT ?kalimat_uri ?latin ?terjemahan WHERE {
+        ?kalimat_uri a jawa:Kalimat ;
+                     jawa:latin ?latin ;
+                     jawa:terjemahan ?terjemahan .
+    } ORDER BY ?kalimat_uri
+    """
+
+    try:
+        # Menyiapkan koneksi ke endpoint Fuseki
+        sparql = SPARQLWrapper(fuseki_endpoint)
+        sparql.setQuery(query)
+        sparql.setReturnFormat(JSON) # Meminta hasil dalam format JSON
+
+        # Melakukan query dan mengonversi hasilnya
+        results = sparql.query().convert()
+
+        # Mem-parsing hasil JSON ke dalam format list of dictionaries
+        data = [
+            {
+                "uri": r["kalimat_uri"]["value"],
+                "latin": r["latin"]["value"],
+                "terjemahan": r["terjemahan"]["value"]
+            }
+            for r in results["results"]["bindings"]
+        ]
+        return data
+    except Exception as e:
+        st.error(f"Gagal terhubung atau mengambil data dari server Fuseki: {e}")
+        st.info("Pastikan server Apache Jena Fuseki Anda sedang berjalan di http://localhost:3030")
+        return None
     """Memuat dan mem-parsing data transliterasi dari file Turtle RDF."""
     if not os.path.exists(ttl_file):
         st.error(f"Berkas data '{ttl_file}' tidak ditemukan.")
