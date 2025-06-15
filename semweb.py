@@ -62,15 +62,6 @@ def init_session_state():
     if 'page_num' not in st.session_state:
         query_params = st.query_params.to_dict()
         st.session_state.page_num = int(query_params.get("page", [1])[0])
-    if 'search_history' not in st.session_state:
-        st.session_state.search_history = []
-
-def add_to_search_history(query):
-    """Menambahkan query ke search history."""
-    if query and query not in st.session_state.search_history:
-        st.session_state.search_history.insert(0, query)
-        if len(st.session_state.search_history) > 5:
-            st.session_state.search_history.pop()
 
 # --- KOMPONEN UI UTAMA ---
 def render_hero_section():
@@ -92,7 +83,7 @@ def render_transliteration_page(rdf_data, total_pages=20):
     st.markdown('<h2 class="page-title">📖 Transliterasi Naskah</h2>', unsafe_allow_html=True)
     
     st.markdown('<div class="transliteration-container">', unsafe_allow_html=True)
-    col1, col2 = st.columns([1, 1], gap="large")
+    col1, col2 = st.columns([1.2, 1], gap="large")
 
     with col1:
         st.markdown(f"""
@@ -115,9 +106,6 @@ def render_transliteration_page(rdf_data, total_pages=20):
                     <div class="manuscript-panel">
                         <div class="manuscript-frame">
                             <img id="manuscriptImage" src="data:image/png;base64,{image_b64}" class="manuscript-image">
-                            <div class="manuscript-overlay">
-                                <div class="zoom-hint">🔍 Klik untuk memperbesar</div>
-                            </div>
                         </div>
                     </div>
                 """, unsafe_allow_html=True)
@@ -221,21 +209,7 @@ def render_search_page(rdf_data):
 
     search_query = st.text_input("Cari...", placeholder="Ketik kata kunci yang ingin dicari...", label_visibility="collapsed")
 
-    if st.session_state.search_history:
-        st.markdown("""
-            <div class="search-history">
-                <div class="history-header">
-                    <span class="history-icon">🕒</span>
-                    <span class="history-title">Pencarian Terkini</span>
-                </div>
-                <div class="history-tags">
-        """, unsafe_allow_html=True)
-        for query in st.session_state.search_history:
-            st.markdown(f'<span class="history-tag">{query}</span>', unsafe_allow_html=True)
-        st.markdown('</div></div>', unsafe_allow_html=True)
-
     if search_query:
-        add_to_search_history(search_query)
         st.markdown('<div class="search-results-section">', unsafe_allow_html=True)
         
         if rdf_data:
@@ -268,29 +242,33 @@ def render_search_page(rdf_data):
     st.markdown('</div>', unsafe_allow_html=True)
 
 def render_about_page():
-    """Merender halaman 'Tentang Naskah' dengan format FAQ."""
+    """Merender halaman 'Tentang Naskah' dengan konten yang informatif."""
     st.markdown('<h2 class="page-title">📜 Tentang Naskah Kakawin Ramayana</h2>', unsafe_allow_html=True)
-    st.markdown("""<div class="about-hero">...</div>""", unsafe_allow_html=True)
-    st.markdown('<div class="faq-container">', unsafe_allow_html=True)
-    
+
     with st.expander("🚪 Pendahuluan: Membuka Gerbang Kakawin Ramayana", expanded=True):
-        st.markdown("""<div class="faq-content">...</div>""", unsafe_allow_html=True)
+        st.markdown("""
+        Proyek digitalisasi ini bertujuan untuk melestarikan dan memperkenalkan kembali **Kakawin Ramayana**, salah satu karya sastra terbesar dalam sejarah Jawa Kuno. Melalui platform ini, kami menyajikan naskah asli, transliterasi teks, serta terjemahannya untuk menjembatani kekayaan masa lalu dengan generasi masa kini.
+        """)
+
     with st.expander("🏛️ Jejak Sejarah: Asal-Usul dan Konteks Penciptaan"):
-        st.markdown("""<div class="faq-content">...</div>""", unsafe_allow_html=True)
+        st.markdown("""
+        Kakawin Ramayana diperkirakan digubah pada masa Kerajaan Medang (Mataram Kuno) sekitar abad ke-9 Masehi. Karya ini merupakan adaptasi dari epos Ramayana karya Walmiki dari India, namun dengan sentuhan lokal yang kental, baik dari segi bahasa, budaya, maupun nilai-nilai filosofis yang diusung.
+        """)
+
     with st.expander("⚔️ Kisah Abadi Sang Rama: Alur Cerita Kakawin Ramayana"):
-        st.markdown("""<div class="faq-content">...</div>""", unsafe_allow_html=True)
-    with st.expander("👥 Galeri Karakter: Tokoh-Tokoh Sentral dan Perwatakannya"):
-        st.markdown("""<div class="faq-content">...</div>""", unsafe_allow_html=True)
-    with st.expander("🎨 Gubahan Jawa: Kakawin Ramayana dalam Dialog dengan Epos India"):
-        st.markdown("""<div class="faq-content">...</div>""", unsafe_allow_html=True)
-    with st.expander("🎼 Keindahan Puitika Kawi: Struktur Sastra"):
-        st.markdown("""<div class="faq-content">...</div>""", unsafe_allow_html=True)
+        st.markdown("""
+        Cerita berpusat pada perjalanan **Rama**, seorang pangeran dari Ayodhya, yang harus menjalani pengasingan di hutan selama 14 tahun bersama istrinya, **Sita**, dan adiknya, **Laksmana**. Konflik memuncak ketika Sita diculik oleh Rahwana, raja raksasa dari Alengka, yang memicu perang besar antara pasukan Rama yang dibantu oleh wanara (manusia kera) melawan pasukan raksasa.
+        """)
+
+    with st.expander("🎨 Gubahan Jawa: Perbedaan dengan Epos India"):
+        st.markdown("""
+        Meskipun alur utamanya sama, Kakawin Ramayana memiliki perbedaan signifikan dengan versi India. Para pujangga Jawa tidak hanya menerjemahkan, tetapi juga menggubah kembali cerita dengan memasukkan unsur-unsur lokal, metrum kakawin yang khas, dan interpretasi filosofis yang lebih mendalam sesuai dengan kearifan lokal pada masanya.
+        """)
+
     with st.expander("🌟 Warisan Budaya Tak Ternilai: Pengaruh Kakawin Ramayana"):
-        st.markdown("""<div class="faq-content">...</div>""", unsafe_allow_html=True)
-    with st.expander("💫 Kesimpulan: Relevansi Abadi Kakawin Ramayana"):
-        st.markdown("""<div class="faq-content">...</div>""", unsafe_allow_html=True)
-        
-    st.markdown("</div>", unsafe_allow_html=True)
+        st.markdown("""
+        Karya ini memiliki pengaruh yang luar biasa dalam kebudayaan Jawa dan Nusantara. Kisahnya diadaptasi ke dalam berbagai bentuk seni seperti relief candi (terutama Candi Prambanan), seni pertunjukan wayang kulit, sendratari, hingga menjadi inspirasi bagi karya-karya sastra setelahnya.
+        """)
 
 # --- FUNGSI UTAMA ---
 def main():
@@ -333,17 +311,12 @@ def main():
         render_hero_section()
         render_search_page(rdf_data)
     elif app_page == "Tentang Naskah":
+        render_hero_section()
         render_about_page()
     
     st.markdown("</div>", unsafe_allow_html=True)
-    st.markdown("""
-        <div id="imageLightbox" class="lightbox">
-            <span class="lightbox-close">&times;</span>
-            <img class="lightbox-content" id="lightboxImage">
-            <div class="lightbox-caption" id="lightboxCaption">Klik di luar gambar untuk menutup</div>
-        </div>""", unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-    st.components.v1.html(f'<script>{load_asset("assets/script.js")}</script>', height=0)
+
+
 
 if __name__ == "__main__":
     main()
