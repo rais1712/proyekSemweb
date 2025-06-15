@@ -415,6 +415,25 @@ section[data-testid="stSidebar"] {
     opacity: 0.5;
 }
 
+/* Styling untuk Tampilan Transliterasi yang Disatukan */
+.unified-text-block {
+    margin-bottom: 0.5rem;
+}
+.text-label {
+    font-weight: 600;
+    color: var(--theme-accent-dark);
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 0.1rem;
+}
+.latin-text-kawi {
+    font-style: italic;
+    color: var(--theme-text);
+}
+.latin-text-modern {
+    color: #575757;
+}
+
 /* Navigation Enhancement */
 .page-nav-container {
     margin-top: var(--spacing-xl);

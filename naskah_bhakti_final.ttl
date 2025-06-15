@@ -10,21 +10,25 @@ jawa:judul a rdf:Property ;
     rdfs:domain jawa:Cerita ;
     rdfs:range xsd:string .
 
-jawa:aksara a rdf:Property ;
+jawa:aksara rdf:type rdf:Property ;
     rdfs:domain jawa:Kalimat ;
     rdfs:range xsd:string .
 
-jawa:latin a rdf:Property ;
+jawa:latin rdf:type rdf:Property ;
     rdfs:domain jawa:Kalimat ;
     rdfs:range xsd:string .
 
-jawa:terjemahan a rdf:Property ;
+jawa:terjemahan rdf:type rdf:Property ;
     rdfs:domain jawa:Kalimat ;
     rdfs:range xsd:string .
 
-jawa:bagianDari a rdf:Property ;
+jawa:bagianDari rdf:type rdf:Property ;
     rdfs:domain jawa:Kalimat ;
     rdfs:range jawa:Cerita .
+
+jawa:halaman rdf:type rdf:Property ;
+    rdfs:domain jawa:Kalimat ;
+    rdfs:range xsd:integer .
 
 jawa:cerita_1 a jawa:Cerita ;
     jawa:judul "Kakawin Ramayana - Prathamas Sargah" .
@@ -32,2479 +36,2975 @@ jawa:cerita_1 a jawa:Cerita ;
 jawa:kalimat_1 a jawa:Kalimat ;
     jawa:latin "Hana sira ratu dibya rĕngön," ;
     jawa:terjemahan "Ada seorang raja yang agung, dengarkanlah," ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_2 a jawa:Kalimat ;
     jawa:latin "prasāsta ring rāt musuhnira pranata," ;
     jawa:terjemahan "terkenal di dunia, musuh-musuhnya tunduk hormat," ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_3 a jawa:Kalimat ;
     jawa:latin "jaya pandita ring aji kabéh," ;
     jawa:terjemahan "unggul sebagai pandita dalam semua ajaran," ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_4 a jawa:Kalimat ;
     jawa:latin "Sang Dasaratha nāma tāmoli." ;
     jawa:terjemahan "Sang Dasaratha namanya tak tertandingi." ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_5 a jawa:Kalimat ;
     jawa:latin "Wéntĕn Ida sang prabu maraga lĕwih durus pirĕngang," ;
     jawa:terjemahan "Ada seorang raja yang agung, dengarkanlah," ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_6 a jawa:Kalimat ;
     jawa:latin "kasub kasumbung ring jagaté mĕsĕh Idané ngandap kasor," ;
     jawa:terjemahan "terkenal di dunia, musuh-musuhnya tunduk hormat," ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_7 a jawa:Kalimat ;
     jawa:latin "molihing kaprajñanan ring tattwa sami," ;
     jawa:terjemahan "memperoleh kebijaksanaan dalam semua ajaran," ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_8 a jawa:Kalimat ;
     jawa:latin "Sang Dasarata parab Ida tanpa tandingan." ;
     jawa:terjemahan "Sang Dasaratha namanya tak tertandingi." ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_9 a jawa:Kalimat ;
     jawa:latin "Sira ta Triwikramapitā," ;
     jawa:terjemahan "Beliau adalah ayah dari Triwikrama," ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_10 a jawa:Kalimat ;
     jawa:latin "pinaka bapa Bhatāra Wisnu mangjanma," ;
     jawa:terjemahan "sebagai ayah Bathara Wisnu yang menjelma," ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_11 a jawa:Kalimat ;
     jawa:latin "inakanikang bhuwana kabéh," ;
     jawa:terjemahan "agar semua dunia sejahtera," ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_12 a jawa:Kalimat ;
     jawa:latin "ya ta donira nimittaning janma." ;
     jawa:terjemahan "itulah tujuannya menjelma." ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_13 a jawa:Kalimat ;
     jawa:latin "Ida wantah ajin Sang Hyang Tri Wikrama," ;
     jawa:terjemahan "Beliau adalah ayah Sang Hyang Tri Wikrama," ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_14 a jawa:Kalimat ;
     jawa:latin "kanggĕh aji rikala Sang Hyang Hari manumadi," ;
     jawa:terjemahan "dianggap ayah ketika Sang Hyang Hari menjelma," ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_15 a jawa:Kalimat ;
     jawa:latin "jaga ngarahayuang jagaté sami," ;
     jawa:terjemahan "akan menyejahterakan seluruh dunia," ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_16 a jawa:Kalimat ;
     jawa:latin "sapunika tatujon Ida mawinan manrĕsti." ;
     jawa:terjemahan "demikianlah tujuan beliau menjelma." ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_17 a jawa:Kalimat ;
     jawa:latin "Gunamānta sang Dasaratha," ;
     jawa:terjemahan "Sang Dasaratha penuh kebajikan," ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_18 a jawa:Kalimat ;
     jawa:latin "wruh sira ring wéda bhakti ring déwa," ;
     jawa:terjemahan "beliau paham akan Weda dan berbakti kepada dewa," ;
+    jawa:halaman "1"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_19 a jawa:Kalimat ;
     jawa:latin "tar malupéng pitra pūja," ;
     jawa:terjemahan "tidak lupa melakukan pemujaan kepada leluhur," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_20 a jawa:Kalimat ;
     jawa:latin "māsih ta siréng swagotra kabéh." ;
     jawa:terjemahan "serta mengasihi semua kerabatnya." ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_21 a jawa:Kalimat ;
     jawa:latin "Lĕwihing guna Ida Sang Dasaratha," ;
     jawa:terjemahan "Keutamaan budi Sang Dasaratha," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_22 a jawa:Kalimat ;
     jawa:latin "wikan Ida ring Wéda bhakti ring Hyang," ;
     jawa:terjemahan "beliau memahami Weda dan berbakti kepada Hyang," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_23 a jawa:Kalimat ;
     jawa:latin "tan lali Ida ngastawa Sang Hyang Pitara," ;
     jawa:terjemahan "tidak lupa beliau memuja Sang Hyang Pitara," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_24 a jawa:Kalimat ;
     jawa:latin "swéca Ida ring samĕton Ida sami." ;
     jawa:terjemahan "bermurah hati beliau kepada semua saudaranya." ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_25 a jawa:Kalimat ;
     jawa:latin "Rāgādi musuh maparö," ;
     jawa:terjemahan "Musuh-musuh seperti nafsu mendekat," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_26 a jawa:Kalimat ;
     jawa:latin "ri hati ya tonggwanya tan madoh ring awak," ;
     jawa:terjemahan "di hati tempatnya, tidak jauh dari diri," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_27 a jawa:Kalimat ;
     jawa:latin "yékā tan hana ri sira," ;
     jawa:terjemahan "itu semua tidak ada pada dirinya," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_28 a jawa:Kalimat ;
     jawa:latin "prawïra wihikan siréng nïti." ;
     jawa:terjemahan "seorang pahlawan yang bijaksana dalam tata negara." ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_29 a jawa:Kalimat ;
     jawa:latin "Pikayun sané kotor sakadi musuh," ;
     jawa:terjemahan "Pikiran kotor seperti musuh," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_30 a jawa:Kalimat ;
     jawa:latin "ngarané ring manah mapangenah néntĕn doh ring angga," ;
     jawa:terjemahan "maksudnya di hati tempatnya tidak jauh dari diri," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_31 a jawa:Kalimat ;
     jawa:latin "punika néntĕn wentĕn ring Ida," ;
     jawa:terjemahan "itu tidak ada pada beliau," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_32 a jawa:Kalimat ;
     jawa:latin "ksatriya wikan ring parikrama." ;
     jawa:terjemahan "ksatria yang bijaksana dalam tata krama." ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_33 a jawa:Kalimat ;
     jawa:latin "Kadi mégha manghudanakĕn," ;
     jawa:terjemahan "Seperti awan yang menurunkan hujan," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_34 a jawa:Kalimat ;
     jawa:latin "padanira yar wéhakĕnnikang dāna," ;
     jawa:terjemahan "begitulah beliau saat memberikan sedekah," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_35 a jawa:Kalimat ;
     jawa:latin "dînāndha krĕpana ya winéh," ;
     jawa:terjemahan "orang miskin, buta, dan sengsara diberi," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_36 a jawa:Kalimat ;
     jawa:latin "nguni-ngunî dang hyang lawan dang ācāryya." ;
     jawa:terjemahan "terutama para pendeta dan guru suci." ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_37 a jawa:Kalimat ;
     jawa:latin "Sakadi méga macingak ngudananin," ;
     jawa:terjemahan "Bagaikan awan terlihat menghujani," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_38 a jawa:Kalimat ;
     jawa:latin "patutan Idané yéning mapaica dana punika," ;
     jawa:terjemahan "beliau patut memberikan sedekah itu," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_39 a jawa:Kalimat ;
     jawa:latin "anĕng ring panjak tiwas buta miwah sengsara punika kapica," ;
     jawa:terjemahan "kepada rakyat miskin, buta, dan sengsara itu diberikan," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_40 a jawa:Kalimat ;
     jawa:latin "sane utama Ida dang hyang miwah Ida dang ācāryya." ;
     jawa:terjemahan "terutama kepada para pendeta dan guru suci." ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_41 a jawa:Kalimat ;
     jawa:latin "Mwang satya ta sira mojar," ;
     jawa:terjemahan "Dan beliau berkata jujur," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_42 a jawa:Kalimat ;
     jawa:latin "ring anakĕbi towi tar mrsĕwāda," ;
     jawa:terjemahan "bahkan kepada para wanita pun tidak berdusta," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_43 a jawa:Kalimat ;
     jawa:latin "nguni-nguni yan ri para jana," ;
     jawa:terjemahan "apalagi kepada orang lain," ;
+    jawa:halaman "2"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_44 a jawa:Kalimat ;
     jawa:latin "priyahita sojar nirātišaya." ;
     jawa:terjemahan "tutur katanya sangat menyenangkan hati." ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_45 a jawa:Kalimat ;
     jawa:latin "Miwah lĕwih pisan Ida satya ngandika," ;
     jawa:terjemahan "Dan sangat mulia beliau jujur berkata," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_46 a jawa:Kalimat ;
     jawa:latin "majeng ring istri taler néntĕn maurĕs wacana," ;
     jawa:terjemahan "kepada wanita pun tidak berkata bohong," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_47 a jawa:Kalimat ;
     jawa:latin "apalagi yéning ring para jana," ;
     jawa:terjemahan "apalagi jika kepada orang lain," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_48 a jawa:Kalimat ;
     jawa:latin "ngawinang seneng manahné ngandika punika." ;
     jawa:terjemahan "menyebabkan senang hatinya berkata demikian." ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_49 a jawa:Kalimat ;
     jawa:latin "Saphala sira rāksakéng rāt," ;
     jawa:terjemahan "Berhasil beliau menjaga dunia," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_50 a jawa:Kalimat ;
     jawa:latin "tuwi sira mitra Hyang Indra bhakti tĕmĕn," ;
     jawa:terjemahan "lagipula beliau adalah sahabat Bathara Indra yang sangat berbakti," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_51 a jawa:Kalimat ;
     jawa:latin "māhéswara ta sira lanā," ;
     jawa:terjemahan "beliau senantiasa mengagungkan Maheshwara," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_52 a jawa:Kalimat ;
     jawa:latin "Šiwa bhakti ginöng lanā ginawé." ;
     jawa:terjemahan "bakti kepada Dewa Siwa senantiasa dilakukan." ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_53 a jawa:Kalimat ;
     jawa:latin "Polih Ida ngraksa jagaté," ;
     jawa:terjemahan "Beliau berhasil menjaga dunia," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_54 a jawa:Kalimat ;
     jawa:latin "taler Ida suwitra ring Ida Hyang Indra bhakti pisan," ;
     jawa:terjemahan "dan beliau juga sahabat Bathara Indra yang sangat berbakti," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_55 a jawa:Kalimat ;
     jawa:latin "ngunggahang Ida Hyang Māhéswara Ida satata," ;
     jawa:terjemahan "beliau senantiasa mengagungkan Bathara Maheswara," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_56 a jawa:Kalimat ;
     jawa:latin "bakti ring Ida Hyang Šiwa agung Ida satata laksanayang." ;
     jawa:terjemahan "bakti kepada Sang Hyang Siwa agung selalu beliau lakukan." ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_57 a jawa:Kalimat ;
     jawa:latin "Ikanang dhanurdhara kabéh," ;
     jawa:terjemahan "Semua pemanah," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_58 a jawa:Kalimat ;
     jawa:latin "kapwa ya bhakti ri sira pranata matwang," ;
     jawa:terjemahan "semuanya berbakti dan tunduk kepada beliau," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_59 a jawa:Kalimat ;
     jawa:latin "kadi mawwata yasa lanā," ;
     jawa:terjemahan "seolah-olah senantiasa membawa kemuliaan," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_60 a jawa:Kalimat ;
     jawa:latin "rupanyanagöng ta kïrtti nira." ;
     jawa:terjemahan "wajahnya agung, itulah kemuliaannya." ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_61 a jawa:Kalimat ;
     jawa:latin "Prajurit-prajurité sané masanjata panah sami," ;
     jawa:terjemahan "Para prajurit yang bersenjata panah semuanya," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_62 a jawa:Kalimat ;
     jawa:latin "maka sami bhakti ring Ida nungkul ngalap kasor," ;
     jawa:terjemahan "semuanya berbakti kepada beliau dan tunduk merendah," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_63 a jawa:Kalimat ;
     jawa:latin "sakadi ngaturang pakaryan Ida satata," ;
     jawa:terjemahan "seolah-olah senantiasa mempersembahkan karyanya," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_64 a jawa:Kalimat ;
     jawa:latin "rūpa Idané agung wibawa punika." ;
     jawa:terjemahan "wajahnya agung, itulah kewibawaannya." ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_65 a jawa:Kalimat ;
     jawa:latin "Jñānanira suddha mawulan," ;
     jawa:terjemahan "Pengetahuannya suci seperti bulan," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_66 a jawa:Kalimat ;
     jawa:latin "parārtha gumawé sukānikang bhuwana," ;
     jawa:terjemahan "bertujuan untuk kebahagiaan seluruh dunia," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_67 a jawa:Kalimat ;
     jawa:latin "sāksāt Indra sira katon," ;
     jawa:terjemahan "seolah-olah terlihat seperti Dewa Indra," ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_68 a jawa:Kalimat ;
     jawa:latin "tuhun hanéng bhumi bhédanira." ;
     jawa:terjemahan "hanya saja beliau berada di bumi, itulah perbedaannya." ;
+    jawa:halaman "3"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_69 a jawa:Kalimat ;
     jawa:latin "Kaprabawan Idané suci kadi bulan," ;
     jawa:terjemahan "Kewibawaannya suci seperti bulan," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_70 a jawa:Kalimat ;
     jawa:latin "ngawinang kasepan jagaté sami," ;
     jawa:terjemahan "menyebabkan kesejahteraan seluruh dunia," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_71 a jawa:Kalimat ;
     jawa:latin "sakadi Ida Sang Hyang Indra kacingak," ;
     jawa:terjemahan "seperti Dewa Indra terlihat," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_72 a jawa:Kalimat ;
     jawa:latin "tuah ring gumi pawidangan Idané." ;
     jawa:terjemahan "hanya di bumi wilayahnya." ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_73 a jawa:Kalimat ;
     jawa:latin "Ikanang pratāpa dumilah," ;
     jawa:terjemahan "Kewibawaan itu bersinar terang," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_74 a jawa:Kalimat ;
     jawa:latin "suka nikanang rāt ginawénya," ;
     jawa:terjemahan "menciptakan kebahagiaan dunia," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_75 a jawa:Kalimat ;
     jawa:latin "kadi bahni ring pahoman," ;
     jawa:terjemahan "seperti api di tempat persembahan," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_76 a jawa:Kalimat ;
     jawa:latin "dumilah mangdé suka nikang rāt." ;
     jawa:terjemahan "bersinar terang membuat dunia bahagia." ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_77 a jawa:Kalimat ;
     jawa:latin "Wibawa Idané ngendihang," ;
     jawa:terjemahan "Kewibawaannya menyala," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_78 a jawa:Kalimat ;
     jawa:latin "kasukan jagaté kakaryanin olih Ida," ;
     jawa:terjemahan "kebahagiaan dunia dibuat oleh beliau," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_79 a jawa:Kalimat ;
     jawa:latin "sakadi api ring pahoman," ;
     jawa:terjemahan "seperti api di tempat persembahan," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_80 a jawa:Kalimat ;
     jawa:latin "ngendih ngawinang jagaté bagia." ;
     jawa:terjemahan "menyala menyebabkan dunia bahagia." ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_81 a jawa:Kalimat ;
     jawa:latin "Hana rājya tulya kéndran," ;
     jawa:terjemahan "Ada sebuah kerajaan bagai kahyangan," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_82 a jawa:Kalimat ;
     jawa:latin "kakwéhan sang mahārddhika susila," ;
     jawa:terjemahan "dipenuhi oleh para cendekiawan yang berbudi luhur," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_83 a jawa:Kalimat ;
     jawa:latin "ring Ayodhyā subhagéng rāt," ;
     jawa:terjemahan "di Ayodhya yang sangat terkenal di dunia," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_84 a jawa:Kalimat ;
     jawa:latin "yéka kadatwannirang nrĕpati." ;
     jawa:terjemahan "itulah istana raja tersebut." ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_85 a jawa:Kalimat ;
     jawa:latin "Wentĕn kaprabon sakadi swarga," ;
     jawa:terjemahan "Ada kerajaan seperti surga," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_86 a jawa:Kalimat ;
     jawa:latin "akéh para wangsa luhur sané susila," ;
     jawa:terjemahan "banyak para bangsawan yang berbudi luhur," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_87 a jawa:Kalimat ;
     jawa:latin "ring Ayodhyā kasub ring jagaté," ;
     jawa:terjemahan "di Ayodhya terkenal di dunia," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_88 a jawa:Kalimat ;
     jawa:latin "punika kadaton Ida Sang Prabu." ;
     jawa:terjemahan "itulah istana beliau Sang Prabu." ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_89 a jawa:Kalimat ;
     jawa:latin "Hayuning swargga tuwi masor," ;
     jawa:terjemahan "Keindahan surga pun kalah," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_90 a jawa:Kalimat ;
     jawa:latin "déning Ayodhyāpurātisaya," ;
     jawa:terjemahan "oleh kota Ayodhya yang tiada tara," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_91 a jawa:Kalimat ;
     jawa:latin "suka nityakāla ménak," ;
     jawa:terjemahan "kebahagiaan senantiasa ada," ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_92 a jawa:Kalimat ;
     jawa:latin "ri rĕngrĕng towi ring lahru." ;
     jawa:terjemahan "baik di musim hujan maupun di musim kemarau." ;
+    jawa:halaman "4"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_93 a jawa:Kalimat ;
     jawa:latin "Kasubang swargané taler kalah," ;
     jawa:terjemahan "Keindahan surga pun kalah," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_94 a jawa:Kalimat ;
     jawa:latin "olih kuta Ayodhyā né lĕwih pisan," ;
     jawa:terjemahan "oleh kota Ayodhya yang sangat luar biasa," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_95 a jawa:Kalimat ;
     jawa:latin "kasukan satata wénten becik," ;
     jawa:terjemahan "kebahagiaan senantiasa ada dan baik," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_96 a jawa:Kalimat ;
     jawa:latin "kala mangsa ujan taler kala mangsa panas." ;
     jawa:terjemahan "baik di musim hujan maupun di musim kemarau." ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_97 a jawa:Kalimat ;
     jawa:latin "Sakwéhning mūlya kabéh," ;
     jawa:terjemahan "Segala yang berharga," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_98 a jawa:Kalimat ;
     jawa:latin "kanaka rajata lén manik hana ngkana," ;
     jawa:terjemahan "emas, perak, dan permata ada di sana," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_99 a jawa:Kalimat ;
     jawa:latin "yāngkĕn huntunya maputih," ;
     jawa:terjemahan "seolah giginya putih," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_100 a jawa:Kalimat ;
     jawa:latin "gumuyu-guyung swargga sor dénya." ;
     jawa:terjemahan "tertawa meremehkan surga karena keunggulannya." ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_101 a jawa:Kalimat ;
     jawa:latin "Samian arta brana sané mahal," ;
     jawa:terjemahan "Semua harta benda yang mahal," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_102 a jawa:Kalimat ;
     jawa:latin "mas, slaka, miwah intan wénten irika," ;
     jawa:terjemahan "emas, perak, dan permata ada di sana," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_103 a jawa:Kalimat ;
     jawa:latin "sakadi untuné putih," ;
     jawa:terjemahan "seolah giginya putih," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_104 a jawa:Kalimat ;
     jawa:latin "ngakak nyungkil swarga kalah olih Ida." ;
     jawa:terjemahan "tertawa meremehkan surga karena beliau." ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_105 a jawa:Kalimat ;
     jawa:latin "Hana ta umah kanaka manik," ;
     jawa:terjemahan "Ada sebuah rumah emas permata," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_106 a jawa:Kalimat ;
     jawa:latin "kinulilingan ikang taman rāmya," ;
     jawa:terjemahan "dikelilingi taman yang indah," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_107 a jawa:Kalimat ;
     jawa:latin "wara kanyakāmĕng-amĕng," ;
     jawa:terjemahan "para gadis jelita bersukaria," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_108 a jawa:Kalimat ;
     jawa:latin "surāpsāri tulya ring Méru." ;
     jawa:terjemahan "bagaikan bidadari di gunung Meru." ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_109 a jawa:Kalimat ;
     jawa:latin "Wentĕn puri mas miwah intan," ;
     jawa:terjemahan "Ada istana emas dan permata," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_110 a jawa:Kalimat ;
     jawa:latin "kakulilingin olih tamané sané asri," ;
     jawa:terjemahan "dikelilingi oleh taman yang indah," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_111 a jawa:Kalimat ;
     jawa:latin "widadari-widadari pada masikian," ;
     jawa:terjemahan "para bidadari bersukaria," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_112 a jawa:Kalimat ;
     jawa:latin "sakadi widadari ring Gunung Meru." ;
     jawa:terjemahan "seperti bidadari di Gunung Meru." ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_113 a jawa:Kalimat ;
     jawa:latin "Špatika manik tamalahalah," ;
     jawa:terjemahan "Banyak sekali permata kristal," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_114 a jawa:Kalimat ;
     jawa:latin "satéja mungwing umah paniñjowan," ;
     jawa:terjemahan "berkilauan di rumah pengintaian," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_115 a jawa:Kalimat ;
     jawa:latin "kadi Gangga saka Himawān," ;
     jawa:terjemahan "bagaikan sungai Gangga dari Himalaya," ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_116 a jawa:Kalimat ;
     jawa:latin "rūpanya katon sutéjāsri." ;
     jawa:terjemahan "tampaklah rupanya bersinar indah." ;
+    jawa:halaman "5"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_117 a jawa:Kalimat ;
     jawa:latin "Akĕh pisan intan patra," ;
     jawa:terjemahan "Banyak sekali permata kristal," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_118 a jawa:Kalimat ;
     jawa:latin "nyunarin genah puri sane kasub," ;
     jawa:terjemahan "bersinar di istana yang terkenal," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_119 a jawa:Kalimat ;
     jawa:latin "sakadi Tukad Gangga saking Gunung Himalaya," ;
     jawa:terjemahan "bagaikan Sungai Gangga dari Gunung Himalaya," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_120 a jawa:Kalimat ;
     jawa:latin "cingak Idané becik pisan." ;
     jawa:terjemahan "pandangan beliau sangat indah." ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_121 a jawa:Kalimat ;
     jawa:latin "Suka trĕpti sang naréndra," ;
     jawa:terjemahan "Senanglah hati sang raja," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_122 a jawa:Kalimat ;
     jawa:latin "bhuktîkang bhoga tan papada dibya," ;
     jawa:terjemahan "menikmati kenikmatan yang tiada bandingannya," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_123 a jawa:Kalimat ;
     jawa:latin "nirbhaya tan hana katakut," ;
     jawa:terjemahan "tanpa rasa takut, tiada yang perlu ditakuti," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_124 a jawa:Kalimat ;
     jawa:latin "sāmanta kabéh masö pranata." ;
     jawa:terjemahan "semua raja bawahan datang tunduk hormat." ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_125 a jawa:Kalimat ;
     jawa:latin "Šanti asih Ida Sang Prabu," ;
     jawa:terjemahan "Damai dan kasih sayang Sang Prabu," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_126 a jawa:Kalimat ;
     jawa:latin "nglĕbur kamoksan sané néntĕn wentĕn tandingan," ;
     jawa:terjemahan "menghancurkan kemoksan yang tiada tandingan," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_127 a jawa:Kalimat ;
     jawa:latin "néntĕn wentĕn rasa takut," ;
     jawa:terjemahan "tidak ada rasa takut," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_128 a jawa:Kalimat ;
     jawa:latin "samian punggawa pada rauh bhakti." ;
     jawa:terjemahan "semua punggawa datang berbakti." ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_129 a jawa:Kalimat ;
     jawa:latin "Sang Kékayī Sumitrā," ;
     jawa:terjemahan "Sang Kekayi, Sumitra," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_130 a jawa:Kalimat ;
     jawa:latin "Kosalyā ghāra sang naréndra tiga," ;
     jawa:terjemahan "Kosalyā adalah tiga istri raja," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_131 a jawa:Kalimat ;
     jawa:latin "Durggā Ganggā Gorī," ;
     jawa:terjemahan "Durggā, Gangga, Gorī," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_132 a jawa:Kalimat ;
     jawa:latin "padanira ya surūpa dibyaguna." ;
     jawa:terjemahan "semuanya berwajah cantik dan berbudi luhur." ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_133 a jawa:Kalimat ;
     jawa:latin "Ida Sang Kékayī, Ida Sang Sumitrā," ;
     jawa:terjemahan "Ida Sang Kekayi, Ida Sang Sumitra," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_134 a jawa:Kalimat ;
     jawa:latin "Ida Sang Kosalyā rabi Ida Sang Prabu tigang diri," ;
     jawa:terjemahan "Ida Sang Kosalya, istri Sang Prabu tiga orang," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_135 a jawa:Kalimat ;
     jawa:latin "sakadi Ida Sang Hyang Durggā, Ida Sang Hyang Ganggā, Ida Sang Hyang Gorī," ;
     jawa:terjemahan "seperti Dewi Durgga, Dewi Gangga, Dewi Gori," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_136 a jawa:Kalimat ;
     jawa:latin "samian lĕwihing rupa miwah gunané." ;
     jawa:terjemahan "semuanya berwajah cantik dan berbudi luhur." ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_137 a jawa:Kalimat ;
     jawa:latin "Suka sang naréndra makurĕn," ;
     jawa:terjemahan "Senanglah sang raja beristri," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_138 a jawa:Kalimat ;
     jawa:latin "déwî nira kapwa yatna yan paniwi," ;
     jawa:terjemahan "para permaisuri beliau semuanya sangat berhati-hati dalam melayani," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_139 a jawa:Kalimat ;
     jawa:latin "tan hana māmbĕk irsya," ;
     jawa:terjemahan "tiada yang berhati iri," ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_140 a jawa:Kalimat ;
     jawa:latin "ri sirang déwî matūt katiga." ;
     jawa:terjemahan "di antara ketiga permaisuri beliau rukun." ;
+    jawa:halaman "6"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_141 a jawa:Kalimat ;
     jawa:latin "Suka Ida Sang Prabu mabiwaka," ;
     jawa:terjemahan "Senanglah Sang Prabu beristri," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_142 a jawa:Kalimat ;
     jawa:latin "para prameswari Idané samian siaga yéning manywita," ;
     jawa:terjemahan "para permaisuri beliau semuanya siaga jika melayani," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_143 a jawa:Kalimat ;
     jawa:latin "néntĕn wentĕn sané iri manahnyané," ;
     jawa:terjemahan "tidak ada yang iri hatinya," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_144 a jawa:Kalimat ;
     jawa:latin "ring Ida Sang Praméswari rukun katiganné." ;
     jawa:terjemahan "terhadap para permaisuri beliau rukun ketiganya." ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_145 a jawa:Kalimat ;
     jawa:latin "Kadi harsa sang mahārsi," ;
     jawa:terjemahan "Bagaikan sukacita sang maharesi," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_146 a jawa:Kalimat ;
     jawa:latin "sakténg rêg sāma lén yajurwéda," ;
     jawa:terjemahan "sakti dalam Regweda, Samaweda, dan Yajurweda," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_147 a jawa:Kalimat ;
     jawa:latin "mangkana sang Dasaratha wéh," ;
     jawa:terjemahan "begitulah pula Sang Dasaratha," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_148 a jawa:Kalimat ;
     jawa:latin "harsanira ta dé mahādéwî." ;
     jawa:terjemahan "kebahagiaannya berasal dari para permaisuri." ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_149 a jawa:Kalimat ;
     jawa:latin "Sakadi liang Ida Sang Mahārĕsi," ;
     jawa:terjemahan "Bagaikan gembira Sang Maharesi," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_150 a jawa:Kalimat ;
     jawa:latin "sakti ring Rĕgwéda Sāma taler ring Yajurwéda," ;
     jawa:terjemahan "sakti dalam Regweda, Samaweda, dan juga Yajurweda," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_151 a jawa:Kalimat ;
     jawa:latin "mangkana Ida Sang Dasaratha taler," ;
     jawa:terjemahan "demikian pula Sang Dasaratha," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_152 a jawa:Kalimat ;
     jawa:latin "kaliangan Ida olih para prameswari." ;
     jawa:terjemahan "kebahagiaan beliau dari para permaisuri." ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_153 a jawa:Kalimat ;
     jawa:latin "Malawas sirār papangguh," ;
     jawa:terjemahan "Lama sudah beliau bertemu," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_154 a jawa:Kalimat ;
     jawa:latin "masnéha lawan mahādéwi," ;
     jawa:terjemahan "penuh kasih sayang dengan para permaisuri," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_155 a jawa:Kalimat ;
     jawa:latin "suraséng sanggama rinasan," ;
     jawa:terjemahan "nikmatnya persetubuhan telah dirasakan," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_156 a jawa:Kalimat ;
     jawa:latin "ālinggana cumbanādinya." ;
     jawa:terjemahan "pelukan, ciuman, dan sebagainya." ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_157 a jawa:Kalimat ;
     jawa:latin "Sukatara Ida manggihin," ;
     jawa:terjemahan "Lama sudah beliau bertemu," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_158 a jawa:Kalimat ;
     jawa:latin "makĕsihan ring para prameswari," ;
     jawa:terjemahan "mengasihi para permaisuri," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_159 a jawa:Kalimat ;
     jawa:latin "rasa nikmaté kahanan," ;
     jawa:terjemahan "nikmatnya telah dirasakan," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_160 a jawa:Kalimat ;
     jawa:latin "angkupan cumbuan miwah sané lianan." ;
     jawa:terjemahan "pelukan, ciuman, dan sebagainya." ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_161 a jawa:Kalimat ;
     jawa:latin "Mahyun ta sira maputrā," ;
     jawa:terjemahan "Berkeinginanlah beliau mempunyai putra," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_162 a jawa:Kalimat ;
     jawa:latin "mānaka wétnyar warĕg rikang wisaya," ;
     jawa:terjemahan "agar beranak karena telah kenyang dengan kenikmatan duniawi," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_163 a jawa:Kalimat ;
     jawa:latin "malawas tar pānak atah," ;
     jawa:terjemahan "sudah lama tidak mempunyai anak," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_164 a jawa:Kalimat ;
     jawa:latin "mahyūn ta sirāgawé yajña." ;
     jawa:terjemahan "maka berkeinginanlah beliau mengadakan upacara yajña." ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_165 a jawa:Kalimat ;
     jawa:latin "Mawinan Ida pacang madué putra," ;
     jawa:terjemahan "Maka beliau akan mempunyai putra," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_166 a jawa:Kalimat ;
     jawa:latin "maputra ri sampun kĕnyang ring kamoksan," ;
     jawa:terjemahan "beranak setelah kenyang dengan kemoksan," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_167 a jawa:Kalimat ;
     jawa:latin "sampun dangu néntĕn madué putra," ;
     jawa:terjemahan "sudah lama tidak mempunyai putra," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_168 a jawa:Kalimat ;
     jawa:latin "mawénang Ida ngawé yadnya." ;
     jawa:terjemahan "maka beliau mengadakan yajña." ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_169 a jawa:Kalimat ;
     jawa:latin "Hana sira rĕsyasrĕngga," ;
     jawa:terjemahan "Ada seorang resi bernama Resyasrengga," ;
+    jawa:halaman "7"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_170 a jawa:Kalimat ;
     jawa:latin "prasāsta karĕngö widagdha ring sāstra," ;
     jawa:terjemahan "terkenal bijaksana dalam sastra," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_171 a jawa:Kalimat ;
     jawa:latin "tarmoli ri yajña kabéh," ;
     jawa:terjemahan "tiada tandingannya dalam segala hal mengenai yajña," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_172 a jawa:Kalimat ;
     jawa:latin "anung makaphalāng anak dibya." ;
     jawa:terjemahan "yang bisa menghasilkan anak yang utama." ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_173 a jawa:Kalimat ;
     jawa:latin "Wentĕn Ida Sang Rĕsi Srĕngga," ;
     jawa:terjemahan "Ada Ida Sang Resi Srĕngga," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_174 a jawa:Kalimat ;
     jawa:latin "kasub kasumbung wikan ring sastra," ;
     jawa:terjemahan "terkenal bijaksana dalam sastra," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_175 a jawa:Kalimat ;
     jawa:latin "néntĕn wentĕn sané nandingin ring sahananing yadnya," ;
     jawa:terjemahan "tidak ada yang menandingi dalam segala hal mengenai yajña," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_176 a jawa:Kalimat ;
     jawa:latin "sané mapuara madué putra luhur." ;
     jawa:terjemahan "yang bisa menghasilkan putra yang mulia." ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_177 a jawa:Kalimat ;
     jawa:latin "Sira ta pinét naranātha," ;
     jawa:terjemahan "Beliau diundang oleh raja," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_178 a jawa:Kalimat ;
     jawa:latin "marā ry Ayodhyā purohita ngkāna," ;
     jawa:terjemahan "datang ke Ayodhya sebagai purohita di sana," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_179 a jawa:Kalimat ;
     jawa:latin "tātar wihang sira pinét," ;
     jawa:terjemahan "beliau tidak menolak diundang," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_180 a jawa:Kalimat ;
     jawa:latin "pininta kasihan sirāyajñā." ;
     jawa:terjemahan "dimohon dengan belas kasihan untuk memimpin yajña." ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_181 a jawa:Kalimat ;
     jawa:latin "Ida katuran olih Ida Sang Prabu," ;
     jawa:terjemahan "Beliau diundang oleh Sang Prabu," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_182 a jawa:Kalimat ;
     jawa:latin "rauh ka Ayodhyā dados purohita irika," ;
     jawa:terjemahan "datang ke Ayodhya sebagai purohita di sana," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_183 a jawa:Kalimat ;
     jawa:latin "néntĕn wénten panyelĕh Ida katuran," ;
     jawa:terjemahan "tidak ada penolakan beliau diundang," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_184 a jawa:Kalimat ;
     jawa:latin "katuran asih Ida ngadakang yadnya." ;
     jawa:terjemahan "dimohon dengan belas kasihan beliau mengadakan yajña." ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_185 a jawa:Kalimat ;
     jawa:latin "Sajining yajña ta umadang," ;
     jawa:terjemahan "Perlengkapan yajña telah tersedia," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_186 a jawa:Kalimat ;
     jawa:latin "sri-wrĕksa samiddha puspa gandha phala," ;
     jawa:terjemahan "kayu cendana, bunga berbau harum, buah-buahan," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_187 a jawa:Kalimat ;
     jawa:latin "dadhi ghrĕta krĕsnatila madhu," ;
     jawa:terjemahan "dadih, minyak samin, wijen hitam, madu," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_188 a jawa:Kalimat ;
     jawa:latin "mwang kumbha kusāgra wrĕtti wĕtih." ;
     jawa:terjemahan "serta kendi, pucuk ilalang, persembahan, dan beras." ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_189 a jawa:Kalimat ;
     jawa:latin "Upakara yadnyané sampun sayaga," ;
     jawa:terjemahan "Perlengkapan yajña sudah siap," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_190 a jawa:Kalimat ;
     jawa:latin "kayu cendana, samidha, sekar, miyik-miyikan, buah-buahan," ;
     jawa:terjemahan "kayu cendana, samidha, bunga, wewangian, buah-buahan," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_191 a jawa:Kalimat ;
     jawa:latin "dadih, minyak samin, wijen selem, madu," ;
     jawa:terjemahan "dadih, minyak samin, wijen hitam, madu," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_192 a jawa:Kalimat ;
     jawa:latin "miwah payuk, pucuk alang-alang, upakara, beras." ;
     jawa:terjemahan "serta kendi, pucuk alang-alang, persembahan, beras." ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_193 a jawa:Kalimat ;
     jawa:latin "Lurnĕkas ta sira mahoma," ;
     jawa:terjemahan "Kemudian beliau memulai upacara homa," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_194 a jawa:Kalimat ;
     jawa:latin "prétādi pisāca rāksasa minantran," ;
     jawa:terjemahan "roh-roh jahat, pisaca, raksasa dimanterai," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_195 a jawa:Kalimat ;
     jawa:latin "bhūta kabéh inilagakĕn," ;
     jawa:terjemahan "semua bhuta diusir," ;
+    jawa:halaman "8"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_196 a jawa:Kalimat ;
     jawa:latin "asing mamighnā rikang yajña." ;
     jawa:terjemahan "segala yang mengganggu yajña." ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_197 a jawa:Kalimat ;
     jawa:latin "Raris Ida ngawitin ngoma," ;
     jawa:terjemahan "Lalu beliau memulai homa," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_198 a jawa:Kalimat ;
     jawa:latin "preta, pisaca, raksasa kamanterain," ;
     jawa:terjemahan "preta, pisaca, raksasa dimanterai," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_199 a jawa:Kalimat ;
     jawa:latin "sarwa bhuta kaicalang," ;
     jawa:terjemahan "semua bhuta dihilangkan," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_200 a jawa:Kalimat ;
     jawa:latin "sahananing sané ngawinang sengkala ring yadnya." ;
     jawa:terjemahan "segala yang menyebabkan gangguan pada yajña." ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_201 a jawa:Kalimat ;
     jawa:latin "Sakali kārana ginawé," ;
     jawa:terjemahan "Segala upacara telah dilakukan," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_202 a jawa:Kalimat ;
     jawa:latin "āwāhana lén pratista sānnidhya," ;
     jawa:terjemahan "pengundangannya serta penempatan dan kehadiran," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_203 a jawa:Kalimat ;
     jawa:latin "Paraméswara inangĕn-angĕn," ;
     jawa:terjemahan "Parameswara direnungkan," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_204 a jawa:Kalimat ;
     jawa:latin "umunggu ring kunda bahnimaya." ;
     jawa:terjemahan "bersemayam di tungku api." ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_205 a jawa:Kalimat ;
     jawa:latin "Sahananing upakara kagenahang," ;
     jawa:terjemahan "Segala upakara ditempatkan," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_206 a jawa:Kalimat ;
     jawa:latin "pangrauh miwah pratista, genahang," ;
     jawa:terjemahan "pengundangannya dan penempatannya, diletakkan," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_207 a jawa:Kalimat ;
     jawa:latin "Ida Sang Hyang Paraméswara kaciptayang," ;
     jawa:terjemahan "Ida Sang Hyang Parameswara dibayangkan," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_208 a jawa:Kalimat ;
     jawa:latin "melinggih ring kunda geni." ;
     jawa:terjemahan "bersemayam di tungku api." ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_209 a jawa:Kalimat ;
     jawa:latin "Sāmpun Bhatāra inĕnah," ;
     jawa:terjemahan "Setelah Bhatara ditempatkan," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_210 a jawa:Kalimat ;
     jawa:latin "tinitisakĕn tang minyāk sasomyamaya," ;
     jawa:terjemahan "disiramkanlah minyak somaya," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_211 a jawa:Kalimat ;
     jawa:latin "lawan krĕsnatila madhu," ;
     jawa:terjemahan "bersama wijen hitam dan madu," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_212 a jawa:Kalimat ;
     jawa:latin "sri-wrĕksa samiddha rowangnya." ;
     jawa:terjemahan "kayu cendana dan samiddha sebagai pelengkapnya." ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_213 a jawa:Kalimat ;
     jawa:latin "Sampun Ida Sang Hyang kagenahang," ;
     jawa:terjemahan "Setelah Ida Sang Hyang ditempatkan," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_214 a jawa:Kalimat ;
     jawa:latin "kagenahang minyak soma," ;
     jawa:terjemahan "ditempatkan minyak soma," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_215 a jawa:Kalimat ;
     jawa:latin "miwah wijen selem madu," ;
     jawa:terjemahan "serta wijen hitam dan madu," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_216 a jawa:Kalimat ;
     jawa:latin "kayu cendana, samidha sarĕngan." ;
     jawa:terjemahan "kayu cendana, samidha bersama." ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_217 a jawa:Kalimat ;
     jawa:latin "Sang Hyang kunda pinūjā," ;
     jawa:terjemahan "Sang Hyang Kundha dipuja," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_218 a jawa:Kalimat ;
     jawa:latin "caru makulilingan samatsya māngsa dadhi," ;
     jawa:terjemahan "sesajen mengelilingi dengan ikan, daging, dan dadih," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_219 a jawa:Kalimat ;
     jawa:latin "kalawan sĕkul niwédya," ;
     jawa:terjemahan "serta nasi persembahan," ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_220 a jawa:Kalimat ;
     jawa:latin "inamĕs salwir nikang marasa." ;
     jawa:terjemahan "dicampur dengan segala yang berasa lezat." ;
+    jawa:halaman "9"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_221 a jawa:Kalimat ;
     jawa:latin "Sang Hyang kunda kapuja," ;
     jawa:terjemahan "Sang Hyang Kundha dipuja," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_222 a jawa:Kalimat ;
     jawa:latin "caru kakulilingin mawi ulam daging dadih," ;
     jawa:terjemahan "sesajen dikelilingi dengan ikan, daging, dadih," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_223 a jawa:Kalimat ;
     jawa:latin "miwah nasi persembahan," ;
     jawa:terjemahan "serta nasi persembahan," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_224 a jawa:Kalimat ;
     jawa:latin "kacampuhin sané sampun marasa." ;
     jawa:terjemahan "dicampur dengan yang sudah berasa." ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_225 a jawa:Kalimat ;
     jawa:latin "Ri sĕdĕng Sang Hyang dumilah," ;
     jawa:terjemahan "Ketika Sang Hyang bersinar terang," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_226 a jawa:Kalimat ;
     jawa:latin "niniwédyākĕn ikang niwédya kabéh," ;
     jawa:terjemahan "dipersembahkanlah semua persembahan itu," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_227 a jawa:Kalimat ;
     jawa:latin "Usadhi lén phalamūla," ;
     jawa:terjemahan "obat-obatan dan buah-buahan," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_228 a jawa:Kalimat ;
     jawa:latin "mwang kĕmbang gandha dhūpādi." ;
     jawa:terjemahan "serta bunga, wewangian, dupa, dan lain-lain." ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_229 a jawa:Kalimat ;
     jawa:latin "Rikala Ida Sang Hyang ngendihang," ;
     jawa:terjemahan "Ketika Ida Sang Hyang menyala terang," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_230 a jawa:Kalimat ;
     jawa:latin "kalaksanayang persembahan samian," ;
     jawa:terjemahan "dilakukanlah persembahan semuanya," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_231 a jawa:Kalimat ;
     jawa:latin "obat-obatan miwah buah-buahan," ;
     jawa:terjemahan "obat-obatan dan buah-buahan," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_232 a jawa:Kalimat ;
     jawa:latin "miwah sekar, miyik-miyikan, dupa miwah sané lianan." ;
     jawa:terjemahan "serta bunga, wewangian, dupa, dan lain-lain." ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_233 a jawa:Kalimat ;
     jawa:latin "Sāmpun pwa sira pinūjā," ;
     jawa:terjemahan "Setelah beliau dipuja," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_234 a jawa:Kalimat ;
     jawa:latin "binojanan sang mahārsi paripūrna," ;
     jawa:terjemahan "disajikan makanan kepada sang maharesi dengan sempurna," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_235 a jawa:Kalimat ;
     jawa:latin "kalawan sang wiku sāksi," ;
     jawa:terjemahan "bersama para wiku saksi," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_236 a jawa:Kalimat ;
     jawa:latin "winūrsitan dinaksinān ta sira." ;
     jawa:terjemahan "diberikan persembahan dan daksinā." ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_237 a jawa:Kalimat ;
     jawa:latin "Sampun Ida kapuja," ;
     jawa:terjemahan "Setelah beliau dipuja," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_238 a jawa:Kalimat ;
     jawa:latin "katuran ajengan Ida Sang Mahārĕsi paripurna," ;
     jawa:terjemahan "disajikan makanan kepada Sang Maharesi dengan sempurna," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
     
 jawa:kalimat_239 a jawa:Kalimat ;
     jawa:latin "miwah Ida Sang Wiku sané nyaksiang," ;
     jawa:terjemahan "serta Sang Wiku yang menyaksikan," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_240 a jawa:Kalimat ;
     jawa:latin "katuran daksina." ;
     jawa:terjemahan "diberikan daksina." ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_241 a jawa:Kalimat ;
     jawa:latin "Šésa mahārsi mamūjā," ;
     jawa:terjemahan "Sisa persembahan maharesi yang memuja," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_242 a jawa:Kalimat ;
     jawa:latin "pūrnnāhuti dibya patya gandha rasa," ;
     jawa:terjemahan "persembahan sempurna, makanan yang lezat dan harum," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_243 a jawa:Kalimat ;
     jawa:latin "ya ta pinangan kinabéhan," ;
     jawa:terjemahan "itulah yang dimakan semuanya," ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_244 a jawa:Kalimat ;
     jawa:latin "dé nira déwi mahārāja." ;
     jawa:terjemahan "oleh para permaisuri raja." ;
+    jawa:halaman "10"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_245 a jawa:Kalimat ;
     jawa:latin "Panyaréan Ida Sang Mahārĕsi né muja," ;
     jawa:terjemahan "Sisa persembahan Sang Maharesi yang memuja," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_246 a jawa:Kalimat ;
     jawa:latin "pūrnahuti sané lĕwih pisan, ajengan miyik tur lĕgén," ;
     jawa:terjemahan "persembahan sempurna yang sangat mulia, makanan harum dan lezat," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
     
 jawa:kalimat_247 a jawa:Kalimat ;
     jawa:latin "punika sané kaajeng samian," ;
     jawa:terjemahan "itulah yang dimakan semuanya," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_248 a jawa:Kalimat ;
     jawa:latin "olih para prameswari Ida Sang Prabu." ;
     jawa:terjemahan "oleh para permaisuri Sang Prabu." ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_249 a jawa:Kalimat ;
     jawa:latin "Nda tatîta kāla lunghā," ;
     jawa:terjemahan "Maka berlalulah waktu," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_250 a jawa:Kalimat ;
     jawa:latin "mānak tānakbi sang Dasarathāsih," ;
     jawa:terjemahan "beranaklah istri kesayangan Sang Dasaratha," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_251 a jawa:Kalimat ;
     jawa:latin "sang Rāmānak matuha," ;
     jawa:terjemahan "Sang Rama adalah anak tertua," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_252 a jawa:Kalimat ;
     jawa:latin "i sira mahādéwi Kosalyā." ;
     jawa:terjemahan "dari Mahadewi Kosalyā." ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_253 a jawa:Kalimat ;
     jawa:latin "Sapunika raris gantosan kahanan," ;
     jawa:terjemahan "Demikianlah kemudian perubahan keadaan," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_254 a jawa:Kalimat ;
     jawa:latin "mamedih Ida Sang Dasaratha," ;
     jawa:terjemahan "beranaklah istri Sang Dasaratha yang dikasihi," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_255 a jawa:Kalimat ;
     jawa:latin "Ida Sang Rāma putra sané pinih ageng," ;
     jawa:terjemahan "Ida Sang Rama putra yang tertua," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_256 a jawa:Kalimat ;
     jawa:latin "ring Ida Sang Mahādewi Kosalya." ;
     jawa:terjemahan "pada Ida Sang Mahadewi Kosalya." ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_257 a jawa:Kalimat ;
     jawa:latin "Sang Kékayī sira makānak," ;
     jawa:terjemahan "Sang Kekayi sira makānak," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_258 a jawa:Kalimat ;
     jawa:latin "sang Bharata kyāti šakti dibya guna," ;
     jawa:terjemahan "Sang Bharata terkenal sakti dibya guna," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_259 a jawa:Kalimat ;
     jawa:latin "déwi sirang Sumitrā," ;
     jawa:terjemahan "dewi Sang Sumitra," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_260 a jawa:Kalimat ;
     jawa:latin "Laksmana Šatrughna putranira." ;
     jawa:terjemahan "Laksmana Satrughna putranya." ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_261 a jawa:Kalimat ;
     jawa:latin "Ida Sang Kékayī madué putra," ;
     jawa:terjemahan "Ida Sang Kekayi mempunyai putra," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_262 a jawa:Kalimat ;
     jawa:latin "Ida Sang Bharata lĕwih pisan kasub lĕwihing guna," ;
     jawa:terjemahan "Ida Sang Bharata sangat terkenal dan berbudi luhur," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_263 a jawa:Kalimat ;
     jawa:latin "Ida Sang Dewi Sumitrā," ;
     jawa:terjemahan "Ida Sang Dewi Sumitra," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_264 a jawa:Kalimat ;
     jawa:latin "Ida Laksmana miwah Ida Šatrughna putrané." ;
     jawa:terjemahan "Ida Laksmana dan Ida Satrughna adalah putranya." ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_265 a jawa:Kalimat ;
     jawa:latin "Ri wĕtunikang putra kabéh," ;
     jawa:terjemahan "Ketika semua putra telah lahir," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_266 a jawa:Kalimat ;
     jawa:latin "pinulung dang hyang lawan dang acaryya," ;
     jawa:terjemahan "dikumpulkan para dang hyang dan dang ācāryya," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_267 a jawa:Kalimat ;
     jawa:latin "paripūrna sira pinūjā," ;
     jawa:terjemahan "mereka dipuja dengan sempurna," ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_268 a jawa:Kalimat ;
     jawa:latin "binojanan dé mahārāja." ;
     jawa:terjemahan "diberi makan oleh mahārāja." ;
+    jawa:halaman "11"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_269 a jawa:Kalimat ;
     jawa:latin "Rikala putra samian sampun embas," ;
     jawa:terjemahan "Ketika semua putra sudah lahir," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_270 a jawa:Kalimat ;
     jawa:latin "katahan Ida dang hyang miwah Ida dang acaryya," ;
     jawa:terjemahan "ditahanlah para dang hyang dan dang ācāryya," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_271 a jawa:Kalimat ;
     jawa:latin "paripurna Ida kapuja," ;
     jawa:terjemahan "sempurna beliau dipuja," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_272 a jawa:Kalimat ;
     jawa:latin "katuran ajengan olih Ida Sang Prabu." ;
     jawa:terjemahan "diberi makan oleh Sang Prabu." ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_273 a jawa:Kalimat ;
     jawa:latin "Matuhānak naranātha," ;
     jawa:terjemahan "Putra-putra raja telah dewasa," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_274 a jawa:Kalimat ;
     jawa:latin "winara-warah angajya wédāstra," ;
     jawa:terjemahan "diajarkan ilmu Weda dan panah," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_275 a jawa:Kalimat ;
     jawa:latin "Bhagawān Wasistha mangajar," ;
     jawa:terjemahan "Bhagawan Wasistha yang mengajar," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_276 a jawa:Kalimat ;
     jawa:latin "nipuna wruh ring dhanurwéda." ;
     jawa:terjemahan "sangat ahli dalam ilmu panah." ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_277 a jawa:Kalimat ;
     jawa:latin "Sampun lingsir putra-putra Ida Sang Prabu," ;
     jawa:terjemahan "Sudah dewasa putra-putra Sang Prabu," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_278 a jawa:Kalimat ;
     jawa:latin "kicen Ida kawruh aji Wéda miwah panah," ;
     jawa:terjemahan "diberi beliau ilmu Weda dan panah," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_279 a jawa:Kalimat ;
     jawa:latin "Bhagawan Wasistha sané ngajahin," ;
     jawa:terjemahan "Bhagawan Wasistha yang mengajar," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_280 a jawa:Kalimat ;
     jawa:latin "lĕwih wikan ring sastra panah." ;
     jawa:terjemahan "sangat ahli dalam ilmu panah." ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_281 a jawa:Kalimat ;
     jawa:latin "Sang Rāma sira winarahan," ;
     jawa:terjemahan "Sang Rama diajarkan," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_282 a jawa:Kalimat ;
     jawa:latin "ring astra dé sang Wasista tar malawas," ;
     jawa:terjemahan "ilmu panah oleh Sang Wasista tidak lama," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_283 a jawa:Kalimat ;
     jawa:latin "kalawan anténira tiga," ;
     jawa:terjemahan "bersama ketiga adiknya," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_284 a jawa:Kalimat ;
     jawa:latin "prajñéng widyā kabéh wihikan." ;
     jawa:terjemahan "pandai dalam segala ilmu dan bijaksana." ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_285 a jawa:Kalimat ;
     jawa:latin "Ida Sang Rāma kicen kawruh," ;
     jawa:terjemahan "Ida Sang Rama diberi pengetahuan," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_286 a jawa:Kalimat ;
     jawa:latin "ring sastra olih Ida Sang Wasista néntĕn dangu," ;
     jawa:terjemahan "dalam sastra oleh Sang Wasista tidak lama," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_287 a jawa:Kalimat ;
     jawa:latin "miwah adin Ida tigang diri," ;
     jawa:terjemahan "serta ketiga adiknya," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_288 a jawa:Kalimat ;
     jawa:latin "wicaksana ring kawruh samian wikan." ;
     jawa:terjemahan "bijaksana dalam segala ilmu, pandai semuanya." ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_289 a jawa:Kalimat ;
     jawa:latin "Sāwara-warah mahārsi," ;
     jawa:terjemahan "Semua ajaran maharesi," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_290 a jawa:Kalimat ;
     jawa:latin "hĕnti kabéh tan pasésa kapwa tama," ;
     jawa:terjemahan "semuanya telah dikuasai tanpa sisa, semua sempurna," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_291 a jawa:Kalimat ;
     jawa:latin "karĕngö ta sira ring rāt," ;
     jawa:terjemahan "terkenallah beliau di dunia," ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_292 a jawa:Kalimat ;
     jawa:latin "gunāmānta susïla towi raray." ;
     jawa:terjemahan "berbudi luhur meskipun masih muda." ;
+    jawa:halaman "12"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_293 a jawa:Kalimat ;
     jawa:latin "Sahananing kawruh Ida Sang Mahārĕsi," ;
     jawa:terjemahan "Semua ajaran Sang Maharesi," ;
+    jawa:halaman "13"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_294 a jawa:Kalimat ;
     jawa:latin "sampun samian néntĕn wénten sisané samian sampurna," ;
     jawa:terjemahan "sudah semuanya tanpa sisa, semuanya sempurna," ;
+    jawa:halaman "13"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_295 a jawa:Kalimat ;
     jawa:latin "kakasubang Ida ring jagaté," ;
     jawa:terjemahan "beliau terkenal di dunia," ;
+    jawa:halaman "13"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_296 a jawa:Kalimat ;
     jawa:latin "lĕwihing guna susila taler sané alit." ;
     jawa:terjemahan "berbudi luhur dan susila meskipun masih kecil." ;
+    jawa:halaman "13"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_297 a jawa:Kalimat ;
     jawa:latin "Hana sira Gādhi suta rsi," ;
     jawa:terjemahan "Ada seorang resi putra Gādhi," ;
+    jawa:halaman "13"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_298 a jawa:Kalimat ;
     jawa:latin "yogiswara lén tapaswi rājarsi," ;
     jawa:terjemahan "seorang yogiswara dan pertapa raja," ;
+    jawa:halaman "13"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_299 a jawa:Kalimat ;
     jawa:latin "Wišwāmitra ngaranira," ;
     jawa:terjemahan "bernama Wiswamitra," ;
+    jawa:halaman "13"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_300 a jawa:Kalimat ;
     jawa:latin "sira rumĕngö sakti sang Rāma." ;
     jawa:terjemahan "beliau mendengar kesaktian Sang Rama." ;
+    jawa:halaman "13"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_301 a jawa:Kalimat ;
     jawa:latin "Wentĕn Ida Sang Rĕsi putran Ida Sang Gādhi," ;
     jawa:terjemahan "Ada Ida Sang Resi putra Ida Sang Gadhi," ;
+    jawa:halaman "13"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_302 a jawa:Kalimat ;
     jawa:latin "yogiswara miwah tapéswara rājarsi," ;
     jawa:terjemahan "yogiswara dan tapaswi rajarshi," ;
+    jawa:halaman "13"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_303 a jawa:Kalimat ;
     jawa:latin "Wišwāmitra parab Idané," ;
     jawa:terjemahan "Wiswamitra namanya," ;
+    jawa:halaman "13"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_304 a jawa:Kalimat ;
     jawa:latin "Ida miragi kasaktian Ida Sang Rāma." ;
     jawa:terjemahan "beliau mendengar kesaktian Sang Rama." ;
+    jawa:halaman "13"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_305 a jawa:Kalimat ;
     jawa:latin "Patapanira yā mananā," ;
     jawa:terjemahan "Pertapaannya rusak," ;
+    jawa:halaman "13"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_306 a jawa:Kalimat ;
     jawa:latin "déning rāksasa krūrakarmma," ;
     jawa:terjemahan "oleh raksasa yang berbuat kejam," ;
+    jawa:halaman "13"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_307 a jawa:Kalimat ;
     jawa:latin "mahyun ta sira rināksā," ;
     jawa:terjemahan "berkeinginanlah beliau dijaga," ;
+    jawa:halaman "13"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_308 a jawa:Kalimat ;
     jawa:latin "patapan nira dénirang Rāma." ;
     jawa:terjemahan "pertapaannya oleh Sang Rama." ;
+    jawa:halaman "13"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_309 a jawa:Kalimat ;
     jawa:latin "Pasraman Idané sampun rusak," ;
     jawa:terjemahan "Pertapaannya sudah rusak," ;
+    jawa:halaman "14"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_310 a jawa:Kalimat ;
     jawa:latin "olih raksasa sané madosa," ;
     jawa:terjemahan "oleh raksasa yang berdosa," ;
+    jawa:halaman "14"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_311 a jawa:Kalimat ;
     jawa:latin "mawénang Ida kajaga," ;
     jawa:terjemahan "maka beliau ingin dijaga," ;
+    jawa:halaman "14"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_312 a jawa:Kalimat ;
     jawa:latin "pasraman Idané olih Ida Sang Rāma." ;
     jawa:terjemahan "pertapaannya oleh Sang Rama." ;
+    jawa:halaman "14"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_313 a jawa:Kalimat ;
     jawa:latin "Naranātha sang Dašaratha," ;
     jawa:terjemahan "Raja Dasaratha," ;
+    jawa:halaman "14"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_314 a jawa:Kalimat ;
     jawa:latin "sira pinaran dénirang mahārsi wara," ;
     jawa:terjemahan "beliau didatangi oleh maharesi yang mulia," ;
+    jawa:halaman "14"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_315 a jawa:Kalimat ;
     jawa:latin "gorawa sang prabhu pinaran," ;
     jawa:terjemahan "raja yang dihormati didatangi," ;
+    jawa:halaman "14"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_316 a jawa:Kalimat ;
     jawa:latin "pranata manambah sirānungsung." ;
     jawa:terjemahan "dengan hormat menyembah dan menyambut." ;
+    jawa:halaman "14"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_317 a jawa:Kalimat ;
     jawa:latin "Ida Sang Prabu Dasaratha," ;
     jawa:terjemahan "Ida Sang Prabu Dasaratha," ;
+    jawa:halaman "14"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_318 a jawa:Kalimat ;
     jawa:latin "Ida katuran olih Ida Sang Mahārĕsi," ;
     jawa:terjemahan "beliau didatangi oleh Sang Maharesi," ;
+    jawa:halaman "14"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_319 a jawa:Kalimat ;
     jawa:latin "kasub Ida Sang Prabu katuran," ;
     jawa:terjemahan "terkenal Sang Prabu didatangi," ;
+    jawa:halaman "14"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_320 a jawa:Kalimat ;
     jawa:latin "bhakti masurya nglungsur." ;
     jawa:terjemahan "dengan hormat menyembah dan menyambut." ;
+    jawa:halaman "14"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_321 a jawa:Kalimat ;
     jawa:latin "Apa doni sang mahārsi," ;
     jawa:terjemahan "Apakah maksud sang maharesi," ;
+    jawa:halaman "14"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_322 a jawa:Kalimat ;
     jawa:latin "kita jaya ring mantra siddha sākahyun," ;
     jawa:terjemahan "anda berhasil dalam mantra yang sesuai keinginan," ;
+    jawa:halaman "14"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_323 a jawa:Kalimat ;
     jawa:latin "tatwa linolyan ta lanā," ;
     jawa:terjemahan "filsafat selalu dipahami," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_324 a jawa:Kalimat ;
     jawa:latin "yatikā mūlya ri rĕsi kadi kita." ;
     jawa:terjemahan "itulah yang mulia bagi resi seperti anda." ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_325 a jawa:Kalimat ;
     jawa:latin "Napi pakayun Ida Sang Mahārĕsi," ;
     jawa:terjemahan "Apakah maksud Sang Maharesi," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_326 a jawa:Kalimat ;
     jawa:latin "paduka nyabrang ring mantra sané sampun kajangkepan," ;
     jawa:terjemahan "anda berhasil dalam mantra yang sesuai keinginan," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_327 a jawa:Kalimat ;
     jawa:latin "tatwa sinurat ring manah satata," ;
     jawa:terjemahan "filsafat selalu tertulis di hati," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_328 a jawa:Kalimat ;
     jawa:latin "punika sané luhur ring rĕsi sakadi paduka." ;
     jawa:terjemahan "itulah yang mulia bagi resi seperti anda." ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_329 a jawa:Kalimat ;
     jawa:latin "Sumahur ta sang mahārsi," ;
     jawa:terjemahan "Maka menjawablah sang maharesi," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_330 a jawa:Kalimat ;
     jawa:latin "tan madwa wuwus naréndra yukti tĕmĕn," ;
     jawa:terjemahan "kata-kata raja itu benar-benar tidak dua," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_331 a jawa:Kalimat ;
     jawa:latin "kami ikihĕn wiku matapa," ;
     jawa:terjemahan "saya ini seorang wiku yang bertapa," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_332 a jawa:Kalimat ;
     jawa:latin "jñana lawan yoga mūlya juga." ;
     jawa:terjemahan "pengetahuan dan yoga juga mulia." ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_333 a jawa:Kalimat ;
     jawa:latin "Masaur Ida Sang Mahārĕsi," ;
     jawa:terjemahan "Menjawablah Ida Sang Maharesi," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_334 a jawa:Kalimat ;
     jawa:latin "néntĕn wentĕn sangsaya ring sabda Sang Prabu yéning patut pisan," ;
     jawa:terjemahan "tidak ada keraguan dalam perkataan Sang Prabu jika memang benar," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_335 a jawa:Kalimat ;
     jawa:latin "tiang wantah wiku sané malaksana tapa," ;
     jawa:terjemahan "saya adalah wiku yang bertapa," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_336 a jawa:Kalimat ;
     jawa:latin "kawruh miwah yoga lĕwih pisan." ;
     jawa:terjemahan "pengetahuan dan yoga sangat mulia." ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_337 a jawa:Kalimat ;
     jawa:latin "lkana kunang dona mami," ;
     jawa:terjemahan "Demikianlah maksudku," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_338 a jawa:Kalimat ;
     jawa:latin "mamalakwa rinaksā dé mahārāja," ;
     jawa:terjemahan "memohon perlindungan dari baginda raja," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_339 a jawa:Kalimat ;
     jawa:latin "hana sanghulun mayajña," ;
     jawa:terjemahan "ada saya yang sedang mengadakan yajña," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_340 a jawa:Kalimat ;
     jawa:latin "ndan yālila rāksasāmighné." ;
     jawa:terjemahan "namun para raksasa mengganggu." ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_341 a jawa:Kalimat ;
     jawa:latin "Punika raris pikayun titiang," ;
     jawa:terjemahan "Itulah kemudian maksud saya," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_342 a jawa:Kalimat ;
     jawa:latin "nyungsung panyuwunan jaga olih Ida Sang Prabu," ;
     jawa:terjemahan "memohon perlindungan dari Sang Prabu," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_343 a jawa:Kalimat ;
     jawa:latin "wentĕn titiang maurip yadnya," ;
     jawa:terjemahan "ada saya mengadakan yajña," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_344 a jawa:Kalimat ;
     jawa:latin "sakéwanten raksasa né masilĕm ngawinang sengkala." ;
     jawa:terjemahan "namun raksasa yang menyamar mengganggu." ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_345 a jawa:Kalimat ;
     jawa:latin "Ikana kunang yan yogyā," ;
     jawa:terjemahan "Demikian pula jika berkenan," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_346 a jawa:Kalimat ;
     jawa:latin "sang Rāma marā ring āsrāmāngraksā," ;
     jawa:terjemahan "Sang Rama datang ke asrama untuk menjaga," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_347 a jawa:Kalimat ;
     jawa:latin "sarāna mamin wĕnanga," ;
     jawa:terjemahan "sebagai penolongku yang mampu," ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_348 a jawa:Kalimat ;
     jawa:latin "umatyanang rāksasāmighné." ;
     jawa:terjemahan "membunuh raksasa pengganggu." ;
+    jawa:halaman "15"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_349 a jawa:Kalimat ;
     jawa:latin "Punika taler yéning patut," ;
     jawa:terjemahan "Itu juga jika pantas," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_350 a jawa:Kalimat ;
     jawa:latin "Ida Sang Rāma rauh ka asrama jaga," ;
     jawa:terjemahan "Ida Sang Rama datang ke asrama menjaga," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_351 a jawa:Kalimat ;
     jawa:latin "saranan titiang né wénang," ;
     jawa:terjemahan "sebagai penolong saya yang mampu," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_352 a jawa:Kalimat ;
     jawa:latin "ngawasin raksasa né ngawinang sengkala." ;
     jawa:terjemahan "membunuh raksasa yang mengganggu." ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_353 a jawa:Kalimat ;
     jawa:latin "Mangkana ling mahārsi," ;
     jawa:terjemahan "Demikianlah kata maharesi," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_354 a jawa:Kalimat ;
     jawa:latin "naréndra trĕsna tĕmĕn ri sang Rāma," ;
     jawa:terjemahan "raja sangat menyayangi Sang Rama," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_355 a jawa:Kalimat ;
     jawa:latin "ndātar sahur tumungkul," ;
     jawa:terjemahan "namun tidak menjawab, menunduk," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_356 a jawa:Kalimat ;
     jawa:latin "mojar tā sang mahārsi muwah." ;
     jawa:terjemahan "berkatalah lagi sang maharesi." ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_357 a jawa:Kalimat ;
     jawa:latin "Mangkana sabda Ida Sang Mahārĕsi," ;
     jawa:terjemahan "Demikianlah perkataan Sang Maharesi," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_358 a jawa:Kalimat ;
     jawa:latin "Ida Sang Prabu asih pisan ring Ida Sang Rāma," ;
     jawa:terjemahan "Sang Prabu sangat mengasihi Sang Rama," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_359 a jawa:Kalimat ;
     jawa:latin "néntĕn masaur nungkul," ;
     jawa:terjemahan "tidak menjawab, menunduk," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_360 a jawa:Kalimat ;
     jawa:latin "masaur malih Ida Sang Mahārĕsi." ;
     jawa:terjemahan "menjawab lagi Sang Maharesi." ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_361 a jawa:Kalimat ;
     jawa:latin "Hé nātha Sang Dašaratha," ;
     jawa:terjemahan "Wahai raja Sang Dasaratha," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_362 a jawa:Kalimat ;
     jawa:latin "nojarku rengönta yatna pituhun ya," ;
     jawa:terjemahan "dengarkanlah baik-baik perkataanku, ikutilah," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_363 a jawa:Kalimat ;
     jawa:latin "yan tan yogya ksama ya," ;
     jawa:terjemahan "jika tidak pantas, maafkanlah," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_364 a jawa:Kalimat ;
     jawa:latin "jātining aswî maminta kasih." ;
     jawa:terjemahan "sesungguhnya saya memohon belas kasihan." ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_365 a jawa:Kalimat ;
     jawa:latin "Ih Sang Prabu Dasaratha," ;
     jawa:terjemahan "Wahai Sang Prabu Dasaratha," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_366 a jawa:Kalimat ;
     jawa:latin "sabda titiang durus piragiang," ;
     jawa:terjemahan "dengarkanlah perkataan saya," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_367 a jawa:Kalimat ;
     jawa:latin "yéning néntĕn patut ampura," ;
     jawa:terjemahan "jika tidak pantas, maafkanlah," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_368 a jawa:Kalimat ;
     jawa:latin "pamitang titiang nyuwun asih." ;
     jawa:terjemahan "saya memohon belas kasihan." ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_369 a jawa:Kalimat ;
     jawa:latin "Nyā dharmmaning kadi kita," ;
     jawa:terjemahan "Inilah dharmanya seperti Anda," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_370 a jawa:Kalimat ;
     jawa:latin "pinakašarana dénirang tapaswi kabéh," ;
     jawa:terjemahan "menjadi pelindung bagi semua pertapa," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_371 a jawa:Kalimat ;
     jawa:latin "salwiraning katakuta," ;
     jawa:terjemahan "segala macam ketakutan," ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_372 a jawa:Kalimat ;
     jawa:latin "kita tāng rāksā ri duhka kabéh." ;
     jawa:terjemahan "Anda yang menjaga dari segala kesusahan." ;
+    jawa:halaman "16"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_373 a jawa:Kalimat ;
     jawa:latin "Puniki dharmané sakadi paduka," ;
     jawa:terjemahan "Inilah dharma seperti Anda," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_374 a jawa:Kalimat ;
     jawa:latin "dados pamragat olih para tapa samian," ;
     jawa:terjemahan "menjadi penolong bagi semua pertapa," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_375 a jawa:Kalimat ;
     jawa:latin "sahananing sané katakutin," ;
     jawa:terjemahan "segala yang ditakuti," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_376 a jawa:Kalimat ;
     jawa:latin "paduka sané ngraksa ring duhkita samian." ;
     jawa:terjemahan "Anda yang menjaga dari segala kesusahan." ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_377 a jawa:Kalimat ;
     jawa:latin "Nyā dharmmaning kadi kami," ;
     jawa:terjemahan "Inilah dharmanya seperti saya," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_378 a jawa:Kalimat ;
     jawa:latin "mawaraha kita ring sinangguhan dharmma," ;
     jawa:terjemahan "memberitahu Anda tentang apa yang disebut dharma," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_379 a jawa:Kalimat ;
     jawa:latin "punya lawan pāpa kunang," ;
     jawa:terjemahan "pahala dan dosa," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_380 a jawa:Kalimat ;
     jawa:latin "kami mawaraha ngwang kadi kiténg yukti." ;
     jawa:terjemahan "saya akan memberitahu Anda yang seperti Anda dalam kebenaran." ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_381 a jawa:Kalimat ;
     jawa:latin "Puniki dharmané sakadi titiang," ;
     jawa:terjemahan "Inilah dharma seperti saya," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_382 a jawa:Kalimat ;
     jawa:latin "ngicénin kawruh ring paduka sané kabaos dharma," ;
     jawa:terjemahan "memberi pengetahuan kepada Anda yang disebut dharma," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_383 a jawa:Kalimat ;
     jawa:latin "pahala miwah dosa raris," ;
     jawa:terjemahan "pahala dan dosa kemudian," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_384 a jawa:Kalimat ;
     jawa:latin "titiang jaga ngicénin paduka né sakadi paduka ring kasugihan." ;
     jawa:terjemahan "saya akan memberi Anda yang seperti Anda dalam kebenaran." ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_385 a jawa:Kalimat ;
     jawa:latin "Brahmana Ksatriyan padulur," ;
     jawa:terjemahan "Brahmana dan Ksatria harus bersatu," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_386 a jawa:Kalimat ;
     jawa:latin "jātinya parasparopa sarppana ya," ;
     jawa:terjemahan "sesungguhnya saling membantu," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_387 a jawa:Kalimat ;
     jawa:latin "wiku tanpa nātha ya hilang," ;
     jawa:terjemahan "wiku tanpa raja akan hancur," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_388 a jawa:Kalimat ;
     jawa:latin "tanpa wiku kunang ratu wisîrnna." ;
     jawa:terjemahan "demikian pula raja tanpa wiku akan binasa." ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_389 a jawa:Kalimat ;
     jawa:latin "Brahmana miwah Ksatriya sami," ;
     jawa:terjemahan "Brahmana dan Ksatria bersatu," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_390 a jawa:Kalimat ;
     jawa:latin "patutipun saling tulungin," ;
     jawa:terjemahan "seharusnya saling membantu," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_391 a jawa:Kalimat ;
     jawa:latin "wiku tanpa prabhu pacang ical," ;
     jawa:terjemahan "wiku tanpa raja akan hilang," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_392 a jawa:Kalimat ;
     jawa:latin "tanpa wiku raris prabhu pacang rusak." ;
     jawa:terjemahan "tanpa wiku, raja akan rusak." ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_393 a jawa:Kalimat ;
     jawa:latin "Kalawan tambhāra iké," ;
     jawa:terjemahan "Dan lagi, ini tidak berat," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_394 a jawa:Kalimat ;
     jawa:latin "apan mahāsakti rakwa Sang Rāma," ;
     jawa:terjemahan "sebab Sang Rama memang sangat sakti," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_395 a jawa:Kalimat ;
     jawa:latin "rānak sri naranātha," ;
     jawa:terjemahan "putra baginda raja," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_396 a jawa:Kalimat ;
     jawa:latin "tatan hana padanira ri kašaktin." ;
     jawa:terjemahan "tiada yang setara dengan kesaktiannya." ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_397 a jawa:Kalimat ;
     jawa:latin "Taler néntĕn abot puniki," ;
     jawa:terjemahan "Juga tidak berat ini," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_398 a jawa:Kalimat ;
     jawa:latin "santukan lĕwih sakti Ida Sang Rāma," ;
     jawa:terjemahan "karena Sang Rama sangat sakti," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_399 a jawa:Kalimat ;
     jawa:latin "putra Ida Sang Prabu," ;
     jawa:terjemahan "putra Sang Prabu," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_400 a jawa:Kalimat ;
     jawa:latin "néntĕn wentĕn sané nyandingin kasaktian Idané." ;
     jawa:terjemahan "tidak ada yang menandingi kesaktiannya." ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_401 a jawa:Kalimat ;
     jawa:latin "Ya matangnya hé naréndra," ;
     jawa:terjemahan "Oleh karena itu, wahai raja," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_402 a jawa:Kalimat ;
     jawa:latin "haywa ta sandéha ring swa putra jayā," ;
     jawa:terjemahan "janganlah ragu akan kemenangan putramu," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_403 a jawa:Kalimat ;
     jawa:latin "dānawa rāksasa hilanga," ;
     jawa:terjemahan "dānawa dan raksasa akan lenyap," ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_404 a jawa:Kalimat ;
     jawa:latin "prabhāwa sang Rāma hétunya." ;
     jawa:terjemahan "itulah sebabnya karena kewibawaan Sang Rama." ;
+    jawa:halaman "17"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_405 a jawa:Kalimat ;
     jawa:latin "Mawinan punika Ih Sang Prabu," ;
     jawa:terjemahan "Oleh karena itu, Wahai Sang Prabu," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_406 a jawa:Kalimat ;
     jawa:latin "sampunang pisan sangsaya ring putra sané jaya," ;
     jawa:terjemahan "janganlah ragu akan kemenangan putra yang jaya," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_407 a jawa:Kalimat ;
     jawa:latin "danawa raksasa pacang ical," ;
     jawa:terjemahan "danawa dan raksasa akan hilang," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_408 a jawa:Kalimat ;
     jawa:latin "wibawa Ida Sang Rāma dados jalaranipun." ;
     jawa:terjemahan "kewibawaan Sang Rama menjadi penyebabnya." ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_409 a jawa:Kalimat ;
     jawa:latin "Nā ling mahārsi mojar," ;
     jawa:terjemahan "Demikianlah kata maharesi," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_410 a jawa:Kalimat ;
     jawa:latin "umĕnĕng atah sang Naréndra māngĕn-angĕn," ;
     jawa:terjemahan "namun sang Raja terdiam merenung," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_411 a jawa:Kalimat ;
     jawa:latin "Dolāya māna citta," ;
     jawa:terjemahan "pikirannya bimbang," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_412 a jawa:Kalimat ;
     jawa:latin "képwan sira tar wĕnang sumahur." ;
     jawa:terjemahan "beliau bingung tidak bisa menjawab." ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_413 a jawa:Kalimat ;
     jawa:latin "Sapunika sabda Ida Sang Mahārĕsi," ;
     jawa:terjemahan "Demikianlah perkataan Sang Maharesi," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_414 a jawa:Kalimat ;
     jawa:latin "idĕp Ida Sang Prabu sampun lĕngah," ;
     jawa:terjemahan "pikiran Sang Prabu sudah lengah," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_415 a jawa:Kalimat ;
     jawa:latin "manah né mawake bingung," ;
     jawa:terjemahan "hati yang membawa kebingungan," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_416 a jawa:Kalimat ;
     jawa:latin "bingung Ida néntĕn wénang masaur." ;
     jawa:terjemahan "bingung beliau tidak bisa menjawab." ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_417 a jawa:Kalimat ;
     jawa:latin "An lakwéki si Rāma," ;
     jawa:terjemahan "Jika Rama pergi sekarang," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_418 a jawa:Kalimat ;
     jawa:latin "lumagé musuh mahārsi ring patapan," ;
     jawa:terjemahan "untuk menghadapi musuh maharesi di pertapaan," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_419 a jawa:Kalimat ;
     jawa:latin "pĕjahāwas ya kasāmbya," ;
     jawa:terjemahan "pasti dia akan mati terbunuh," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_420 a jawa:Kalimat ;
     jawa:latin "apan raré tan wruhing bisama." ;
     jawa:terjemahan "karena dia masih anak-anak dan tidak tahu tentang bahaya." ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_421 a jawa:Kalimat ;
     jawa:latin "Yéning Ida Sang Rāma jaga lunga," ;
     jawa:terjemahan "Jika Ida Sang Rama akan pergi," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_422 a jawa:Kalimat ;
     jawa:latin "ngadĕg mĕsĕh Sang Mahārĕsi ring pasraman," ;
     jawa:terjemahan "menghadapi musuh Sang Maharesi di pertapaan," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_423 a jawa:Kalimat ;
     jawa:latin "pacang seda mangkin keni wibaya," ;
     jawa:terjemahan "akan meninggal sekarang terkena bahaya," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_424 a jawa:Kalimat ;
     jawa:latin "santukan alit néntĕn uning ring wibaya." ;
     jawa:terjemahan "karena masih kecil tidak tahu bahaya." ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_425 a jawa:Kalimat ;
     jawa:latin "Tuhu yan wruh ya ring astra," ;
     jawa:terjemahan "Memang benar dia pandai dalam ilmu panah," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_426 a jawa:Kalimat ;
     jawa:latin "ndātan tahu manglagé musuh bisama," ;
     jawa:terjemahan "namun tidak tahu menghadapi musuh yang berbahaya," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_427 a jawa:Kalimat ;
     jawa:latin "rāksasa māyā ya kabéh," ;
     jawa:terjemahan "semua raksasa itu penuh tipuan," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_428 a jawa:Kalimat ;
     jawa:latin "lāwan paracidra yan paprang." ;
     jawa:terjemahan "dan licik saat berperang." ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_429 a jawa:Kalimat ;
     jawa:latin "Yéning wikan Ida ring panah," ;
     jawa:terjemahan "Jika beliau pandai dalam panah," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_430 a jawa:Kalimat ;
     jawa:latin "néntĕn uning ngadĕg mĕsĕh sané wibaya," ;
     jawa:terjemahan "tidak tahu menghadapi musuh yang berbahaya," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_431 a jawa:Kalimat ;
     jawa:latin "raksasa sané madosa samian," ;
     jawa:terjemahan "semua raksasa yang berdosa," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_432 a jawa:Kalimat ;
     jawa:latin "miwah sané licik yéning mayudha." ;
     jawa:terjemahan "dan yang licik jika berperang." ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_433 a jawa:Kalimat ;
     jawa:latin "Yapwan wihanga sang rsi," ;
     jawa:terjemahan "Jika sang resi menolak," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_434 a jawa:Kalimat ;
     jawa:latin "anumoda yar paminta šarana ngké," ;
     jawa:terjemahan "menyetujui jika meminta bantuan di sini," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_435 a jawa:Kalimat ;
     jawa:latin "krodhā sirān salahasan," ;
     jawa:terjemahan "beliau akan murka dan salah paham," ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_436 a jawa:Kalimat ;
     jawa:latin "byakta kami kabéh sināpa nira." ;
     jawa:terjemahan "jelas kita semua akan dikutuk olehnya." ;
+    jawa:halaman "18"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_437 a jawa:Kalimat ;
     jawa:latin "Yéning panyelĕh Ida Sang Rĕsi," ;
     jawa:terjemahan "Jika penolakan Sang Resi," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_438 a jawa:Kalimat ;
     jawa:latin "mapikenoh yéning nglungsur tulung iriki," ;
     jawa:terjemahan "bermanfaat jika meminta bantuan di sini," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_439 a jawa:Kalimat ;
     jawa:latin "krodha Ida nyalahin," ;
     jawa:terjemahan "beliau murka menyalahkan," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_440 a jawa:Kalimat ;
     jawa:latin "sami titiang pacang keni sapata Idané." ;
     jawa:terjemahan "jelas kita semua akan terkena kutukannya." ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_441 a jawa:Kalimat ;
     jawa:latin "Ri huwus nira māngĕn-angĕn," ;
     jawa:terjemahan "Setelah beliau merenung," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_442 a jawa:Kalimat ;
     jawa:latin "sumahur ta sirānumoda tar pamihang," ;
     jawa:terjemahan "beliau menjawab setuju tanpa menolak," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_443 a jawa:Kalimat ;
     jawa:latin "Om om sajña mahārsi," ;
     jawa:terjemahan "Om om, baiklah maharesi," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_444 a jawa:Kalimat ;
     jawa:latin "yan yogyā pwangkulun saranā." ;
     jawa:terjemahan "jika memang patut hamba menjadi penolong." ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_445 a jawa:Kalimat ;
     jawa:latin "Risampun Ida ngĕnĕng-ĕnĕngin," ;
     jawa:terjemahan "Setelah beliau merenungkan," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_446 a jawa:Kalimat ;
     jawa:latin "masaur Ida néntĕn nyelĕh," ;
     jawa:terjemahan "beliau menjawab tidak menolak," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_447 a jawa:Kalimat ;
     jawa:latin "Om Om sinanggihang Ida Sang Mahārĕsi," ;
     jawa:terjemahan "Om Om, dianggapsah Sang Maharesi," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_448 a jawa:Kalimat ;
     jawa:latin "yéning patut titiang dados panulung." ;
     jawa:terjemahan "jika memang pantas saya menjadi penolong." ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_449 a jawa:Kalimat ;
     jawa:latin "Bālaka raray mapunggung," ;
     jawa:terjemahan "Seorang anak kecil yang bodoh," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_450 a jawa:Kalimat ;
     jawa:latin "tapwan paprang taman panon šatru," ;
     jawa:terjemahan "belum pernah berperang dan melihat musuh," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_451 a jawa:Kalimat ;
     jawa:latin "yapwan wĕnangāsaranā," ;
     jawa:terjemahan "jika memang mampu menjadi penolong," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_452 a jawa:Kalimat ;
     jawa:latin "sojar mahārsi tan wihangĕn." ;
     jawa:terjemahan "perkataan maharesi tidak akan ditolak." ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_453 a jawa:Kalimat ;
     jawa:latin "Alit-alit né alit mapunggung," ;
     jawa:terjemahan "Anak-anak yang masih kecil dan bodoh," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_454 a jawa:Kalimat ;
     jawa:latin "durung mayudha durung kacingak mĕsĕh," ;
     jawa:terjemahan "belum berperang, belum melihat musuh," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_455 a jawa:Kalimat ;
     jawa:latin "yéning wénang dados panulung," ;
     jawa:terjemahan "jika mampu menjadi penolong," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_456 a jawa:Kalimat ;
     jawa:latin "sabda Ida Sang Mahārĕsi néntĕn kaselĕhin." ;
     jawa:terjemahan "perkataan Sang Maharesi tidak akan ditolak." ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_457 a jawa:Kalimat ;
     jawa:latin "Dadi tusta sang mahārsi," ;
     jawa:terjemahan "Maka senanglah hati sang maharesi," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_458 a jawa:Kalimat ;
     jawa:latin "madĕg ta sira māmwit muliha sighra," ;
     jawa:terjemahan "beliau berdiri dan pamit untuk segera pulang," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_459 a jawa:Kalimat ;
     jawa:latin "sang Rāma sira madandan," ;
     jawa:terjemahan "Sang Rama pun bersiap-siap," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_460 a jawa:Kalimat ;
     jawa:latin "lumakwa umaré rikang patapan." ;
     jawa:terjemahan "berangkat menuju pertapaan itu." ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_461 a jawa:Kalimat ;
     jawa:latin "Raris liang Ida Sang Mahārĕsi," ;
     jawa:terjemahan "Maka senanglah Sang Maharesi," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_462 a jawa:Kalimat ;
     jawa:latin "ngadĕg Ida mamit digĕlis pacang mantuk," ;
     jawa:terjemahan "beliau berdiri dan pamit untuk segera pulang," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_463 a jawa:Kalimat ;
     jawa:latin "Sang Rama Ida makinkin," ;
     jawa:terjemahan "Sang Rama pun bersiap-siap," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_464 a jawa:Kalimat ;
     jawa:latin "jaga mamarga lunga ka pasraman." ;
     jawa:terjemahan "akan berangkat menuju pertapaan." ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_465 a jawa:Kalimat ;
     jawa:latin "Sang Laksmana sira dibya," ;
     jawa:terjemahan "Sang Laksmana yang mulia," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_466 a jawa:Kalimat ;
     jawa:latin "sira sama suka duhka mwang sang Rāma," ;
     jawa:terjemahan "beliau turut serta dalam suka dan duka bersama Sang Rama," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_467 a jawa:Kalimat ;
     jawa:latin "rumakĕt cittanira lanā," ;
     jawa:terjemahan "hatinya selalu melekat erat," ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_468 a jawa:Kalimat ;
     jawa:latin "dadi ta sira tumūt maréng patapan." ;
     jawa:terjemahan "maka beliau ikut serta pergi ke pertapaan." ;
+    jawa:halaman "19"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_469 a jawa:Kalimat ;
     jawa:latin "Sang Laksmana Ida maraga lĕwih," ;
     jawa:terjemahan "Sang Laksmana beliau berwujud mulia," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_470 a jawa:Kalimat ;
     jawa:latin "Ida sarĕng nanggĕnin suka duhka ngiring Ida Sang Rama," ;
     jawa:terjemahan "beliau turut serta menanggung suka duka mengikuti Sang Rama," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_471 a jawa:Kalimat ;
     jawa:latin "satata rakĕt pakahyunan Idané," ;
     jawa:terjemahan "senantiasa melekat hati beliau," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_472 a jawa:Kalimat ;
     jawa:latin "kandugi Ida sarĕng lunga ka pasraman." ;
     jawa:terjemahan "hingga beliau ikut serta pergi ke pertapaan." ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_473 a jawa:Kalimat ;
     jawa:latin "Sira magawé pratiwimba," ;
     jawa:terjemahan "Beliau menciptakan teladan," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_474 a jawa:Kalimat ;
     jawa:latin "tuladan ikang wwang ulah nirar paniwi," ;
     jawa:terjemahan "contoh bagi orang-orang yang berbakti," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_475 a jawa:Kalimat ;
     jawa:latin "sakwan sang Rāma tumūt," ;
     jawa:terjemahan "setiap perkataan Sang Rama diikuti," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_476 a jawa:Kalimat ;
     jawa:latin "tar dadi kantun asing saparan." ;
     jawa:terjemahan "tidak pernah tertinggal ke mana pun pergi." ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_477 a jawa:Kalimat ;
     jawa:latin "Ida makarya imba," ;
     jawa:terjemahan "Beliau membuat contoh," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_478 a jawa:Kalimat ;
     jawa:latin "mangda katulad olih para janané pidabdab Idané manywita," ;
     jawa:terjemahan "agar diteladani oleh orang-orang dalam perilaku beliau melayani," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_479 a jawa:Kalimat ;
     jawa:latin "sapangandikan Ida sang Rama kairingang," ;
     jawa:terjemahan "setiap perkataan Sang Rama diikuti," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_480 a jawa:Kalimat ;
     jawa:latin "néntĕn kahyun palas salampah laku." ;
     jawa:terjemahan "tidak ingin terpisah dalam setiap langkah." ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_481 a jawa:Kalimat ;
     jawa:latin "Rahina ya sakatambé māwa tang désa rāmya," ;
     jawa:terjemahan "Keesokan harinya, desa itu menjadi ramai," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_482 a jawa:Kalimat ;
     jawa:latin "lumaku ta sira kālih sampun amwit manĕmbah," ;
     jawa:terjemahan "berjalanlah mereka berdua setelah berpamitan dan menyembah," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_483 a jawa:Kalimat ;
     jawa:latin "mamawa ta sira langkap astra sanghāra rāja," ;
     jawa:terjemahan "mereka membawa busur dan panah penghancur raja," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_484 a jawa:Kalimat ;
     jawa:latin "anakbi ry Ayodhyā šoka monĕng manahnya." ;
     jawa:terjemahan "para wanita di Ayodhya bersedih dan rindu di hati." ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_485 a jawa:Kalimat ;
     jawa:latin "Bénjangné pasĕmĕngan galang jagaté ngulangunin," ;
     jawa:terjemahan "Keesokan paginya, terang dunia mempesona," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_486 a jawa:Kalimat ;
     jawa:latin "mamargi Ida Sang kalih sasampuné amwit bhakti," ;
     jawa:terjemahan "berjalanlah mereka berdua setelah berpamitan dan berbakti," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_487 a jawa:Kalimat ;
     jawa:latin "ngusung Ida panah miwah aji panah Ida Sang Rāma," ;
     jawa:terjemahan "membawa busur dan ilmu panah Sang Rama," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_488 a jawa:Kalimat ;
     jawa:latin "istri ring Ayodhyā sebet rindu manahnyané." ;
     jawa:terjemahan "istri di Ayodhya sedih dan rindu hatinya." ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_489 a jawa:Kalimat ;
     jawa:latin "Katĕkanira lumakwāsānti sang astaséni," ;
     jawa:terjemahan "Setibanya beliau di sana, Bhagawan Astasena melakukan upacara perdamaian," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_490 a jawa:Kalimat ;
     jawa:latin "padahi haji ya ginwal manggalāning lumakwa," ;
     jawa:terjemahan "gong raja dibunyikan sebagai tanda keberangkatan," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_491 a jawa:Kalimat ;
     jawa:latin "kumĕduti tĕngĕnan mārbāhu sang Rāmabhadra," ;
     jawa:terjemahan "lengan kanan Sang Ramabhadra berkedut," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_492 a jawa:Kalimat ;
     jawa:latin "marahakĕna alahning šatru tātan pašésa." ;
     jawa:terjemahan "menandakan kekalahan musuh tanpa sisa." ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_493 a jawa:Kalimat ;
     jawa:latin "Risampun rawuh diwasané jaga mamargi Ida sang Bhagawanta raris ngastawa," ;
     jawa:terjemahan "Setelah tiba waktunya untuk berangkat, beliau Bhagawanta lalu memuja," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_494 a jawa:Kalimat ;
     jawa:latin "gong kapraboné raris katabuh pinaka manggalan ida jaga mamargi," ;
     jawa:terjemahan "gong kerajaan lalu ditabuh sebagai pertanda keberangkatan beliau," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_495 a jawa:Kalimat ;
     jawa:latin "makĕdutan tangan ida sang rama sané ring tĕngĕn nyĕcĕh," ;
     jawa:terjemahan "terasa getaran di tangan kanan Sang Rama," ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
 
 jawa:kalimat_496 a jawa:Kalimat ;
     jawa:latin "nyihnayang kasor ipuné i mĕsĕh tanpa gantulan." ;
     jawa:terjemahan "menunjukkan kekalahan musuh tanpa sisa." ;
+    jawa:halaman "20"^^xsd:integer ;
     jawa:bagianDari jawa:cerita_1 .
