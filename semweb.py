@@ -1,6 +1,5 @@
 import streamlit as st
 import os
-from rdflib import Graph
 import base64
 import html
 import re
@@ -32,60 +31,70 @@ def get_image_as_base64(file_path):
     except FileNotFoundError:
         return None
 
-# Ganti fungsi load_rdf_data dengan versi ini
+# --- BAGIAN LOGIKA DATA (RDF) ---
+
+def extract_number_from_uri(uri):
+    """Mengekstrak nomor dari URI untuk pengurutan."""
+    match = re.search(r'_(\d+)$', uri)
+    return int(match.group(1)) if match else float('inf')
+
 @st.cache_data
 def load_rdf_data(page_num, fuseki_endpoint="http://localhost:3030/kakawin/query"):
-    """Mengambil data transliterasi dari SPARQL endpoint Fuseki UNTUK HALAMAN TERTENTU."""
+    """
+    Mengambil data dari Fuseki dan mengurutkannya secara numerik.
+    """
     query = f"""
     PREFIX jawa: <http://example.org/jawa#>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
     SELECT ?kalimat_uri ?latin ?terjemahan WHERE {{
         ?kalimat_uri a jawa:Kalimat ;
                      jawa:latin ?latin ;
                      jawa:terjemahan ?terjemahan ;
                      jawa:halaman ?halaman .
         FILTER(?halaman = {page_num})
-    }} ORDER BY ?kalimat_uri
+    }}
     """
     try:
         sparql = SPARQLWrapper(fuseki_endpoint)
         sparql.setQuery(query)
         sparql.setReturnFormat(JSON)
         results = sparql.query().convert()
+
         data = [
             {
                 "uri": r["kalimat_uri"]["value"],
                 "latin": r["latin"]["value"],
-                "terjemahan": r["terjemahan"]["value"]
+                "terjemahan": r["terjemahan"]["value"],
+                "uri_number": extract_number_from_uri(r["kalimat_uri"]["value"])
             }
             for r in results["results"]["bindings"]
         ]
+        
+        # Urutkan data berdasarkan nomor URI di dalam Python
+        data.sort(key=lambda x: x['uri_number'])
+        
         return data
     except Exception as e:
         st.error(f"Gagal terhubung atau mengambil data dari server Fuseki: {e}")
         st.info("Pastikan server Apache Jena Fuseki Anda sedang berjalan di http://localhost:3030")
         return None
-    
-# Tambahkan fungsi BARU ini di bawah fungsi load_rdf_data
+
 @st.cache_data
 def load_all_rdf_data(fuseki_endpoint="http://localhost:3030/kakawin/query"):
     """Mengambil SEMUA data transliterasi dari Fuseki untuk keperluan pencarian."""
-    # Query ini tidak memiliki FILTER halaman
     query = """
     PREFIX jawa: <http://example.org/jawa#>
     SELECT ?kalimat_uri ?latin ?terjemahan WHERE {
         ?kalimat_uri a jawa:Kalimat ;
                      jawa:latin ?latin ;
                      jawa:terjemahan ?terjemahan .
-    } ORDER BY ?kalimat_uri
+    }
     """
     try:
         sparql = SPARQLWrapper(fuseki_endpoint)
         sparql.setQuery(query)
         sparql.setReturnFormat(JSON)
         results = sparql.query().convert()
-        data = [
+        return [
             {
                 "uri": r["kalimat_uri"]["value"],
                 "latin": r["latin"]["value"],
@@ -93,10 +102,8 @@ def load_all_rdf_data(fuseki_endpoint="http://localhost:3030/kakawin/query"):
             }
             for r in results["results"]["bindings"]
         ]
-        return data
     except Exception as e:
         st.error(f"Gagal terhubung atau mengambil data dari server Fuseki: {e}")
-        st.info("Pastikan server Apache Jena Fuseki Anda sedang berjalan di http://localhost:3030")
         return None
 
 # --- INISIALISASI SESSION STATE ---
@@ -106,9 +113,9 @@ def init_session_state():
         query_params = st.query_params.to_dict()
         st.session_state.page_num = int(query_params.get("page", [1])[0])
 
-# --- KOMPONEN UI UTAMA ---
+# --- KOMPONEN UI ---
 def render_hero_section():
-    """Merender Hero Section dengan animasi dan efek visual yang menarik."""
+    """Merender Hero Section."""
     st.markdown("""
         <section class="hero-section">
             <div class="hero-background-pattern"></div>
@@ -122,13 +129,12 @@ def render_hero_section():
     """, unsafe_allow_html=True)
 
 def render_transliteration_page(rdf_data, total_pages=20):
-    """Merender halaman transliterasi dengan tampilan Kawi dan Interpretasi disatukan."""
+    """Merender halaman transliterasi dengan logika yang disederhanakan."""
     st.markdown('<h2 class="page-title">📖 Transliterasi Naskah</h2>', unsafe_allow_html=True)
-    
     st.markdown('<div class="transliteration-container">', unsafe_allow_html=True)
     col1, col2 = st.columns([1.2, 1], gap="large")
 
-    # --- Kolom Kiri (Gambar Naskah & Navigasi) - Tidak ada perubahan ---
+    # --- Kolom Kiri (Gambar Naskah & Navigasi) ---
     with col1:
         st.markdown(f"""
             <div class="panel-header manuscript-header">
@@ -164,13 +170,13 @@ def render_transliteration_page(rdf_data, total_pages=20):
                 st.rerun()
         st.markdown('</div></div>', unsafe_allow_html=True)
 
-    # --- Kolom Kanan (Transliterasi) - LOGIKA BARU ---
+    # --- Kolom Kanan (Transliterasi) ---
     with col2:
         st.markdown(f"""
             <div class="panel-header transliteration-header">
                 <div class="panel-header-icon">📖</div>
                 <div class="panel-header-text">
-                    <h3>Transliterasi</h3>
+                    <h3>Teks dan Terjemahan</h3>
                     <span class="panel-header-subtitle">Halaman {st.session_state.page_num}</span>
                 </div>
             </div>
@@ -178,36 +184,25 @@ def render_transliteration_page(rdf_data, total_pages=20):
         
         st.markdown('<div class="transliteration-content">', unsafe_allow_html=True)
         with st.container(height=650):
-            if rdf_data and len(rdf_data) % 8 == 0: # Pastikan data valid (kelipatan 8 baris per stanza)
+            if rdf_data:
                 st.markdown('<div class="transliteration-items">', unsafe_allow_html=True)
                 
-                num_stanzas = len(rdf_data) // 8
-                num_lines_per_stanza = 4
-
-                for i in range(num_stanzas * num_lines_per_stanza):
-                    kawi_item = rdf_data[i]
-                    modern_item = rdf_data[i + (num_stanzas * num_lines_per_stanza)]
-
+                # Loop sederhana: tampilkan setiap kalimat dan terjemahannya
+                for i, item in enumerate(rdf_data):
                     st.markdown(f"""
                         <div class="transliterasi-item" data-item="{i+1}">
-                            <div class="item-number">{i % 4 + 1}</div>
+                            <div class="item-number">{i + 1}</div>
                             <div class="item-content">
-                                <div class="unified-text-block">
-                                    <span class="text-label">Teks Kawi:</span>
-                                    <span class="latin-text-kawi">{kawi_item['latin']}</span>
-                                </div>
-                                <div class="unified-text-block">
-                                    <span class="text-label">Interpretasi:</span>
-                                    <span class="latin-text-modern">{modern_item['latin']}</span>
-                                </div>
+                                <div class="latin-text">{html.escape(item['latin'])}</div>
                                 <div class="translation-divider"></div>
                                 <div class="translation-text">
                                     <span class="translation-label">Terjemahan:</span>
-                                    <span class="translation-content">{html.escape(kawi_item['terjemahan'])}</span>
+                                    <span class="translation-content">{html.escape(item['terjemahan'])}</span>
                                 </div>
                             </div>
                         </div>
                     """, unsafe_allow_html=True)
+
                 st.markdown('</div>', unsafe_allow_html=True)
             else:
                 st.markdown(f"""
@@ -218,11 +213,10 @@ def render_transliteration_page(rdf_data, total_pages=20):
                     </div>
                 """, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
-    
     st.markdown('</div>', unsafe_allow_html=True)
 
 def render_search_page(rdf_data):
-    """Merender halaman pencarian yang dipercantik."""
+    """Merender halaman pencarian."""
     st.markdown('<h2 class="page-title">🔍 Pencarian Teks</h2>', unsafe_allow_html=True)
     st.markdown('<div class="search-page-container">', unsafe_allow_html=True)
     
@@ -238,52 +232,44 @@ def render_search_page(rdf_data):
 
     search_query = st.text_input("Cari...", placeholder="Ketik kata kunci yang ingin dicari...", label_visibility="collapsed")
 
-    if search_query:
+    if search_query and rdf_data:
         st.markdown('<div class="search-results-section">', unsafe_allow_html=True)
         
-        if rdf_data:
-            query_lower = search_query.lower()
-            results = [item for item in rdf_data if query_lower in item['latin'].lower() or query_lower in item['terjemahan'].lower()]
-            
-            if not results:
-                st.markdown(f"""<div class="no-results">...</div>""", unsafe_allow_html=True)
-            else:
-                st.markdown(f"""
-                    <div class="results-header">
-                        <div class="results-count">
-                            <span class="results-icon">✨</span>
-                            <span class="results-text">Ditemukan <strong>{len(results)} hasil</strong> untuk "<strong>{search_query}</strong>"</span>
-                        </div>
-                    </div>""", unsafe_allow_html=True)
-                
-                st.markdown('<div class="search-results-container">', unsafe_allow_html=True)
-                # Ganti blok 'for' di render_search_page dengan ini
-                for i, item in enumerate(results):
-                    highlighted_latin = re.sub(f'({re.escape(search_query)})', r'<mark>\1</mark>', item['latin'], flags=re.IGNORECASE)
-                    highlighted_translation = re.sub(f'({re.escape(search_query)})', r'<mark>\1</mark>', item['terjemahan'], flags=re.IGNORECASE)
-
-                    expander_title = item['latin'].replace(search_query, f"<mark>{search_query}</mark>")
-                    
-                    with st.expander(f"📝 Hasil {i+1}: {item['latin'][:70]}{'...' if len(item['latin']) > 70 else ''}", expanded=(i < 3)):
-                        # KODE YANG DIPERBAIKI
-                        st.markdown(f"""
-                            <div class="item-content" style="padding-top: 10px;">
-                                <div class="latin-text">{highlighted_latin}</div>
-                                <div class="translation-divider"></div>
-                                <div class="translation-text">
-                                    <span class="translation-label">Terjemahan:</span>
-                                    <span class="translation-content">{highlighted_translation}</span>
-                                </div>
-                            </div>
-                        """, unsafe_allow_html=True)
+        query_lower = search_query.lower()
+        results = [item for item in rdf_data if query_lower in item['latin'].lower() or query_lower in item['terjemahan'].lower()]
+        
+        if not results:
+            st.info(f'Tidak ditemukan hasil untuk "{search_query}".')
         else:
-            st.markdown("""<div class="error-state">...</div>""", unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-
+            st.markdown(f"""
+                <div class="results-header">
+                    <div class="results-count">
+                        <span class="results-icon">✨</span>
+                        <span class="results-text">Ditemukan <strong>{len(results)} hasil</strong> untuk "<strong>{search_query}</strong>"</span>
+                    </div>
+                </div>""", unsafe_allow_html=True)
+            
+            st.markdown('<div class="search-results-container">', unsafe_allow_html=True)
+            for i, item in enumerate(results):
+                highlighted_latin = re.sub(f'({re.escape(search_query)})', r'<mark>\1</mark>', item['latin'], flags=re.IGNORECASE)
+                highlighted_translation = re.sub(f'({re.escape(search_query)})', r'<mark>\1</mark>', item['terjemahan'], flags=re.IGNORECASE)
+                
+                with st.expander(f"📝 Hasil {i+1}: {item['latin'][:70]}{'...' if len(item['latin']) > 70 else ''}", expanded=(i < 3)):
+                    st.markdown(f"""
+                        <div class="item-content" style="padding-top: 10px;">
+                            <div class="latin-text">{highlighted_latin}</div>
+                            <div class="translation-divider"></div>
+                            <div class="translation-text">
+                                <span class="translation-label">Terjemahan:</span>
+                                <span class="translation-content">{highlighted_translation}</span>
+                            </div>
+                        </div>
+                    """, unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
 def render_about_page():
-    """Merender halaman 'Tentang Naskah' dengan konten yang informatif."""
+    """Merender halaman 'Tentang Naskah'."""
     st.markdown('<h2 class="page-title">📜 Tentang Naskah Kakawin Ramayana</h2>', unsafe_allow_html=True)
 
     with st.expander("🚪 Pendahuluan: Membuka Gerbang Kakawin Ramayana", expanded=True):
@@ -344,25 +330,22 @@ def main():
             </div>""", unsafe_allow_html=True)
 
     # --- Blok Konten Utama ---
-    # Pastikan blok ini berada DI LUAR 'with st.sidebar:'
     st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
     if app_page == "Transliterasi & Naskah":
-        # Muat data hanya untuk halaman saat ini
         rdf_data = load_rdf_data(page_num=st.session_state.page_num)
         render_hero_section()
         render_transliteration_page(rdf_data)
     elif app_page == "Pencarian":
-        # Muat SEMUA data untuk pencarian
         all_data = load_all_rdf_data()
         render_hero_section()
         render_search_page(all_data)
     elif app_page == "Tentang Naskah":
-        # Tidak perlu memuat data RDF untuk halaman ini
         render_hero_section()
         render_about_page()
     
-    st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True) # Close .main-content
+    st.markdown("</div>", unsafe_allow_html=True) # Close .app-container
 
 
 if __name__ == "__main__":
