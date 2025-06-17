@@ -318,6 +318,7 @@ def main():
     st.markdown(f'<style>{load_asset("assets/style.css")}</style>', unsafe_allow_html=True)
     st.markdown('<div class="app-container">', unsafe_allow_html=True)
 
+    # --- Blok Sidebar ---
     with st.sidebar:
         st.markdown("""
             <div class="sidebar-header">
@@ -342,27 +343,26 @@ def main():
                 </div>
             </div>""", unsafe_allow_html=True)
 
-    
-    
-        st.markdown('<div class="main-content">', unsafe_allow_html=True)
+    # --- Blok Konten Utama ---
+    # Pastikan blok ini berada DI LUAR 'with st.sidebar:'
+    st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
-        # Logika baru untuk memuat data berdasarkan halaman yang aktif
-        if app_page == "Transliterasi & Naskah":
-            # Muat data hanya untuk halaman saat ini
-            rdf_data = load_rdf_data(page_num=st.session_state.page_num)
-            render_hero_section()
-            render_transliteration_page(rdf_data)
-        elif app_page == "Pencarian":
-            # Muat SEMUA data untuk pencarian
-            all_data = load_all_rdf_data()
-            render_hero_section()
-            render_search_page(all_data)
-        elif app_page == "Tentang Naskah":
-            # Tidak perlu memuat data RDF untuk halaman ini
-            render_hero_section()
-            render_about_page()
-        
-        st.markdown("</div>", unsafe_allow_html=True)
+    if app_page == "Transliterasi & Naskah":
+        # Muat data hanya untuk halaman saat ini
+        rdf_data = load_rdf_data(page_num=st.session_state.page_num)
+        render_hero_section()
+        render_transliteration_page(rdf_data)
+    elif app_page == "Pencarian":
+        # Muat SEMUA data untuk pencarian
+        all_data = load_all_rdf_data()
+        render_hero_section()
+        render_search_page(all_data)
+    elif app_page == "Tentang Naskah":
+        # Tidak perlu memuat data RDF untuk halaman ini
+        render_hero_section()
+        render_about_page()
+    
+    st.markdown("</div>", unsafe_allow_html=True)
 
 
 if __name__ == "__main__":
