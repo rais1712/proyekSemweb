@@ -1,5 +1,3 @@
-Berikut adalah isi lengkap dokumen `README.md` yang sudah diformat rapi. Kamu bisa langsung **copy-paste seluruh isi ini ke file README.md** dalam proyek GitHub-mu:
-
 ---
 
 ```markdown
