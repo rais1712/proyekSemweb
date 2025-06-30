@@ -1,96 +1,209 @@
-Digitalisasi dan Eksplorasi Semantik Kakawin Ramayana
-Sebuah portal web interaktif yang dibangun menggunakan teknologi web semantik untuk menjelajahi naskah kuno Kakawin Ramayana. Proyek ini memungkinkan pengguna untuk melihat gambar naskah asli, membaca transliterasi teks Latin, memahami terjemahannya dalam Bahasa Indonesia, serta melakukan pencarian teks secara efisien.
+Berikut adalah isi lengkap dokumen `README.md` yang sudah diformat rapi. Kamu bisa langsung **copy-paste seluruh isi ini ke file README.md** dalam proyek GitHub-mu:
 
-Aplikasi ini dikembangkan sebagai bagian dari proyek mata kuliah Web Semantik.
+---
 
-Fitur Utama
-Penampil Naskah Terpadu: Menampilkan gambar naskah asli berdampingan dengan data transliterasi dan terjemahan per halaman.
-Navigasi Halaman: Antarmuka yang mudah digunakan untuk berpindah antar halaman naskah dengan tombol navigasi dan indikator kemajuan.
-Pencarian Teks Cerdas: Fitur pencarian kata kunci pada seluruh data teks (transliterasi dan terjemahan).
-Antarmuka Web Modern: Dibangun dengan Streamlit untuk pengalaman pengguna yang responsif dan modern.
-Teknologi yang Digunakan
-Frontend: Streamlit 
-Backend: Python
-Database: Apache Jena Fuseki (sebagai RDF Triplestore)
-Pemodelan Data: RDF dengan sintaks Turtle (.ttl)
-Interaksi Kueri: SPARQLWrapper
-Panduan Instalasi dan Penyiapan
-Ikuti langkah-langkah berikut untuk menjalankan proyek ini di lingkungan lokal Anda.
+```markdown
+# 🌸 Digitalisasi dan Eksplorasi Semantik Kakawin Ramayana
 
-Langkah 1: Prasyarat
-Pastikan perangkat Anda telah terinstal:
+Proyek ini adalah sebuah **portal web interaktif** yang dibangun menggunakan teknologi **web semantik** untuk menjelajahi naskah kuno *Kakawin Ramayana*. Aplikasi ini memungkinkan pengguna:
 
-Python 3.7+ 
-Java 17+: Sangat penting, karena Apache Jena Fuseki versi terbaru memerlukannya. Anda bisa cek versi dengan java -version.
-Git (opsional, jika Anda ingin clone repositori).
-Langkah 2: Dapatkan File Proyek
-Unduh atau clone repositori ini ke mesin lokal Anda:
+- Melihat gambar naskah asli
+- Membaca transliterasi teks Latin
+- Memahami terjemahannya dalam Bahasa Indonesia
+- Melakukan pencarian teks yang efisien
 
-Bash
+> Dibuat untuk memenuhi tugas mata kuliah **Web Semantik** di Program Studi Teknik Informatika, Universitas Padjadjaran.
 
+---
+
+## ✨ Fitur Utama
+
+- **📖 Penampil Naskah Terpadu**  
+  Menampilkan gambar naskah berdampingan dengan transliterasi dan terjemahan per halaman.
+  
+- **➡️ Navigasi Halaman**  
+  Tombol ◀ dan ▶ untuk berpindah antar halaman naskah.
+
+- **🔍 Pencarian Teks Cerdas**  
+  Pencarian kata kunci pada transliterasi dan terjemahan naskah.
+
+- **💻 Antarmuka Web Modern**  
+  Dibuat menggunakan Streamlit, ringan dan mudah digunakan.
+
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+| Komponen    | Teknologi                        |
+|-------------|----------------------------------|
+| Frontend    | Streamlit                        |
+| Backend     | Python                           |
+| Database    | Apache Jena Fuseki (RDF Triplestore) |
+| Pemodelan Data | RDF (Turtle `.ttl`)           |
+| Kueri       | SPARQL via `SPARQLWrapper`       |
+
+---
+
+## 🗂️ Struktur Proyek
+
+```
+
+├── assets/
+│   ├── style.css          # Styling antarmuka
+│   └── script.js          # Script tambahan (opsional)
+├── images/
+│   ├── page\_1.png         # Gambar naskah per halaman
+│   └── ...
+├── naskah\_bhakti\_final.ttl # File RDF utama
+├── semweb.py              # Aplikasi utama Streamlit
+├── requirements.txt       # Daftar dependensi
+└── README.md              # Dokumen ini
+
+````
+
+---
+
+## ⚙️ Panduan Instalasi
+
+### 1. Prasyarat
+
+Pastikan perangkat Anda sudah terpasang:
+
+- Python 3.7+
+- Java 17+ (**penting untuk Apache Jena Fuseki**)
+- Git (opsional)
+
+### 2. Clone Repositori
+
+```bash
 git clone <URL_REPOSITORI_ANDA>
 cd <NAMA_FOLDER_PROYEK>
-Langkah 3: Instalasi Dependensi Python
-Buka terminal di direktori proyek dan jalankan perintah berikut untuk menginstal semua pustaka yang diperlukan:
+````
 
-Bash
+### 3. Instalasi Dependensi Python
 
+```bash
 pip install -r requirements.txt
-Langkah 4: Siapkan Apache Jena Fuseki
-Unduh Fuseki: Kunjungi situs resmi Apache Jena dan unduh Apache Jena Fuseki.
-Ekstrak File: Ekstrak file ZIP/TAR yang telah diunduh ke lokasi yang mudah diakses.
-Jalankan Server Fuseki:
-Buka terminal atau Command Prompt.
-Navigasikan ke dalam direktori Fuseki yang telah diekstrak.
-Jalankan server dengan perintah:
-Bash
+```
 
-./fuseki-server # Untuk Linux/macOS
-# atau
-fuseki-server.bat # Untuk Windows
-Buat Dataset:
-Buka browser dan akses http://localhost:3030.
-Klik "New Dataset".
-Beri nama dataset: kakawin.
-Pilih tipe dataset: "Persistent (TDB2)".
-Klik "Create Dataset".
-Unggah Data RDF:
-Klik nama dataset kakawin yang baru saja Anda buat.
-Pilih tab "upload data".
-Klik "Select Files..." dan pilih file naskah_bhakti_final.ttl dari direktori proyek Anda.
-Klik "upload". Data naskah kini siap diakses.
-Cara Menjalankan Aplikasi
-Pastikan server Fuseki Anda sudah berjalan dari langkah sebelumnya.
+---
 
-Buka Terminal Baru: Buka jendela terminal atau Command Prompt yang baru.
-Navigasi ke Direktori Proyek: Arahkan terminal ke folder tempat semweb.py berada.
-Jalankan Aplikasi Streamlit: Eksekusi perintah berikut:
-Bash
+## 🔧 Konfigurasi Apache Jena Fuseki
 
+1. **Unduh Fuseki** dari [https://jena.apache.org/download/index.cgi](https://jena.apache.org/download/index.cgi)
+2. **Ekstrak** file ZIP
+3. **Jalankan Server**:
+
+```bash
+# Linux / macOS
+./fuseki-server
+
+# Windows
+fuseki-server.bat
+```
+
+4. Akses antarmuka di: [http://localhost:3030](http://localhost:3030)
+
+5. **Buat Dataset**:
+
+* Klik "New Dataset"
+* Nama: `kakawin`
+* Tipe: `Persistent (TDB2)`
+* Klik **Create Dataset**
+
+6. **Upload Data**:
+
+* Pilih dataset `kakawin`
+* Masuk ke tab `Upload Data`
+* Upload file `naskah_bhakti_final.ttl`
+
+---
+
+## 🚀 Menjalankan Aplikasi
+
+1. Pastikan server Fuseki telah berjalan
+2. Jalankan aplikasi:
+
+```bash
 streamlit run semweb.py
-Akses Aplikasi: Aplikasi akan otomatis terbuka di browser Anda pada alamat http://localhost:8501.
-Panduan Penggunaan Aplikasi
-Sidebar: Gunakan sidebar di sebelah kiri untuk berpindah antara tiga menu utama:
-Transliterasi & Naskah: Halaman utama untuk melihat naskah dan teksnya. Gunakan tombol ◀ dan ▶ untuk navigasi halaman.
-Pencarian: Masukkan kata kunci untuk mencari teks di seluruh naskah.
-Tentang Naskah: Membaca informasi latar belakang mengenai Kakawin Ramayana.
-Halaman Transliterasi: Di halaman ini, Anda akan melihat gambar naskah di sebelah kiri dan daftar transliterasi serta terjemahannya di sebelah kanan.
-Halaman Pencarian: Ketik kata atau frasa yang ingin Anda cari. Hasil akan ditampilkan secara dinamis di bawahnya, lengkap dengan teks Latin, terjemahan, dan sorotan pada kata kunci yang cocok.
-Struktur Proyek
-.
-├── assets/
-│   ├── style.css         # File styling untuk antarmuka
-│   └── script.js         # File JavaScript (jika ada fungsionalitas tambahan)
-├── images/
-│   ├── page_1.png        # Gambar naskah halaman 1
-│   └── ...               # Gambar naskah halaman lainnya
-├── naskah_bhakti_final.ttl # File data RDF utama
-├── semweb.py               # Kode utama aplikasi Streamlit
-├── requirements.txt      # Daftar dependensi Python
-└── README.md             # File panduan ini
-Tim Pengembang
-Proyek ini dikembangkan oleh:
+```
 
-Ecki Fawwaz (140810220063) 
-Rais ABiyyu Putra (140810220069) 
-Novem romadhofi Kika (140810220083)
+3. Akses aplikasi di: [http://localhost:8501](http://localhost:8501)
+
+---
+
+## 📚 Panduan Penggunaan
+
+### Sidebar
+
+* **Transliterasi & Naskah**
+  Menampilkan naskah asli, transliterasi Latin, dan terjemahan. Navigasi antar halaman tersedia.
+
+* **Pencarian**
+  Ketik kata kunci, hasil relevan akan ditampilkan lengkap dengan highlight.
+
+* **Tentang Naskah**
+  Informasi sejarah dan konteks Kakawin Ramayana.
+
+---
+
+## 🧠 Model Data RDF
+
+Contoh representasi RDF (Turtle):
+
+```turtle
+@prefix jawa: <http://example.org/jawa#> .
+
+jawa:kalimat_1 a jawa:Kalimat ;
+    jawa:latin "Hana sira ratu dibya rĕngön," ;
+    jawa:terjemahan "Ada seorang raja yang agung, dengarkanlah," ;
+    jawa:halaman "1"^^xsd:integer ;
+    jawa:bagianDari jawa:cerita_1 .
+```
+
+---
+
+## 📌 Arsitektur Aplikasi
+
+1. **Data disimpan** dalam file `.ttl` dan diunggah ke dataset `kakawin` di Fuseki.
+2. **Antarmuka pengguna** dibuat dengan Streamlit.
+3. **Kueri SPARQL** dikirim ke endpoint Fuseki (`http://localhost:3030/kakawin/query`).
+4. **Hasil kueri** ditampilkan secara dinamis (JSON → Streamlit).
+
+---
+
+## 🧑‍💻 Tim Pengembang
+
+* **Ecki Fawwaz** (140810220063)
+* **Rais Abiyyu Putra** (140810220069)
+* **Novem Romadhofi Kika** (140810220083)
+
+---
+
+## ✅ Status Proyek
+
+\:heavy\_check\_mark: **Selesai**
+Dirancang dan diimplementasikan untuk tugas akhir mata kuliah Web Semantik.
+
+---
+
+## 💡 Saran Pengembangan
+
+* Penambahan sargah lain dari Kakawin Ramayana
+* Fitur pencarian entitas dan analisis semantik lanjutan
+* Visualisasi graf tokoh dan lokasi
+* Fitur anotasi kolaboratif dari pengguna
+
+---
+
+## 📄 Lisensi
+
+Hak cipta © 2025 - Universitas Padjadjaran
+Proyek ini untuk tujuan akademik dan tidak dimaksudkan untuk distribusi komersial.
+
+```
+
+---
+
+Silakan gunakan langsung, dan jika kamu ingin saya bantu membuatkan badge GitHub (build passing, MIT license, dsb), atau menambahkan gambar/logo proyek di bagian atas, tinggal beri tahu saja.
+```
