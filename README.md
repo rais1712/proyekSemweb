@@ -34,13 +34,13 @@ Proyek ini adalah sebuah **portal web interaktif** yang dibangun menggunakan tek
 
 ## 🛠️ Teknologi yang Digunakan
 
-| Komponen    | Teknologi                        |
-|-------------|----------------------------------|
-| Frontend    | Streamlit                        |
-| Backend     | Python                           |
-| Database    | Apache Jena Fuseki (RDF Triplestore) |
-| Pemodelan Data | RDF (Turtle `.ttl`)           |
-| Kueri       | SPARQL via `SPARQLWrapper`       |
+| Komponen        | Teknologi                       |
+|-------------    |---------------------------------|
+| Frontend        | Streamlit                       |
+| Backend         | Python                          |
+| Database        | Apache Jena Fuseki              |
+| Pemodelan Data  | RDF (Turtle `.ttl`)             |
+| Kueri           | SPARQL via `SPARQLWrapper`      |
 
 ---
 
@@ -195,14 +195,3 @@ Dirancang dan diimplementasikan untuk tugas akhir mata kuliah Web Semantik.
 
 ---
 
-## 📄 Lisensi
-
-Hak cipta © 2025 - Universitas Padjadjaran
-Proyek ini untuk tujuan akademik dan tidak dimaksudkan untuk distribusi komersial.
-
-```
-
----
-
-Silakan gunakan langsung, dan jika kamu ingin saya bantu membuatkan badge GitHub (build passing, MIT license, dsb), atau menambahkan gambar/logo proyek di bagian atas, tinggal beri tahu saja.
-```
