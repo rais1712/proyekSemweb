@@ -1,6 +1,3 @@
----
-
-```markdown
 # 🌸 Digitalisasi dan Eksplorasi Semantik Kakawin Ramayana
 
 Proyek ini adalah sebuah **portal web interaktif** yang dibangun menggunakan teknologi **web semantik** untuk menjelajahi naskah kuno *Kakawin Ramayana*. Aplikasi ini memungkinkan pengguna:
