@@ -41,7 +41,7 @@ Proyek ini adalah sebuah **portal web interaktif** yang dibangun menggunakan tek
 
 ## 🗂️ Struktur Proyek
 
-
+````
 ├── assets/
 │   ├── style.css          # Styling antarmuka
 │   └── script.js          # Script tambahan (opsional)
