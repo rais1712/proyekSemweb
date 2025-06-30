@@ -174,19 +174,3 @@ jawa:kalimat_1 a jawa:Kalimat ;
 
 ---
 
-## ✅ Status Proyek
-
-\:heavy\_check\_mark: **Selesai**
-Dirancang dan diimplementasikan untuk tugas akhir mata kuliah Web Semantik.
-
----
-
-## 💡 Saran Pengembangan
-
-* Penambahan sargah lain dari Kakawin Ramayana
-* Fitur pencarian entitas dan analisis semantik lanjutan
-* Visualisasi graf tokoh dan lokasi
-* Fitur anotasi kolaboratif dari pengguna
-
----
-
